@@ -1,0 +1,140 @@
+2025-10-19 20:03:04 | INFO     | user_api | lifespan:21 | Запуск приложения начат
+2025-10-19 20:03:07 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-19 20:03:07 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-19 20:03:07 | INFO     | user_api | lifespan:24 | Подключение к PostgeSQL и Redis завершено
+2025-10-19 20:09:17 | INFO     | user_api | lifespan:81 | Завершение работы приложения начато
+2025-10-19 20:09:18 | INFO     | user_api | lifespan:83 | Соединение с БД закрыто
+2025-10-19 20:09:18 | INFO     | user_api | lifespan:84 | Приложение полностью остановлено2025-10-23 22:15:22 | INFO     | user_api | lifespan:22 | Запуск приложения начат
+2025-10-23 22:15:24 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-23 22:15:28 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('127.0.0.1', 6379), [Errno 10061] Connect call failed ('::1', 6379, 0, 0) connecting to localhost:6379.
+2025-10-23 22:15:34 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('127.0.0.1', 6379), [Errno 10061] Connect call failed ('::1', 6379, 0, 0) connecting to localhost:6379.
+2025-10-23 22:15:40 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('127.0.0.1', 6379), [Errno 10061] Connect call failed ('::1', 6379, 0, 0) connecting to localhost:6379.
+2025-10-23 22:15:40 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-23 22:15:40 | INFO     | user_api | lifespan:25 | Подключение к PostgeSQL и Redis завершено
+2025-10-23 22:17:26 | WARNING  | user_api | get_current_user:68 | Отсутствует токен доступа, IP: 127.0.0.1
+2025-10-23 22:17:26 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Не удалось проверить учетные данные
+2025-10-23 22:17:26 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Не удалось проверить учетные данные | Path: /chat/notifications | Method: GET | IP: 127.0.0.1
+2025-10-23 22:18:23 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-23 22:18:57 | INFO     | user_api | create_chat_room:58 | Создана чат-комната 1 пользователем 1
+2025-10-23 22:19:42 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-23 22:19:42 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/2 | Method: GET | IP: 127.0.0.1
+2025-10-23 22:20:14 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-23 22:20:14 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/2 | Method: GET | IP: 127.0.0.1
+2025-10-23 22:20:59 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: [{'type': 'enum', 'loc': ('body', 'message_type'), 'msg': "Input should be 'text', 'image' or 'file'", 'input': 'hello', 'ctx': {'expected': "'text', 'image' or 'file'"}}]
+2025-10-23 22:20:59 | WARNING  | user_api | validation_exception_handler:205 | Validation Error: 1 errors | Path: /chat/rooms/1/messages | Method: POST | IP: 127.0.0.1
+2025-10-23 22:21:11 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: [{'type': 'enum', 'loc': ('body', 'message_type'), 'msg': "Input should be 'text', 'image' or 'file'", 'input': 'hello', 'ctx': {'expected': "'text', 'image' or 'file'"}}]
+2025-10-23 22:21:11 | WARNING  | user_api | validation_exception_handler:205 | Validation Error: 1 errors | Path: /chat/rooms/1/messages | Method: POST | IP: 127.0.0.1
+2025-10-23 22:30:26 | INFO     | user_api | lifespan:82 | Завершение работы приложения начато
+2025-10-23 22:30:26 | INFO     | user_api | lifespan:84 | Соединение с БД закрыто
+2025-10-23 22:30:26 | INFO     | user_api | lifespan:85 | Приложение полностью остановлено
+2025-10-24 22:02:51 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-24 22:02:52 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-24 22:02:56 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('127.0.0.1', 6379), [Errno 10061] Connect call failed ('::1', 6379, 0, 0) connecting to localhost:6379.
+2025-10-24 22:03:02 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('127.0.0.1', 6379), [Errno 10061] Connect call failed ('::1', 6379, 0, 0) connecting to localhost:6379.
+2025-10-24 22:03:09 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('127.0.0.1', 6379), [Errno 10061] Connect call failed ('::1', 6379, 0, 0) connecting to localhost:6379.
+2025-10-24 22:03:09 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-24 22:03:09 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-24 22:03:13 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /favicon.ico | Method: GET | IP: 127.0.0.1
+2025-10-24 22:03:33 | WARNING  | user_api | get_current_user:68 | Отсутствует токен доступа, IP: 127.0.0.1
+2025-10-24 22:03:33 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Не удалось проверить учетные данные
+2025-10-24 22:03:33 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Не удалось проверить учетные данные | Path: /video/rooms/1/join | Method: POST | IP: 127.0.0.1
+2025-10-24 22:03:34 | WARNING  | user_api | get_current_user:68 | Отсутствует токен доступа, IP: 127.0.0.1
+2025-10-24 22:03:34 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Не удалось проверить учетные данные
+2025-10-24 22:03:34 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Не удалось проверить учетные данные | Path: /video/rooms | Method: POST | IP: 127.0.0.1
+2025-10-24 22:03:44 | WARNING  | user_api | get_current_user:68 | Отсутствует токен доступа, IP: 127.0.0.1
+2025-10-24 22:03:45 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Не удалось проверить учетные данные
+2025-10-24 22:03:45 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Не удалось проверить учетные данные | Path: /video/rooms | Method: POST | IP: 127.0.0.1
+2025-10-24 22:03:49 | WARNING  | user_api | get_current_user:68 | Отсутствует токен доступа, IP: 127.0.0.1
+2025-10-24 22:03:49 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Не удалось проверить учетные данные
+2025-10-24 22:03:49 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Не удалось проверить учетные данные | Path: /video/rooms | Method: POST | IP: 127.0.0.1
+2025-10-24 22:03:50 | WARNING  | user_api | get_current_user:68 | Отсутствует токен доступа, IP: 127.0.0.1
+2025-10-24 22:03:50 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Не удалось проверить учетные данные
+2025-10-24 22:03:50 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Не удалось проверить учетные данные | Path: /video/rooms | Method: POST | IP: 127.0.0.1
+2025-10-24 22:04:24 | WARNING  | user_api | get_current_user:68 | Отсутствует токен доступа, IP: 127.0.0.1
+2025-10-24 22:04:24 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Не удалось проверить учетные данные
+2025-10-24 22:04:24 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Не удалось проверить учетные данные | Path: /video/rooms | Method: POST | IP: 127.0.0.1
+2025-10-24 22:04:43 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-24 22:04:50 | ERROR    | user_api | create_video_room:120 | Ошибка создания видеокомнаты: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: отношение "video_rooms" не существует
+[SQL: SELECT video_rooms.room_id, video_rooms.room_name, video_rooms.room_description, video_rooms.room_code, video_rooms.room_url, video_rooms.created_at, video_rooms.created_by, video_rooms.is_active, video_rooms.is_private, video_rooms.max_participants, video_rooms.encryption_key, video_rooms.recording_enabled, video_rooms.waiting_room_enabled 
+FROM video_rooms 
+WHERE video_rooms.room_code = $1::VARCHAR]
+[parameters: ('WAM5Z57S',)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-10-24 22:04:50 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 500: Ошибка создания видеокомнаты
+2025-10-24 22:04:50 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Ошибка создания видеокомнаты | Path: /video/rooms | Method: POST | IP: 127.0.0.1
+2025-10-24 22:05:43 | INFO     | user_api | lifespan:84 | Завершение работы приложения начато
+2025-10-24 22:05:43 | INFO     | user_api | lifespan:86 | Соединение с БД закрыто
+2025-10-24 22:05:43 | INFO     | user_api | lifespan:87 | Приложение полностью остановлено
+2025-10-24 22:14:30 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-24 22:14:30 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-24 22:14:30 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-24 22:14:30 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-24 22:14:31 | INFO     | user_api | lifespan:44 | Созданы недостающие роли: [1, 2, 3]
+2025-10-24 22:14:31 | INFO     | user_api | lifespan:56 | Создание администратора по умолчанию
+2025-10-24 22:14:32 | INFO     | user_api | lifespan:78 | Администратор по умолчанию создан
+2025-10-24 22:14:41 | WARNING  | user_api | get_current_user:68 | Отсутствует токен доступа, IP: 127.0.0.1
+2025-10-24 22:14:41 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Не удалось проверить учетные данные
+2025-10-24 22:14:41 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Не удалось проверить учетные данные | Path: /video/rooms | Method: POST | IP: 127.0.0.1
+2025-10-24 22:16:30 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-24 22:16:51 | ERROR    | user_api | create_video_room:120 | Ошибка создания видеокомнаты: (sqlalchemy.dialects.postgresql.asyncpg.Error) <class 'asyncpg.exceptions.DataError'>: invalid input for query argument $9: {'can_mute_others': True, 'can_remove_ot... (expected str, got dict)
+[SQL: INSERT INTO video_participants (room_id, user_id, left_at, is_online, is_muted, is_video_enabled, is_screen_sharing, role, permissions, last_activity) VALUES ($1::INTEGER, $2::INTEGER, $3::TIMESTAMP WITHOUT TIME ZONE, $4::BOOLEAN, $5::BOOLEAN, $6::BOOLEAN, $7::BOOLEAN, $8::VARCHAR, $9::VARCHAR, $10::TIMESTAMP WITHOUT TIME ZONE) RETURNING video_participants.participant_id, video_participants.joined_at]
+[parameters: (1, 1, None, True, False, True, False, 'host', {'can_mute_others': True, 'can_remove_others': True, 'can_start_recording': True}, None)]
+(Background on this error at: https://sqlalche.me/e/20/dbapi)
+2025-10-24 22:16:51 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 500: Ошибка создания видеокомнаты
+2025-10-24 22:16:51 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Ошибка создания видеокомнаты | Path: /video/rooms | Method: POST | IP: 127.0.0.1
+2025-10-24 22:17:57 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 404: Видеокомната не найдена
+2025-10-24 22:17:57 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Видеокомната не найдена | Path: /video/rooms/1 | Method: GET | IP: 127.0.0.1
+2025-10-24 22:19:09 | INFO     | user_api | lifespan:84 | Завершение работы приложения начато
+2025-10-24 22:19:10 | INFO     | user_api | lifespan:86 | Соединение с БД закрыто
+2025-10-24 22:19:10 | INFO     | user_api | lifespan:87 | Приложение полностью остановлено
+2025-10-24 22:19:46 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-24 22:19:49 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-24 22:19:49 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-24 22:19:49 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-24 22:21:17 | INFO     | user_api | lifespan:84 | Завершение работы приложения начато
+2025-10-24 22:21:18 | INFO     | user_api | lifespan:86 | Соединение с БД закрыто
+2025-10-24 22:21:18 | INFO     | user_api | lifespan:87 | Приложение полностью остановлено
+2025-10-24 22:26:15 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-24 22:26:18 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-24 22:26:18 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-24 22:26:18 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-24 22:27:52 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-24 22:27:53 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-24 22:27:53 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-24 22:27:53 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-24 22:28:50 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-24 22:28:54 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-24 22:28:54 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-24 22:28:54 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-24 22:29:00 | INFO     | user_api | lifespan:84 | Завершение работы приложения начато
+2025-10-24 22:29:00 | INFO     | user_api | lifespan:86 | Соединение с БД закрыто
+2025-10-24 22:29:00 | INFO     | user_api | lifespan:87 | Приложение полностью остановлено
+2025-10-24 22:30:16 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-24 22:30:18 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-24 22:30:19 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-24 22:30:19 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-24 22:30:53 | WARNING  | user_api | get_current_user:68 | Отсутствует токен доступа, IP: 127.0.0.1
+2025-10-24 22:30:53 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Не удалось проверить учетные данные
+2025-10-24 22:30:53 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Не удалось проверить учетные данные | Path: /video/rooms | Method: POST | IP: 127.0.0.1
+2025-10-24 22:31:01 | WARNING  | user_api | get_current_user:68 | Отсутствует токен доступа, IP: 127.0.0.1
+2025-10-24 22:31:01 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Не удалось проверить учетные данные
+2025-10-24 22:31:01 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Не удалось проверить учетные данные | Path: /video/rooms | Method: POST | IP: 127.0.0.1
+2025-10-24 22:31:03 | WARNING  | user_api | get_current_user:68 | Отсутствует токен доступа, IP: 127.0.0.1
+2025-10-24 22:31:03 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Не удалось проверить учетные данные
+2025-10-24 22:31:03 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Не удалось проверить учетные данные | Path: /video/rooms | Method: POST | IP: 127.0.0.1
+2025-10-24 22:31:13 | WARNING  | user_api | get_current_user:68 | Отсутствует токен доступа, IP: 127.0.0.1
+2025-10-24 22:31:13 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Не удалось проверить учетные данные
+2025-10-24 22:31:13 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Не удалось проверить учетные данные | Path: /video/rooms | Method: POST | IP: 127.0.0.1
+2025-10-24 22:31:22 | WARNING  | user_api | get_current_user:68 | Отсутствует токен доступа, IP: 127.0.0.1
+2025-10-24 22:31:22 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Не удалось проверить учетные данные
+2025-10-24 22:31:22 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Не удалось проверить учетные данные | Path: /video/rooms | Method: POST | IP: 127.0.0.1
+2025-10-24 22:31:57 | WARNING  | user_api | get_current_user:68 | Отсутствует токен доступа, IP: 127.0.0.1
+2025-10-24 22:31:57 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Не удалось проверить учетные данные
+2025-10-24 22:31:57 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Не удалось проверить учетные данные | Path: /video/rooms | Method: POST | IP: 127.0.0.1
+2025-10-24 22:32:24 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-24 22:32:30 | ERROR    | user_api | create_video_room:121 | Ошибка создания видеокомнаты: (sqlalchemy.dialects.postgresql.asyncpg.Error) <class 'asyncpg.exceptions.DataError'>: invalid input for query argument $9: {'can_mute_others': True, 'can_remove_ot... (expected str, got dict)
+[SQL: INSERT INTO video_participants (room_id, user_id, left_at, is_online, is_muted, is_video_enabled, is_screen_sharing, role, permissions, last_activity) VALUES ($1::INTEGER, $2::INTEGER, $3::TIMESTAMP WITHOUT TIME ZONE, $4::BOOLEAN, $5::BOOLEAN, $6::BOOLEAN, $7::BOOLEAN, $8::VARCHAR, $9::VARCHAR, $10::TIMESTAMP WITHOUT TIME ZONE) RETURNING video_participants.participant_id, video_participants.joined_at]
+[parameters: (2, 1, None, True, False, True, False, 'host', {'can_mute_others': True, 'can_remove_others': True, 'can_start_recording': True}, None)]
+(Background on this error at: https://sqlalche.me/e/20/dbapi)
+2025-10-24 22:32:30 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 500: Ошибка создания видеокомнаты
+2025-10-24 22:32:30 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Ошибка создания видеокомнаты | Path: /video/rooms | Method: POST | IP: 127.0.0.1
