@@ -161,7 +161,7 @@ class MessageModeration(Base):
     moderation_id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
     message_id: Mapped[int] = mapped_column(ForeignKey("messages.message_id"), nullable=False, unique=True)
     moderator_id: Mapped[int] = mapped_column(ForeignKey("users.user_id"), nullable=False)
-    action: Mapped[str] = mapped_column(String(20), nullable=False)  # approve, reject, delete
+    action: Mapped[str] = mapped_column(String(20), nullable=False)  # approve, reject, 
     reason: Mapped[Optional[str]] = mapped_column(String(500), nullable=True)
     moderated_at: Mapped[datetime] = mapped_column(TIMESTAMP, server_default=func.now(), nullable=False)
     
@@ -188,3 +188,145 @@ class Notification(Base):
     # Связи
     user = relationship("User")
     message = relationship("Message")
+
+
+# ==================== VIDEO CONFERENCE MODELS ====================
+
+class VideoRoom(Base):
+    """
+    Модель видеокомнаты.
+    """
+    __tablename__ = "video_rooms"
+    
+    room_id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    room_name: Mapped[str] = mapped_column(String(100), nullable=False)
+    room_description: Mapped[Optional[str]] = mapped_column(String(500), nullable=True)
+    room_code: Mapped[str] = mapped_column(String(20), unique=True, nullable=False, index=True)
+    room_url: Mapped[str] = mapped_column(String(255), unique=True, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(TIMESTAMP, server_default=func.now(), nullable=False)
+    created_by: Mapped[int] = mapped_column(ForeignKey("users.user_id"), nullable=False)
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
+    is_private: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+    max_participants: Mapped[int] = mapped_column(Integer, default=50, nullable=False)
+    encryption_key: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
+    recording_enabled: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+    waiting_room_enabled: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+    
+    # Связи
+    creator = relationship("User", foreign_keys=[created_by])
+    participants = relationship("VideoParticipant", back_populates="room", cascade="all, delete-orphan")
+    media_streams = relationship("MediaStream", back_populates="room", cascade="all, delete-orphan")
+    recordings = relationship("RoomRecording", back_populates="room", cascade="all, delete-orphan")
+
+
+class VideoParticipant(Base):
+    """
+    Модель участника видеоконференции.
+    """
+    __tablename__ = "video_participants"
+    
+    participant_id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    room_id: Mapped[int] = mapped_column(ForeignKey("video_rooms.room_id"), nullable=False)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.user_id"), nullable=False)
+    joined_at: Mapped[datetime] = mapped_column(TIMESTAMP, server_default=func.now(), nullable=False)
+    left_at: Mapped[Optional[datetime]] = mapped_column(TIMESTAMP, nullable=True)
+    is_online: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
+    is_muted: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+    is_video_enabled: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
+    is_screen_sharing: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+    role: Mapped[str] = mapped_column(String(20), default="participant", nullable=False)  # host, co-host, participant
+    permissions: Mapped[Optional[str]] = mapped_column(String(500), nullable=True)  # JSON строка с правами
+    last_activity: Mapped[Optional[datetime]] = mapped_column(TIMESTAMP, nullable=True)
+    
+    # Связи
+    room = relationship("VideoRoom", back_populates="participants")
+    user = relationship("User")
+    media_streams = relationship("MediaStream", back_populates="participant", cascade="all, delete-orphan")
+
+
+class MediaStream(Base):
+    """
+    Модель медиапотока.
+    """
+    __tablename__ = "media_streams"
+    
+    stream_id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    room_id: Mapped[int] = mapped_column(ForeignKey("video_rooms.room_id"), nullable=False)
+    participant_id: Mapped[int] = mapped_column(ForeignKey("video_participants.participant_id"), nullable=False)
+    stream_type: Mapped[str] = mapped_column(String(20), nullable=False)  # audio, video, screen
+    stream_id_webrtc: Mapped[str] = mapped_column(String(100), nullable=False)
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
+    quality: Mapped[str] = mapped_column(String(20), default="auto", nullable=False)  # low, medium, high, auto
+    bitrate: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
+    resolution: Mapped[Optional[str]] = mapped_column(String(20), nullable=True)  # 720p, 1080p, etc
+    created_at: Mapped[datetime] = mapped_column(TIMESTAMP, server_default=func.now(), nullable=False)
+    ended_at: Mapped[Optional[datetime]] = mapped_column(TIMESTAMP, nullable=True)
+    
+    # Связи
+    room = relationship("VideoRoom", back_populates="media_streams")
+    participant = relationship("VideoParticipant", back_populates="media_streams")
+
+
+class RoomRecording(Base):
+    """
+    Модель записи комнаты.
+    """
+    __tablename__ = "room_recordings"
+    
+    recording_id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    room_id: Mapped[int] = mapped_column(ForeignKey("video_rooms.room_id"), nullable=False)
+    started_by: Mapped[int] = mapped_column(ForeignKey("users.user_id"), nullable=False)
+    started_at: Mapped[datetime] = mapped_column(TIMESTAMP, server_default=func.now(), nullable=False)
+    ended_at: Mapped[Optional[datetime]] = mapped_column(TIMESTAMP, nullable=True)
+    file_path: Mapped[Optional[str]] = mapped_column(String(500), nullable=True)
+    file_size: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
+    duration: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)  # в секундах
+    is_processing: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+    is_available: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+    thumbnail_path: Mapped[Optional[str]] = mapped_column(String(500), nullable=True)
+    
+    # Связи
+    room = relationship("VideoRoom", back_populates="recordings")
+    starter = relationship("User", foreign_keys=[started_by])
+
+
+class RoomInvitation(Base):
+    """
+    Модель приглашений в комнату.
+    """
+    __tablename__ = "room_invitations"
+    
+    invitation_id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    room_id: Mapped[int] = mapped_column(ForeignKey("video_rooms.room_id"), nullable=False)
+    invited_by: Mapped[int] = mapped_column(ForeignKey("users.user_id"), nullable=False)
+    invited_user_id: Mapped[Optional[int]] = mapped_column(ForeignKey("users.user_id"), nullable=True)
+    invited_email: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
+    invitation_code: Mapped[str] = mapped_column(String(50), unique=True, nullable=False, index=True)
+    expires_at: Mapped[datetime] = mapped_column(TIMESTAMP, nullable=False)
+    is_used: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+    used_at: Mapped[Optional[datetime]] = mapped_column(TIMESTAMP, nullable=True)
+    created_at: Mapped[datetime] = mapped_column(TIMESTAMP, server_default=func.now(), nullable=False)
+    
+    # Связи
+    room = relationship("VideoRoom")
+    inviter = relationship("User", foreign_keys=[invited_by])
+    invited_user = relationship("User", foreign_keys=[invited_user_id])
+
+
+class RoomEvent(Base):
+    """
+    Модель событий в комнате.
+    """
+    __tablename__ = "room_events"
+    
+    event_id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    room_id: Mapped[int] = mapped_column(ForeignKey("video_rooms.room_id"), nullable=False)
+    participant_id: Mapped[Optional[int]] = mapped_column(ForeignKey("video_participants.participant_id"), nullable=True)
+    event_type: Mapped[str] = mapped_column(String(50), nullable=False)  # join, leave, mute, unmute, etc
+    event_data: Mapped[Optional[str]] = mapped_column(String(1000), nullable=True)  # JSON данные события
+    created_at: Mapped[datetime] = mapped_column(TIMESTAMP, server_default=func.now(), nullable=False)
+    
+    # Связи
+    room = relationship("VideoRoom")
+    participant = relationship("VideoParticipant")
+

@@ -1,16 +1,25 @@
+import datetime
 from contextlib import asynccontextmanager
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, Depends
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 from sqlalchemy import func, select
+from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.users.routes import router as users_router
-from src.admins.routes import router as admin_router
-from src.moders.routes import router as moder_router
+# Новые импорты пользователей
+from src.users.routes import profile_router, admin_router, moder_router, public_router
+from src.websocket.routes import router as websocket_router
+from src.websocket.auth import router as websocket_auth_router
 from src.auth.routes import router as auth_router
 from src.images.routes import router as img_router
-from src.chats.routes import router as chat_router
-from src.db.database import engine, startup as db_startup
+from src.chat.routes import router as chat_router
+from src.video.routes import router as video_router
+
+from src.db.database import engine, get_db, startup as db_startup
 from src.db.models import Role, User, UserStatus
+from src.auth.auth import get_current_user
 from src.utils.password import hash_password_with_pepper
 from src.core.config_app import settings
 from src.core.config_log import logger
@@ -22,10 +31,10 @@ async def lifespan(app: FastAPI):
     logger.info("Запуск приложения начат")
 
     await db_startup()
-    logger.info("Подключение к PostgeSQL и Redis завершено")
+    logger.info("Подключение к PostgreSQL и Redis завершено")
 
     async with engine.begin() as conn:
-        # роли
+        # Создаем роли если их нет
         desired_roles = [
             {"role_id": 1, "role_name": "администратор"},
             {"role_id": 2, "role_name": "модератор"},
@@ -37,37 +46,34 @@ async def lifespan(app: FastAPI):
 
         missing = [r for r in desired_roles if r["role_id"] not in existing_role_ids]
         if missing:
-            # вставляем недостающие роли
             await conn.execute(Role.__table__.insert(), missing)
             logger.info(f"Созданы недостающие роли: {[r['role_id'] for r in missing]}")
         else:
             logger.debug("Роли уже присутствуют в БД")
 
-        # админ: создаём, если нет пользователя с user_id = 1
+        # Создаем администратора по умолчанию если его нет
         res = await conn.execute(select(User).where(User.user_id == 1))
         existing_admin = res.scalars().first()
         if not existing_admin:
             if not settings.ADMIN_PASSWORD:
                 logger.error("ADMIN_PASSWORD не задан в настройках — админ не будет создан")
             else:
-                # Не логируем пароль администратора
                 logger.info("Создание администратора по умолчанию")
                 hashed = hash_password_with_pepper(settings.ADMIN_PASSWORD, settings.PASSWORD_PEPPER)
 
-                # Используем имя файла аватара из настроек
                 admin_avatar_name = settings.ADMIN_IMAGES
-                
+
                 insert_stmt = User.__table__.insert().values(
                     user_login="admin",
                     user_full_name="Админ Админов",
                     user_email=settings.ADMIN_EMAIL,
                     user_password_hash=hashed,
-                    user_salt="",  # Больше не используем отдельную соль
+                    user_salt="",
                     user_avatar_url=admin_avatar_name,
                     role_id=1,
                     registered_at=func.now(),
                     is_deleted=False,
-                    status=UserStatus.ACTIVE, 
+                    status=UserStatus.ACTIVE,
                     ban_reason=None,
                     banned_at=None,
                 )
@@ -77,7 +83,7 @@ async def lifespan(app: FastAPI):
         else:
             logger.debug("Администратор по id = 1 уже существует")
 
-    yield  # — здесь приложение «живет»
+    yield
 
     logger.info("Завершение работы приложения начато")
     await engine.dispose()
@@ -91,6 +97,7 @@ app = FastAPI(
     lifespan=lifespan
 )
 
+# CORS middleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.ALLOWED_ORIGINS,
@@ -102,12 +109,56 @@ app.add_middleware(
 # Настраиваем обработчики исключений
 setup_exception_handlers(app)
 
-app.include_router(users_router)
-app.include_router(admin_router)
-app.include_router(moder_router)
+# Подключаем роутеры с новой структурой пользователей
+app.include_router(profile_router, prefix="/users")
+app.include_router(admin_router, prefix="/users")
+app.include_router(moder_router, prefix="/users")
+app.include_router(public_router, prefix="/users")
+
+# Остальные роутеры
 app.include_router(auth_router)
 app.include_router(img_router)
 app.include_router(chat_router)
+app.include_router(video_router)
+
+app.include_router(websocket_auth_router)
+app.include_router(websocket_router, prefix="/api/v1")
+
+# Статические файлы
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# Настраиваем шаблоны
+templates = Jinja2Templates(directory="templates")
+
+
+@app.get("/", response_class=HTMLResponse)
+async def root(request: Request):
+    return templates.TemplateResponse("video_client.html", {"request": request})
+
+
+@app.get("/video-conference", response_class=HTMLResponse)
+async def video_conference(request: Request):
+    return templates.TemplateResponse("video_client.html", {"request": request})
+
+
+@app.get("/test-websocket", response_class=HTMLResponse)
+async def test_websocket(request: Request):
+    return templates.TemplateResponse("video_client.html", {"request": request})
+
+
+@app.get("/api/health")
+async def health_check():
+    return {"status": "working", "timestamp": datetime.datetime.utcnow().isoformat()}
+
+
+@app.get("/api/test-auth")
+async def test_auth(current_user: User = Depends(get_current_user)):
+    return {
+        "user_id": current_user.user_id,
+        "login": current_user.user_login,
+        "role": current_user.role_id
+    }
+
 
 if __name__ == "__main__":
     import uvicorn

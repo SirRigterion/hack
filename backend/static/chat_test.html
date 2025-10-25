@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест чата - VideoConf App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin-bottom: 10px;
+        }
+        
+        .content {
+            display: flex;
+            min-height: 600px;
+        }
+        
+        .sidebar {
+            width: 300px;
+            background: #34495e;
+            color: white;
+            padding: 20px;
+            border-right: 3px solid #2c3e50;
+        }
+        
+        .main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .auth-section {
+            padding: 20px;
+            border-bottom: 2px solid #ecf0f1;
+            background: #f8f9fa;
+        }
+        
+        .auth-form {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: end;
+        }
+        
+        .form-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        input, select, button {
+            padding: 10px;
+            border: 2px solid #bdc3c7;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+
+        button:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+        }
+
+        .btn-success {
+            background: #27ae60;
+        }
+
+        .btn-success:hover {
+            background: #219a52;
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+        }
+
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+
+        .rooms-section {
+            padding: 20px;
+        }
+
+        .rooms-list {
+            max-height: 200px;
+            overflow-y: auto;
+            border: 2px solid #ecf0f1;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+
+        .room-item {
+            padding: 10px;
+            border-bottom: 1px solid #ecf0f1;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .room-item:hover {
+            background: #ecf0f1;
+        }
+
+        .room-item.active {
+            background: #3498db;
+            color: white;
+        }
+
+        .chat-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            border-top: 2px solid #ecf0f1;
+        }
+
+        .chat-header {
+            padding: 15px 20px;
+            background: #34495e;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-radius: 10px;
+            max-width: 70%;
+            word-wrap: break-word;
+        }
+
+        .message.own {
+            background: #3498db;
+            color: white;
+            margin-left: auto;
+            border-bottom-right-radius: 2px;
+        }
+
+        .message.other {
+            background: white;
+            border: 2px solid #ecf0f1;
+            border-bottom-left-radius: 2px;
+        }
+
+        .message-sender {
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 12px;
+        }
+
+        .message-content {
+            line-height: 1.4;
+        }
+
+        .message-time {
+            font-size: 11px;
+            opacity: 0.7;
+            text-align: right;
+            margin-top: 5px;
+        }
+
+        .chat-input {
+            padding: 20px;
+            background: white;
+            border-top: 2px solid #ecf0f1;
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #bdc3c7;
+            border-radius: 8px;
+            font-size: 14px;
+            background: #f8f9fa;
+            transition: border-color 0.3s;
+        }
+
+        .chat-input input:focus {
+            outline: none;
+            border-color: #3498db;
+            background: white;
+        }
+
+        .chat-input input:disabled {
+            background: #ecf0f1;
+            color: #7f8c8d;
+            cursor: not-allowed;
+        }
+
+        .chat-input button {
+            padding: 12px 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+            width: auto;
+            min-width: 100px;
+        }
+
+        .chat-input button:hover:not(:disabled) {
+            background: #2980b9;
+        }
+
+        .chat-input button:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+        }
+
+        .status {
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+
+        .status.connected {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status.disconnected {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .typing-indicator {
+            padding: 5px 20px;
+            font-style: italic;
+            color: #7f8c8d;
+            font-size: 12px;
+            min-height: 20px;
+        }
+
+        .user-info {
+            background: #2c3e50;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .online-users {
+            margin-top: 15px;
+        }
+
+        .online-user {
+            display: flex;
+            align-items: center;
+            padding: 5px;
+            margin-bottom: 5px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+        }
+
+        .online-dot {
+            width: 8px;
+            height: 8px;
+            background: #27ae60;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>🧪 Тестирование чат-модуля</h1>
+        <p>VideoConf App - Демонстрация работы чата</p>
+    </div>
+
+    <div class="content">
+        <div class="sidebar">
+            <div class="user-info" id="userInfo">
+                Не авторизован
+            </div>
+
+            <div class="auth-section">
+                <h3>🔐 Авторизация</h3>
+                <div class="auth-form">
+                    <div class="form-group">
+                        <label>Логин или Email:</label>
+                        <input type="text" id="loginInput" placeholder="admin или ваш логин" value="admin">
+                    </div>
+                    <div class="form-group">
+                        <label>Пароль:</label>
+                        <input type="password" id="passwordInput" placeholder="Пароль" value="string111">
+                    </div>
+                    <button onclick="login()" id="loginBtn">Войти</button>
+                    <button onclick="logout()" id="logoutBtn" disabled class="btn-danger">Выйти</button>
+                </div>
+            </div>
+
+            <div class="rooms-section">
+                <h3>🗂 Комнаты</h3>
+                <button onclick="createRoom()" class="btn-success" style="margin-bottom: 10px; width: 100%;">+ Создать
+                    комнату
+                </button>
+                <div class="rooms-list" id="roomsList">
+                    <!-- Список комнат будет здесь -->
+                </div>
+            </div>
+
+            <div class="online-users">
+                <h3>🟢 Онлайн</h3>
+                <div id="onlineUsers">
+                    <!-- Список онлайн пользователей -->
+                </div>
+            </div>
+        </div>
+
+        <div class="main">
+            <div class="status disconnected" id="connectionStatus">
+                ❌ WebSocket отключен
+            </div>
+
+            <div class="chat-section">
+                <div class="chat-header">
+                    <h3 id="currentRoom">Выберите комнату для начала общения</h3>
+                    <div id="roomUsers">Участников: 0</div>
+                </div>
+
+                <div class="chat-messages" id="chatMessages">
+                    <!-- Сообщения будут здесь -->
+                    <div class="message other">
+                        <div class="message-sender">Система</div>
+                        <div class="message-content">Добро пожаловать в тестовый чат! Выберите комнату слева или
+                            создайте новую.
+                        </div>
+                        <div class="message-time">Только что</div>
+                    </div>
+                </div>
+
+                <div class="typing-indicator" id="typingIndicator"></div>
+
+                <div class="chat-input">
+                    <input type="text" id="messageInput" placeholder="Введите сообщение..." disabled>
+                    <button onclick="sendMessage()" id="sendBtn" disabled>Отправить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Глобальные переменные
+    let currentUser = null;
+    let currentRoom = null;
+    let ws = null;
+    let authToken = null;
+    let messageRefreshInterval = null;
+
+    // Базовый URL API
+    const API_BASE = 'http://localhost:8000';
+
+    // DOM элементы
+    const userInfo = document.getElementById('userInfo');
+    const connectionStatus = document.getElementById('connectionStatus');
+    const roomsList = document.getElementById('roomsList');
+    const chatMessages = document.getElementById('chatMessages');
+    const messageInput = document.getElementById('messageInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const currentRoomTitle = document.getElementById('currentRoom');
+    const roomUsers = document.getElementById('roomUsers');
+    const typingIndicator = document.getElementById('typingIndicator');
+    const onlineUsers = document.getElementById('onlineUsers');
+    const loginBtn = document.getElementById('loginBtn');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    // Функции авторизации
+    async function login() {
+        const login = document.getElementById('loginInput').value;
+        const password = document.getElementById('passwordInput').value;
+
+        if (!login || !password) {
+            alert('Введите логин и пароль');
+            return;
+        }
+
+        try {
+            const response = await fetch(`${API_BASE}/auth/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    user_indificator: login,
+                    user_password: password
+                }),
+                credentials: 'include'
+            });
+
+            if (response.ok) {
+                const userData = await response.json();
+                currentUser = userData;
+                authToken = getCookie('access_token');
+
+                updateUI();
+                loadRooms();
+                connectWebSocket();
+
+                addSystemMessage('✅ Успешный вход в систему');
+            } else {
+                const error = await response.json();
+                alert(`Ошибка входа: ${error.detail}`);
+            }
+        } catch (error) {
+            console.error('Ошибка входа:', error);
+            alert('Ошибка соединения с сервером');
+        }
+    }
+
+    async function logout() {
+        if (messageRefreshInterval) {
+            clearInterval(messageRefreshInterval);
+            messageRefreshInterval = null;
+        }
+
+        try {
+            await fetch(`${API_BASE}/auth/logout`, {
+                method: 'POST',
+                credentials: 'include'
+            });
+        } catch (error) {
+            console.error('Ошибка выхода:', error);
+        }
+
+        currentUser = null;
+        authToken = null;
+        currentRoom = null;
+
+        if (ws) {
+            ws.close();
+            ws = null;
+        }
+
+        updateUI();
+        addSystemMessage('🔒 Вы вышли из системы');
+    }
+
+    // Функции для работы с комнатами
+    async function loadRooms() {
+        if (!currentUser) return;
+
+        try {
+            const response = await fetch(`${API_BASE}/chat/rooms`, {
+                credentials: 'include'
+            });
+
+            if (response.ok) {
+                const rooms = await response.json();
+                displayRooms(rooms);
+            }
+        } catch (error) {
+            console.error('Ошибка загрузки комнат:', error);
+        }
+    }
+
+    async function createRoom() {
+        if (!currentUser) {
+            alert('Сначала войдите в систему');
+            return;
+        }
+
+        const roomName = prompt('Введите название комнаты:');
+        if (!roomName) return;
+
+        try {
+            const response = await fetch(`${API_BASE}/chat/rooms`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    room_name: roomName,
+                    room_description: 'Тестовая комната',
+                    is_private: false
+                }),
+                credentials: 'include'
+            });
+
+            if (response.ok) {
+                const room = await response.json();
+                loadRooms();
+                addSystemMessage(`✅ Комната "${roomName}" создана`);
+            } else {
+                const error = await response.json();
+                alert(`Ошибка создания комнаты: ${error.detail}`);
+            }
+        } catch (error) {
+            console.error('Ошибка создания комнаты:', error);
+            alert('Ошибка соединения с сервером');
+        }
+    }
+
+    function displayRooms(rooms) {
+        roomsList.innerHTML = '';
+
+        rooms.forEach(room => {
+            const roomElement = document.createElement('div');
+            roomElement.className = 'room-item';
+            roomElement.innerHTML = `
+                <strong>${room.room_name}</strong>
+                <div style="font-size: 12px; opacity: 0.8;">
+                    Участников: ${room.participants_count || 0}
+                </div>
+            `;
+
+            roomElement.onclick = () => joinRoom(room);
+            roomsList.appendChild(roomElement);
+        });
+    }
+
+    async function joinRoom(room) {
+        if (!currentUser) return;
+
+        currentRoom = room;
+        updateUI();
+
+        // Останавливаем предыдущий интервал
+        if (messageRefreshInterval) {
+            clearInterval(messageRefreshInterval);
+        }
+
+        // Загружаем сообщения сразу
+        await loadRoomMessages(room);
+
+
+        // Присоединяемся к комнате через WebSocket
+        if (ws && ws.readyState === WebSocket.OPEN) {
+            joinRoomViaWebSocket(room);
+        }
+
+        addSystemMessage(`✅ Вы присоединились к комнате "${room.room_name}"`);
+    }
+
+    // Функция загрузки сообщений комнаты
+    async function loadRoomMessages(room) {
+        if (!room || !currentUser) return;
+
+        try {
+            const response = await fetch(`${API_BASE}/chat/rooms/${room.room_id}/messages?limit=50`, {
+                credentials: 'include'
+            });
+
+            if (response.ok) {
+                const messages = await response.json();
+                displayMessages(messages.reverse());
+            }
+        } catch (error) {
+            console.error('Ошибка загрузки сообщений:', error);
+        }
+    }
+
+    // Функции для работы с сообщениями
+    function displayMessages(messages) {
+        // Сохраняем позицию прокрутки
+        const wasScrolledToBottom = isScrolledToBottom();
+
+        chatMessages.innerHTML = '';
+
+        if (messages.length === 0) {
+            chatMessages.innerHTML = `
+                <div class="message other">
+                    <div class="message-sender">Система</div>
+                    <div class="message-content">В этой комнате пока нет сообщений</div>
+                    <div class="message-time">Только что</div>
+                </div>
+            `;
+            return;
+        }
+
+        messages.forEach(message => {
+            addMessageToChat(message);
+        });
+
+        // Восстанавливаем позицию прокрутки
+        if (wasScrolledToBottom) {
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+    }
+
+    // Функция проверки, прокручен ли чат до конца
+    function isScrolledToBottom() {
+        const threshold = 100; // пикселей от конца
+        return chatMessages.scrollTop + chatMessages.clientHeight >= chatMessages.scrollHeight - threshold;
+    }
+
+    function addMessageToChat(message) {
+        // Проверяем, не дублируется ли сообщение
+        const existingMessage = document.querySelector(`[data-message-id="${message.message_id}"]`);
+        if (existingMessage) {
+            console.log('Message already exists:', message.message_id);
+            return;
+        }
+
+        const messageElement = document.createElement('div');
+        messageElement.className = `message ${message.sender_id === currentUser?.user_id ? 'own' : 'other'}`;
+        messageElement.setAttribute('data-message-id', message.message_id);
+
+        const time = new Date(message.created_at).toLocaleTimeString('ru-RU', {
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+
+        messageElement.innerHTML = `
+            <div class="message-sender">${message.sender_name || 'Неизвестный'}</div>
+            <div class="message-content">${message.content}</div>
+            <div class="message-time">${time}</div>
+        `;
+
+        chatMessages.appendChild(messageElement);
+
+        // Плавная прокрутка к новому сообщению
+        setTimeout(() => {
+            messageElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+
+        console.log('✅ Message added to chat:', message);
+    }
+
+    function addSystemMessage(text) {
+        const messageElement = document.createElement('div');
+        messageElement.className = 'message other';
+        messageElement.innerHTML = `
+            <div class="message-sender">Система</div>
+            <div class="message-content">${text}</div>
+            <div class="message-time">Только что</div>
+        `;
+
+        chatMessages.appendChild(messageElement);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    async function sendMessage() {
+        const content = messageInput.value.trim();
+
+        if (!content || !currentRoom || !currentUser) return;
+
+        try {
+            const response = await fetch(`${API_BASE}/chat/rooms/${currentRoom.room_id}/messages`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    content: content,
+                    message_type: 'text'
+                }),
+                credentials: 'include'
+            });
+
+            if (response.ok) {
+                const messageData = await response.json();
+                console.log('✅ Message sent via HTTP:', messageData);
+                messageInput.value = '';
+
+                // Временно: принудительно обновляем чат через 1 секунду
+                setTimeout(() => {
+                    loadRoomMessages(currentRoom);
+                }, 1000);
+
+            } else {
+                const error = await response.json();
+                alert(`Ошибка отправки: ${error.detail}`);
+            }
+        } catch (error) {
+            console.error('Ошибка отправки сообщения:', error);
+            alert('Ошибка соединения с сервером');
+        }
+    }
+
+    async function connectWebSocket() {
+        if (!currentUser || ws) return;
+
+        try {
+            // Сначала получаем токен для WebSocket
+            const tokenResponse = await fetch(`${API_BASE}/ws-auth/token`, {
+                credentials: 'include'
+            });
+
+            if (!tokenResponse.ok) {
+                throw new Error('Не удалось получить WebSocket токен');
+            }
+
+            const tokenData = await tokenResponse.json();
+            const wsToken = tokenData.token;
+
+            // Подключаемся к WebSocket с токеном
+            const wsUrl = `ws://localhost:8000/api/v1/ws/global?token=${encodeURIComponent(wsToken)}`;
+            ws = new WebSocket(wsUrl);
+
+            ws.onopen = () => {
+                connectionStatus.className = 'status connected';
+                connectionStatus.textContent = '✅ WebSocket подключен';
+                console.log('WebSocket connected');
+
+                // При подключении присоединяемся к текущей комнате
+                if (currentRoom) {
+                    joinRoomViaWebSocket(currentRoom);
+                }
+            };
+
+            ws.onclose = (event) => {
+                connectionStatus.className = 'status disconnected';
+                connectionStatus.textContent = '❌ WebSocket отключен';
+                console.log('WebSocket disconnected:', event.code, event.reason);
+
+                // Пытаемся переподключиться через 5 секунд
+                setTimeout(() => {
+                    if (currentUser) {
+                        connectWebSocket();
+                    }
+                }, 5000);
+            };
+
+            ws.onerror = (error) => {
+                console.error('WebSocket error:', error);
+                connectionStatus.className = 'status disconnected';
+                connectionStatus.textContent = '❌ Ошибка WebSocket';
+            };
+
+            ws.onmessage = (event) => {
+                try {
+                    const data = JSON.parse(event.data);
+                    handleWebSocketMessage(data);
+                } catch (error) {
+                    console.error('Error parsing WebSocket message:', error);
+                }
+            };
+
+        } catch (error) {
+            console.error('Ошибка подключения WebSocket:', error);
+            connectionStatus.className = 'status disconnected';
+            connectionStatus.textContent = '❌ Ошибка подключения WebSocket';
+        }
+    }
+
+    // Добавь функцию для присоединения к комнате через WebSocket
+    function joinRoomViaWebSocket(room) {
+        if (ws && ws.readyState === WebSocket.OPEN) {
+            ws.send(JSON.stringify({
+                type: "join_room",
+                room_id: room.room_id,
+                room_name: room.room_name
+            }));
+        }
+    }
+
+    function handleWebSocketMessage(data) {
+        console.log('📨 WebSocket message received:', data);
+
+        switch (data.type) {
+            case 'chat_message':
+                console.log('✅ Новое сообщение через WebSocket:', data.data);
+                addMessageToChat(data.data);
+                break;
+
+            case 'update_chat':
+                // Принудительное обновление чата для всех участников
+                console.log('🔄 Принудительное обновление чата:', data.event);
+                if (currentRoom && data.data && data.data.room_id === currentRoom.room_id) {
+                    if (data.event === 'new_message') {
+                        addMessageToChat(data.data);
+                    } else if (data.event === 'message_updated') {
+                        updateMessageInChat(data.data);
+                    } else if (data.event === 'message_deleted') {
+                        removeMessageFromChat(data.data.message_id);
+                    }
+                }
+                break;
+
+            case 'message_updated':
+                console.log('✏️ Сообщение обновлено:', data.data);
+                updateMessageInChat(data.data);
+                break;
+
+            case 'message_deleted':
+                console.log('🗑️ Сообщение удалено:', data.data);
+                removeMessageFromChat(data.data.message_id);
+                break;
+
+            case 'user_online':
+                updateOnlineUsers(data);
+                break;
+
+            case 'user_joined':
+                addSystemMessage(`${data.full_name || data.username} присоединился к чату`);
+                if (data.participants_count) {
+                    roomUsers.textContent = `Участников: ${data.participants_count}`;
+                }
+                break;
+
+            case 'user_left':
+                addSystemMessage(`${data.full_name || data.username} покинул чат`);
+                if (data.participants_count) {
+                    roomUsers.textContent = `Участников: ${data.participants_count}`;
+                }
+                break;
+
+            case 'room_info':
+                console.log('Room info received:', data);
+                if (data.participants) {
+                    updateOnlineUsersList(data.participants);
+                }
+                break;
+
+            case 'notification':
+                showNotification(data.data || data);
+                break;
+
+            case 'pong':
+                console.log('🏓 WebSocket pong received');
+                break;
+
+            default:
+                console.log('Unknown WebSocket message type:', data.type, data);
+        }
+    }
+
+    function updateOnlineUsersList(participants) {
+        onlineUsers.innerHTML = '';
+
+        if (participants && participants.length > 0) {
+            participants.forEach(user => {
+                const userElement = document.createElement('div');
+                userElement.className = 'online-user';
+                userElement.innerHTML = `
+                    <div class="online-dot"></div>
+                    <span>${user.full_name || user.username}</span>
+                `;
+                onlineUsers.appendChild(userElement);
+            });
+        } else {
+            onlineUsers.innerHTML = '<div style="opacity: 0.7;">Нет онлайн пользователей</div>';
+        }
+    }
+
+    function updateMessageInChat(messageData) {
+        const messageElement = document.querySelector(`[data-message-id="${messageData.message_id}"]`);
+        if (messageElement) {
+            const contentElement = messageElement.querySelector('.message-content');
+            if (contentElement) {
+                contentElement.textContent = messageData.content;
+            }
+        }
+    }
+
+    // Функция удаления сообщения из чата
+    function removeMessageFromChat(messageId) {
+        const messageElement = document.querySelector(`[data-message-id="${messageId}"]`);
+        if (messageElement) {
+            messageElement.remove();
+        }
+    }
+
+    function updateTypingIndicator(data) {
+        if (data.room_id !== currentRoom?.room_id) return;
+
+        if (data.is_typing && data.typing_users.length > 0) {
+            const usersText = data.typing_users.length === 1 ?
+                'пользователь печатает...' :
+                `${data.typing_users.length} пользователя печатают...`;
+            typingIndicator.textContent = usersText;
+        } else {
+            typingIndicator.textContent = '';
+        }
+    }
+
+    function updateOnlineUsers(data) {
+        // В реальном приложении здесь бы обновлялся список онлайн пользователей
+        console.log('Online users update:', data);
+    }
+
+    function showNotification(notification) {
+        addSystemMessage(`🔔 ${notification.title}: ${notification.content}`);
+    }
+
+    // Вспомогательные функции
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+        return null;
+    }
+
+    function updateUI() {
+        if (currentUser) {
+            userInfo.innerHTML = `
+                <strong>👤 ${currentUser.user_login}</strong>
+                <div style="font-size: 12px;">${currentUser.user_email}</div>
+            `;
+            loginBtn.disabled = true;
+            logoutBtn.disabled = false;
+            messageInput.disabled = !currentRoom;
+            sendBtn.disabled = !currentRoom;
+        } else {
+            userInfo.textContent = 'Не авторизован';
+            loginBtn.disabled = false;
+            logoutBtn.disabled = true;
+            messageInput.disabled = true;
+            sendBtn.disabled = true;
+        }
+
+        if (currentRoom) {
+            currentRoomTitle.textContent = `💬 ${currentRoom.room_name}`;
+            roomUsers.textContent = `Участников: ${currentRoom.participants_count || 0}`;
+        } else {
+            currentRoomTitle.textContent = 'Выберите комнату для начала общения';
+            roomUsers.textContent = 'Участников: 0';
+        }
+    }
+
+    // Обработчики событий
+    messageInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            sendMessage();
+        }
+    });
+
+    messageInput.addEventListener('input', () => {
+        if (currentRoom && ws && ws.readyState === WebSocket.OPEN) {
+            // Отправляем статус печатания
+            ws.send(JSON.stringify({
+                type: 'typing',
+                room_id: currentRoom.room_id,
+                is_typing: messageInput.value.length > 0
+            }));
+        }
+    });
+
+    // Периодический ping для поддержания соединения
+    setInterval(() => {
+        if (ws && ws.readyState === WebSocket.OPEN) {
+            ws.send(JSON.stringify({ type: 'ping' }));
+        }
+    }, 30000);
+
+    // Инициализация
+    updateUI();
+</script>
+</body>
+</html>

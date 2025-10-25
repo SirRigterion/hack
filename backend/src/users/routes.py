@@ -18,8 +18,8 @@ from src.core.config_app import settings
 from src.core.config_log import logger
 from src.utils.decorators import require_cookie_and_not_deleted, not_banned_required, rate_limit
 from src.core.exceptions import (
-    ValidationError, AuthorizationError, 
-    NotFoundError, ConflictError, InternalServerError
+    ValidationError, AuthenticationError, AuthorizationError, 
+    NotFoundError, ConflictError, RateLimitError, InternalServerError
 )
 from src.utils.email import send_email, send_reset_password, send_verification_email, send_deletion_email
 from src.utils.token import create_token, get_token_by_hash, consume_user_token, hash_token

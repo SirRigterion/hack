@@ -8,6 +8,7 @@ from src.db.models import User, UserStatus
 from src.auth.auth import create_access_token, get_current_user, set_auth_cookie
 from src.auth.schemas import UserCreate, UserLogin
 from src.users.schemas import UserProfile
+
 from src.core.config_log import logger
 from src.core.config_app import settings
 from src.utils.password import hash_password_with_pepper, verify_password_with_pepper
@@ -15,7 +16,6 @@ from src.utils.decorators import rate_limit, require_cookie_and_not_deleted
 from src.utils.email import send_verification_email
 from src.utils.token import create_token, get_token_by_hash, consume_user_token, hash_token
 from src.cache.redis_cache import cache_user_profile, incr, delete
-
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
