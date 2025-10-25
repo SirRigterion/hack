@@ -41,7 +41,7 @@ export class UserAPI {
 
   constructor(baseURL?: string) {
     this.axios = axios.create({
-      baseURL: baseURL || process.env.REACT_APP_API_URL,
+      baseURL: baseURL || process.env.NEXT_PUBLIC_API_URL,
       withCredentials: true,
     });
   }
@@ -216,7 +216,7 @@ export class ChatAPI {
 
   constructor(baseURL?: string) {
     this.axios = axios.create({
-      baseURL: baseURL || process.env.REACT_APP_API_URL,
+      baseURL: baseURL || process.env.NEXT_PUBLIC_API_URL,
       withCredentials: true,
     });
   }
