@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест видеозвонков</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f0f0f0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .btn:hover {
+            background: #45a049;
+        }
+        .btn.danger {
+            background: #f44336;
+        }
+        .btn.danger:hover {
+            background: #d32f2f;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+        }
+        .error {
+            background: #ffebee;
+            border-left-color: #f44336;
+        }
+        .success {
+            background: #e8f5e8;
+            border-left-color: #4CAF50;
+        }
+        input {
+            padding: 8px;
+            margin: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .video-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .video-wrapper {
+            background: #333;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+        video {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .video-label {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Тест видеозвонков</h1>
+        
+        <div class="status" id="status">
+            Готов к тестированию
+        </div>
+
+        <div>
+            <input type="text" id="roomCode" placeholder="Код комнаты" value="TEST001">
+            <input type="text" id="userName" placeholder="Ваше имя" value="Тестер">
+            <button class="btn" onclick="joinRoom()">Присоединиться</button>
+            <button class="btn danger" onclick="leaveRoom()">Покинуть</button>
+        </div>
+
+        <div>
+            <button class="btn" onclick="toggleMute()">🎤 Микрофон</button>
+            <button class="btn" onclick="toggleVideo()">📹 Камера</button>
+            <button class="btn" onclick="toggleScreenShare()">🖥️ Экран</button>
+        </div>
+
+        <div class="video-container" id="videoContainer">
+            <!-- Видео элементы будут добавлены здесь -->
+        </div>
+
+        <div>
+            <h3>Отладочная информация:</h3>
+            <div id="debugInfo"></div>
+        </div>
+    </div>
+
+    <script>
+        let localStream = null;
+        let peerConnections = new Map();
+        let remoteStreams = new Map();
+        let socket = null;
+        let roomCode = '';
+        let userId = '';
+        let userName = '';
+        let isMuted = false;
+        let isVideoEnabled = true;
+
+        const iceConfig = {
+            iceServers: [
+                { urls: 'stun:stun.l.google.com:19302' },
+                { urls: 'stun:stun1.l.google.com:19302' }
+            ]
+        };
+
+        function getWebSocketHost() {
+            // Если мы на localhost, используем localhost
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                return window.location.host;
+            }
+            
+            // Для других устройств используем IP адрес сервера
+            return window.location.host;
+        }
+
+        function updateStatus(message, type = 'info') {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = `status ${type}`;
+        }
+
+        function updateDebugInfo() {
+            const debug = document.getElementById('debugInfo');
+            debug.innerHTML = `
+                <p><strong>Комната:</strong> ${roomCode}</p>
+                <p><strong>Пользователь:</strong> ${userName} (${userId})</p>
+                <p><strong>Peer Connections:</strong> ${peerConnections.size}</p>
+                <p><strong>Удаленные потоки:</strong> ${remoteStreams.size}</p>
+                <p><strong>WebSocket:</strong> ${socket ? socket.readyState : 'Не подключен'}</p>
+                <p><strong>Локальный поток:</strong> ${localStream ? 'Есть' : 'Нет'}</p>
+            `;
+        }
+
+        async function joinRoom() {
+            try {
+                roomCode = document.getElementById('roomCode').value;
+                userName = document.getElementById('userName').value;
+                userId = `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+
+                updateStatus('Получение доступа к медиаустройствам...', 'info');
+
+                // Получаем доступ к камере и микрофону
+                localStream = await navigator.mediaDevices.getUserMedia({
+                    video: true,
+                    audio: true
+                });
+
+                // Отображаем локальное видео
+                addVideoElement(userId, localStream, userName + ' (Вы)', true);
+
+                updateStatus('Подключение к WebSocket...', 'info');
+
+                // Подключаемся к WebSocket
+                const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+                const host = getWebSocketHost();
+                const wsUrl = `${protocol}//${host}/video/ws/${roomCode}?user_id=${userId}`;
+                
+                console.log('Подключение к WebSocket:', wsUrl);
+                
+                socket = new WebSocket(wsUrl);
+
+                socket.onopen = () => {
+                    updateStatus('Подключено к комнате', 'success');
+                    
+                    // Отправляем информацию о пользователе
+                    socket.send(JSON.stringify({
+                        type: 'user_info',
+                        user_id: userId,
+                        user_name: userName
+                    }));
+
+                    // Запрашиваем список участников
+                    socket.send(JSON.stringify({ type: 'get_participants' }));
+                };
+
+                socket.onmessage = (event) => {
+                    const message = JSON.parse(event.data);
+                    console.log('Получено сообщение:', message);
+                    handleWebSocketMessage(message);
+                };
+
+                socket.onclose = () => {
+                    updateStatus('Соединение закрыто', 'error');
+                };
+
+                socket.onerror = (error) => {
+                    updateStatus('Ошибка WebSocket: ' + error, 'error');
+                };
+
+            } catch (error) {
+                updateStatus('Ошибка: ' + error.message, 'error');
+                console.error('Ошибка входа в комнату:', error);
+            }
+        }
+
+        function handleWebSocketMessage(message) {
+            switch (message.type) {
+                case 'user_joined':
+                    handleUserJoined(message);
+                    break;
+                case 'user_left':
+                    handleUserLeft(message);
+                    break;
+                case 'webrtc_signal':
+                    handleWebRTCSignal(message);
+                    break;
+                case 'participants_list':
+                    handleParticipantsList(message);
+                    break;
+            }
+            updateDebugInfo();
+        }
+
+        function handleUserJoined(message) {
+            const { user_id, user_name } = message;
+            if (user_id !== userId) {
+                console.log(`Новый участник: ${user_name} (${user_id})`);
+                createPeerConnection(user_id);
+            }
+        }
+
+        function handleUserLeft(message) {
+            const { user_id } = message;
+            removeVideoElement(user_id);
+            closePeerConnection(user_id);
+        }
+
+        function handleWebRTCSignal(message) {
+            const { signal_type, data, sender_user_id } = message;
+            if (sender_user_id === userId) return;
+
+            switch (signal_type) {
+                case 'offer':
+                    handleOffer(data, sender_user_id);
+                    break;
+                case 'answer':
+                    handleAnswer(data, sender_user_id);
+                    break;
+                case 'ice_candidate':
+                    handleIceCandidate(data, sender_user_id);
+                    break;
+            }
+        }
+
+        function handleParticipantsList(message) {
+            const { participants } = message;
+            participants.forEach(participant => {
+                if (participant.user_id !== userId) {
+                    createPeerConnection(participant.user_id);
+                }
+            });
+        }
+
+        async function createPeerConnection(targetUserId) {
+            try {
+                console.log(`Создание peer connection для ${targetUserId}`);
+                
+                const peerConnection = new RTCPeerConnection(iceConfig);
+
+                // Добавляем локальные треки
+                if (localStream) {
+                    localStream.getTracks().forEach(track => {
+                        peerConnection.addTrack(track, localStream);
+                    });
+                }
+
+                // Обрабатываем удаленные треки
+                peerConnection.ontrack = (event) => {
+                    console.log(`Получен удаленный трек от ${targetUserId}`);
+                    const [remoteStream] = event.streams;
+                    remoteStreams.set(targetUserId, remoteStream);
+                    
+                    // Находим имя пользователя
+                    const participantName = `Участник ${targetUserId.substr(-4)}`;
+                    addVideoElement(targetUserId, remoteStream, participantName, false);
+                };
+
+                // Собираем ICE кандидаты
+                peerConnection.onicecandidate = (event) => {
+                    if (event.candidate) {
+                        socket.send(JSON.stringify({
+                            type: 'webrtc_signal',
+                            signal_type: 'ice_candidate',
+                            data: event.candidate,
+                            target_user_id: targetUserId,
+                            sender_user_id: userId
+                        }));
+                    }
+                };
+
+                peerConnections.set(targetUserId, peerConnection);
+
+                // Создаем offer
+                const offer = await peerConnection.createOffer();
+                await peerConnection.setLocalDescription(offer);
+                
+                socket.send(JSON.stringify({
+                    type: 'webrtc_signal',
+                    signal_type: 'offer',
+                    data: offer,
+                    target_user_id: targetUserId,
+                    sender_user_id: userId
+                }));
+
+            } catch (error) {
+                console.error('Ошибка создания peer connection:', error);
+            }
+        }
+
+        async function handleOffer(offer, senderUserId) {
+            try {
+                let peerConnection = peerConnections.get(senderUserId);
+                
+                if (!peerConnection) {
+                    peerConnection = new RTCPeerConnection(iceConfig);
+                    
+                    // Добавляем локальные треки
+                    if (localStream) {
+                        localStream.getTracks().forEach(track => {
+                            peerConnection.addTrack(track, localStream);
+                        });
+                    }
+
+                    // Обрабатываем удаленные треки
+                    peerConnection.ontrack = (event) => {
+                        console.log(`Получен удаленный трек от ${senderUserId}`);
+                        const [remoteStream] = event.streams;
+                        remoteStreams.set(senderUserId, remoteStream);
+                        
+                        const participantName = `Участник ${senderUserId.substr(-4)}`;
+                        addVideoElement(senderUserId, remoteStream, participantName, false);
+                    };
+
+                    // Собираем ICE кандидаты
+                    peerConnection.onicecandidate = (event) => {
+                        if (event.candidate) {
+                            socket.send(JSON.stringify({
+                                type: 'webrtc_signal',
+                                signal_type: 'ice_candidate',
+                                data: event.candidate,
+                                target_user_id: senderUserId,
+                                sender_user_id: userId
+                            }));
+                        }
+                    };
+
+                    peerConnections.set(senderUserId, peerConnection);
+                }
+
+                await peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
+                const answer = await peerConnection.createAnswer();
+                await peerConnection.setLocalDescription(answer);
+
+                socket.send(JSON.stringify({
+                    type: 'webrtc_signal',
+                    signal_type: 'answer',
+                    data: answer,
+                    target_user_id: senderUserId,
+                    sender_user_id: userId
+                }));
+
+            } catch (error) {
+                console.error('Ошибка обработки offer:', error);
+            }
+        }
+
+        async function handleAnswer(answer, senderUserId) {
+            try {
+                const peerConnection = peerConnections.get(senderUserId);
+                if (peerConnection) {
+                    await peerConnection.setRemoteDescription(new RTCSessionDescription(answer));
+                }
+            } catch (error) {
+                console.error('Ошибка обработки answer:', error);
+            }
+        }
+
+        async function handleIceCandidate(candidate, senderUserId) {
+            try {
+                const peerConnection = peerConnections.get(senderUserId);
+                if (peerConnection) {
+                    await peerConnection.addIceCandidate(new RTCIceCandidate(candidate));
+                }
+            } catch (error) {
+                console.error('Ошибка обработки ICE candidate:', error);
+            }
+        }
+
+        function addVideoElement(userId, stream, name, isLocal) {
+            const container = document.getElementById('videoContainer');
+            
+            // Удаляем существующий элемент
+            const existing = document.getElementById(`video-${userId}`);
+            if (existing) {
+                existing.parentElement.remove();
+            }
+
+            const wrapper = document.createElement('div');
+            wrapper.className = 'video-wrapper';
+            if (isLocal) {
+                wrapper.style.border = '3px solid #4CAF50';
+            }
+
+            const video = document.createElement('video');
+            video.id = `video-${userId}`;
+            video.srcObject = stream;
+            video.autoplay = true;
+            video.muted = true;
+            video.playsInline = true;
+
+            const label = document.createElement('div');
+            label.className = 'video-label';
+            label.textContent = name;
+
+            wrapper.appendChild(video);
+            wrapper.appendChild(label);
+            container.appendChild(wrapper);
+
+            console.log(`Добавлено видео для ${name} (${userId})`);
+        }
+
+        function removeVideoElement(userId) {
+            const element = document.getElementById(`video-${userId}`);
+            if (element) {
+                element.parentElement.remove();
+                remoteStreams.delete(userId);
+            }
+        }
+
+        function closePeerConnection(userId) {
+            const peerConnection = peerConnections.get(userId);
+            if (peerConnection) {
+                peerConnection.close();
+                peerConnections.delete(userId);
+            }
+        }
+
+        function leaveRoom() {
+            if (socket) {
+                socket.close();
+            }
+            
+            peerConnections.forEach(pc => pc.close());
+            peerConnections.clear();
+            remoteStreams.clear();
+            
+            if (localStream) {
+                localStream.getTracks().forEach(track => track.stop());
+                localStream = null;
+            }
+            
+            document.getElementById('videoContainer').innerHTML = '';
+            updateStatus('Покинули комнату', 'info');
+            updateDebugInfo();
+        }
+
+        function toggleMute() {
+            if (localStream) {
+                const audioTrack = localStream.getAudioTracks()[0];
+                if (audioTrack) {
+                    audioTrack.enabled = !audioTrack.enabled;
+                    isMuted = !audioTrack.enabled;
+                    updateStatus(`Микрофон ${isMuted ? 'выключен' : 'включен'}`, isMuted ? 'error' : 'success');
+                }
+            }
+        }
+
+        function toggleVideo() {
+            if (localStream) {
+                const videoTrack = localStream.getVideoTracks()[0];
+                if (videoTrack) {
+                    videoTrack.enabled = !videoTrack.enabled;
+                    isVideoEnabled = videoTrack.enabled;
+                    updateStatus(`Камера ${isVideoEnabled ? 'включена' : 'выключена'}`, isVideoEnabled ? 'success' : 'error');
+                }
+            }
+        }
+
+        function toggleScreenShare() {
+            updateStatus('Демонстрация экрана не реализована в тестовой версии', 'error');
+        }
+
+        // Инициализация
+        window.addEventListener('load', () => {
+            updateDebugInfo();
+            console.log('Тестовая страница загружена');
+        });
+    </script>
+</body>
+</html>

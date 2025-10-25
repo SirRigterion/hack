@@ -1,0 +1,1400 @@
+2025-10-19 20:03:04 | INFO     | user_api | lifespan:21 | Запуск приложения начат
+2025-10-19 20:03:07 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-19 20:03:07 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-19 20:03:07 | INFO     | user_api | lifespan:24 | Подключение к PostgeSQL и Redis завершено
+2025-10-19 20:09:17 | INFO     | user_api | lifespan:81 | Завершение работы приложения начато
+2025-10-19 20:09:18 | INFO     | user_api | lifespan:83 | Соединение с БД закрыто
+2025-10-19 20:09:18 | INFO     | user_api | lifespan:84 | Приложение полностью остановлено2025-10-23 22:15:22 | INFO     | user_api | lifespan:22 | Запуск приложения начат
+2025-10-23 22:15:24 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-23 22:15:28 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('127.0.0.1', 6379), [Errno 10061] Connect call failed ('::1', 6379, 0, 0) connecting to localhost:6379.
+2025-10-23 22:15:34 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('127.0.0.1', 6379), [Errno 10061] Connect call failed ('::1', 6379, 0, 0) connecting to localhost:6379.
+2025-10-23 22:15:40 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('127.0.0.1', 6379), [Errno 10061] Connect call failed ('::1', 6379, 0, 0) connecting to localhost:6379.
+2025-10-23 22:15:40 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-23 22:15:40 | INFO     | user_api | lifespan:25 | Подключение к PostgeSQL и Redis завершено
+2025-10-23 22:17:26 | WARNING  | user_api | get_current_user:68 | Отсутствует токен доступа, IP: 127.0.0.1
+2025-10-23 22:17:26 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Не удалось проверить учетные данные
+2025-10-23 22:17:26 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Не удалось проверить учетные данные | Path: /chat/notifications | Method: GET | IP: 127.0.0.1
+2025-10-23 22:18:23 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-23 22:18:57 | INFO     | user_api | create_chat_room:58 | Создана чат-комната 1 пользователем 1
+2025-10-23 22:19:42 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-23 22:19:42 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/2 | Method: GET | IP: 127.0.0.1
+2025-10-23 22:20:14 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-23 22:20:14 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/2 | Method: GET | IP: 127.0.0.1
+2025-10-23 22:20:59 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: [{'type': 'enum', 'loc': ('body', 'message_type'), 'msg': "Input should be 'text', 'image' or 'file'", 'input': 'hello', 'ctx': {'expected': "'text', 'image' or 'file'"}}]
+2025-10-23 22:20:59 | WARNING  | user_api | validation_exception_handler:205 | Validation Error: 1 errors | Path: /chat/rooms/1/messages | Method: POST | IP: 127.0.0.1
+2025-10-23 22:21:11 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: [{'type': 'enum', 'loc': ('body', 'message_type'), 'msg': "Input should be 'text', 'image' or 'file'", 'input': 'hello', 'ctx': {'expected': "'text', 'image' or 'file'"}}]
+2025-10-23 22:21:11 | WARNING  | user_api | validation_exception_handler:205 | Validation Error: 1 errors | Path: /chat/rooms/1/messages | Method: POST | IP: 127.0.0.1
+2025-10-23 22:30:26 | INFO     | user_api | lifespan:82 | Завершение работы приложения начато
+2025-10-23 22:30:26 | INFO     | user_api | lifespan:84 | Соединение с БД закрыто
+2025-10-23 22:30:26 | INFO     | user_api | lifespan:85 | Приложение полностью остановлено
+2025-10-24 22:02:51 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-24 22:02:52 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-24 22:02:56 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('127.0.0.1', 6379), [Errno 10061] Connect call failed ('::1', 6379, 0, 0) connecting to localhost:6379.
+2025-10-24 22:03:02 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('127.0.0.1', 6379), [Errno 10061] Connect call failed ('::1', 6379, 0, 0) connecting to localhost:6379.
+2025-10-24 22:03:09 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('127.0.0.1', 6379), [Errno 10061] Connect call failed ('::1', 6379, 0, 0) connecting to localhost:6379.
+2025-10-24 22:03:09 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-24 22:03:09 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-24 22:03:13 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /favicon.ico | Method: GET | IP: 127.0.0.1
+2025-10-24 22:03:33 | WARNING  | user_api | get_current_user:68 | Отсутствует токен доступа, IP: 127.0.0.1
+2025-10-24 22:03:33 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Не удалось проверить учетные данные
+2025-10-24 22:03:33 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Не удалось проверить учетные данные | Path: /video/rooms/1/join | Method: POST | IP: 127.0.0.1
+2025-10-24 22:03:34 | WARNING  | user_api | get_current_user:68 | Отсутствует токен доступа, IP: 127.0.0.1
+2025-10-24 22:03:34 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Не удалось проверить учетные данные
+2025-10-24 22:03:34 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Не удалось проверить учетные данные | Path: /video/rooms | Method: POST | IP: 127.0.0.1
+2025-10-24 22:03:44 | WARNING  | user_api | get_current_user:68 | Отсутствует токен доступа, IP: 127.0.0.1
+2025-10-24 22:03:45 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Не удалось проверить учетные данные
+2025-10-24 22:03:45 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Не удалось проверить учетные данные | Path: /video/rooms | Method: POST | IP: 127.0.0.1
+2025-10-24 22:03:49 | WARNING  | user_api | get_current_user:68 | Отсутствует токен доступа, IP: 127.0.0.1
+2025-10-24 22:03:49 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Не удалось проверить учетные данные
+2025-10-24 22:03:49 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Не удалось проверить учетные данные | Path: /video/rooms | Method: POST | IP: 127.0.0.1
+2025-10-24 22:03:50 | WARNING  | user_api | get_current_user:68 | Отсутствует токен доступа, IP: 127.0.0.1
+2025-10-24 22:03:50 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Не удалось проверить учетные данные
+2025-10-24 22:03:50 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Не удалось проверить учетные данные | Path: /video/rooms | Method: POST | IP: 127.0.0.1
+2025-10-24 22:04:24 | WARNING  | user_api | get_current_user:68 | Отсутствует токен доступа, IP: 127.0.0.1
+2025-10-24 22:04:24 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Не удалось проверить учетные данные
+2025-10-24 22:04:24 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Не удалось проверить учетные данные | Path: /video/rooms | Method: POST | IP: 127.0.0.1
+2025-10-24 22:04:43 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-24 22:04:50 | ERROR    | user_api | create_video_room:120 | Ошибка создания видеокомнаты: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: отношение "video_rooms" не существует
+[SQL: SELECT video_rooms.room_id, video_rooms.room_name, video_rooms.room_description, video_rooms.room_code, video_rooms.room_url, video_rooms.created_at, video_rooms.created_by, video_rooms.is_active, video_rooms.is_private, video_rooms.max_participants, video_rooms.encryption_key, video_rooms.recording_enabled, video_rooms.waiting_room_enabled 
+FROM video_rooms 
+WHERE video_rooms.room_code = $1::VARCHAR]
+[parameters: ('WAM5Z57S',)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-10-24 22:04:50 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 500: Ошибка создания видеокомнаты
+2025-10-24 22:04:50 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Ошибка создания видеокомнаты | Path: /video/rooms | Method: POST | IP: 127.0.0.1
+2025-10-24 22:05:43 | INFO     | user_api | lifespan:84 | Завершение работы приложения начато
+2025-10-24 22:05:43 | INFO     | user_api | lifespan:86 | Соединение с БД закрыто
+2025-10-24 22:05:43 | INFO     | user_api | lifespan:87 | Приложение полностью остановлено
+2025-10-24 22:14:30 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-24 22:14:30 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-24 22:14:30 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-24 22:14:30 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-24 22:14:31 | INFO     | user_api | lifespan:44 | Созданы недостающие роли: [1, 2, 3]
+2025-10-24 22:14:31 | INFO     | user_api | lifespan:56 | Создание администратора по умолчанию
+2025-10-24 22:14:32 | INFO     | user_api | lifespan:78 | Администратор по умолчанию создан
+2025-10-24 22:14:41 | WARNING  | user_api | get_current_user:68 | Отсутствует токен доступа, IP: 127.0.0.1
+2025-10-24 22:14:41 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Не удалось проверить учетные данные
+2025-10-24 22:14:41 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Не удалось проверить учетные данные | Path: /video/rooms | Method: POST | IP: 127.0.0.1
+2025-10-24 22:16:30 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-24 22:16:51 | ERROR    | user_api | create_video_room:120 | Ошибка создания видеокомнаты: (sqlalchemy.dialects.postgresql.asyncpg.Error) <class 'asyncpg.exceptions.DataError'>: invalid input for query argument $9: {'can_mute_others': True, 'can_remove_ot... (expected str, got dict)
+[SQL: INSERT INTO video_participants (room_id, user_id, left_at, is_online, is_muted, is_video_enabled, is_screen_sharing, role, permissions, last_activity) VALUES ($1::INTEGER, $2::INTEGER, $3::TIMESTAMP WITHOUT TIME ZONE, $4::BOOLEAN, $5::BOOLEAN, $6::BOOLEAN, $7::BOOLEAN, $8::VARCHAR, $9::VARCHAR, $10::TIMESTAMP WITHOUT TIME ZONE) RETURNING video_participants.participant_id, video_participants.joined_at]
+[parameters: (1, 1, None, True, False, True, False, 'host', {'can_mute_others': True, 'can_remove_others': True, 'can_start_recording': True}, None)]
+(Background on this error at: https://sqlalche.me/e/20/dbapi)
+2025-10-24 22:16:51 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 500: Ошибка создания видеокомнаты
+2025-10-24 22:16:51 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Ошибка создания видеокомнаты | Path: /video/rooms | Method: POST | IP: 127.0.0.1
+2025-10-24 22:17:57 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 404: Видеокомната не найдена
+2025-10-24 22:17:57 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Видеокомната не найдена | Path: /video/rooms/1 | Method: GET | IP: 127.0.0.1
+2025-10-24 22:19:09 | INFO     | user_api | lifespan:84 | Завершение работы приложения начато
+2025-10-24 22:19:10 | INFO     | user_api | lifespan:86 | Соединение с БД закрыто
+2025-10-24 22:19:10 | INFO     | user_api | lifespan:87 | Приложение полностью остановлено
+2025-10-24 22:19:46 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-24 22:19:49 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-24 22:19:49 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-24 22:19:49 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-24 22:21:17 | INFO     | user_api | lifespan:84 | Завершение работы приложения начато
+2025-10-24 22:21:18 | INFO     | user_api | lifespan:86 | Соединение с БД закрыто
+2025-10-24 22:21:18 | INFO     | user_api | lifespan:87 | Приложение полностью остановлено
+2025-10-24 22:26:15 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-24 22:26:18 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-24 22:26:18 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-24 22:26:18 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-24 22:27:52 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-24 22:27:53 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-24 22:27:53 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-24 22:27:53 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-24 22:28:50 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-24 22:28:54 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-24 22:28:54 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-24 22:28:54 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-24 22:29:00 | INFO     | user_api | lifespan:84 | Завершение работы приложения начато
+2025-10-24 22:29:00 | INFO     | user_api | lifespan:86 | Соединение с БД закрыто
+2025-10-24 22:29:00 | INFO     | user_api | lifespan:87 | Приложение полностью остановлено
+2025-10-24 22:30:16 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-24 22:30:18 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-24 22:30:19 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-24 22:30:19 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-24 22:30:53 | WARNING  | user_api | get_current_user:68 | Отсутствует токен доступа, IP: 127.0.0.1
+2025-10-24 22:30:53 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Не удалось проверить учетные данные
+2025-10-24 22:30:53 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Не удалось проверить учетные данные | Path: /video/rooms | Method: POST | IP: 127.0.0.1
+2025-10-24 22:31:01 | WARNING  | user_api | get_current_user:68 | Отсутствует токен доступа, IP: 127.0.0.1
+2025-10-24 22:31:01 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Не удалось проверить учетные данные
+2025-10-24 22:31:01 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Не удалось проверить учетные данные | Path: /video/rooms | Method: POST | IP: 127.0.0.1
+2025-10-24 22:31:03 | WARNING  | user_api | get_current_user:68 | Отсутствует токен доступа, IP: 127.0.0.1
+2025-10-24 22:31:03 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Не удалось проверить учетные данные
+2025-10-24 22:31:03 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Не удалось проверить учетные данные | Path: /video/rooms | Method: POST | IP: 127.0.0.1
+2025-10-24 22:31:13 | WARNING  | user_api | get_current_user:68 | Отсутствует токен доступа, IP: 127.0.0.1
+2025-10-24 22:31:13 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Не удалось проверить учетные данные
+2025-10-24 22:31:13 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Не удалось проверить учетные данные | Path: /video/rooms | Method: POST | IP: 127.0.0.1
+2025-10-24 22:31:22 | WARNING  | user_api | get_current_user:68 | Отсутствует токен доступа, IP: 127.0.0.1
+2025-10-24 22:31:22 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Не удалось проверить учетные данные
+2025-10-24 22:31:22 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Не удалось проверить учетные данные | Path: /video/rooms | Method: POST | IP: 127.0.0.1
+2025-10-24 22:31:57 | WARNING  | user_api | get_current_user:68 | Отсутствует токен доступа, IP: 127.0.0.1
+2025-10-24 22:31:57 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Не удалось проверить учетные данные
+2025-10-24 22:31:57 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Не удалось проверить учетные данные | Path: /video/rooms | Method: POST | IP: 127.0.0.1
+2025-10-24 22:32:24 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-24 22:32:30 | ERROR    | user_api | create_video_room:121 | Ошибка создания видеокомнаты: (sqlalchemy.dialects.postgresql.asyncpg.Error) <class 'asyncpg.exceptions.DataError'>: invalid input for query argument $9: {'can_mute_others': True, 'can_remove_ot... (expected str, got dict)
+[SQL: INSERT INTO video_participants (room_id, user_id, left_at, is_online, is_muted, is_video_enabled, is_screen_sharing, role, permissions, last_activity) VALUES ($1::INTEGER, $2::INTEGER, $3::TIMESTAMP WITHOUT TIME ZONE, $4::BOOLEAN, $5::BOOLEAN, $6::BOOLEAN, $7::BOOLEAN, $8::VARCHAR, $9::VARCHAR, $10::TIMESTAMP WITHOUT TIME ZONE) RETURNING video_participants.participant_id, video_participants.joined_at]
+[parameters: (2, 1, None, True, False, True, False, 'host', {'can_mute_others': True, 'can_remove_others': True, 'can_start_recording': True}, None)]
+(Background on this error at: https://sqlalche.me/e/20/dbapi)
+2025-10-24 22:32:30 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 500: Ошибка создания видеокомнаты
+2025-10-24 22:32:30 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Ошибка создания видеокомнаты | Path: /video/rooms | Method: POST | IP: 127.0.0.1
+2025-10-24 23:07:53 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-24 23:07:54 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-24 23:07:54 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-24 23:07:54 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-24 23:08:19 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-24 23:08:33 | INFO     | user_api | create_chat_room:58 | Создана чат-комната 1 пользователем 1
+2025-10-24 23:10:07 | ERROR    | user_api | send_message:328 | Ошибка отправки сообщения: (sqlalchemy.dialects.postgresql.asyncpg.IntegrityError) <class 'asyncpg.exceptions.ForeignKeyViolationError'>: INSERT или UPDATE в таблице "messages" нарушает ограничение внешнего ключа "messages_reply_to_fkey"
+DETAIL:  Ключ (reply_to)=(0) отсутствует в таблице "messages".
+[SQL: INSERT INTO messages (room_id, sender_id, content, message_type, edited_at, status, is_deleted, reply_to) VALUES ($1::INTEGER, $2::INTEGER, $3::VARCHAR, $4::VARCHAR, $5::TIMESTAMP WITHOUT TIME ZONE, $6::messagestatus, $7::BOOLEAN, $8::INTEGER) RETURNING messages.message_id, messages.created_at]
+[parameters: (1, 1, 'string', 'text', None, 'SENT', False, 0)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-10-24 23:10:07 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 500: Ошибка отправки сообщения
+2025-10-24 23:10:07 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Ошибка отправки сообщения | Path: /chat/rooms/1/messages | Method: POST | IP: 127.0.0.1
+2025-10-24 23:10:20 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: [{'type': 'int_type', 'loc': ('body', 'reply_to'), 'msg': 'Input should be a valid integer', 'input': [1, 2]}]
+2025-10-24 23:10:20 | WARNING  | user_api | validation_exception_handler:205 | Validation Error: 1 errors | Path: /chat/rooms/1/messages | Method: POST | IP: 127.0.0.1
+2025-10-24 23:10:42 | ERROR    | user_api | send_message:328 | Ошибка отправки сообщения: (sqlalchemy.dialects.postgresql.asyncpg.IntegrityError) <class 'asyncpg.exceptions.ForeignKeyViolationError'>: INSERT или UPDATE в таблице "messages" нарушает ограничение внешнего ключа "messages_reply_to_fkey"
+DETAIL:  Ключ (reply_to)=(0) отсутствует в таблице "messages".
+[SQL: INSERT INTO messages (room_id, sender_id, content, message_type, edited_at, status, is_deleted, reply_to) VALUES ($1::INTEGER, $2::INTEGER, $3::VARCHAR, $4::VARCHAR, $5::TIMESTAMP WITHOUT TIME ZONE, $6::messagestatus, $7::BOOLEAN, $8::INTEGER) RETURNING messages.message_id, messages.created_at]
+[parameters: (1, 1, 'string', 'text', None, 'SENT', False, 0)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-10-24 23:10:42 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 500: Ошибка отправки сообщения
+2025-10-24 23:10:42 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Ошибка отправки сообщения | Path: /chat/rooms/1/messages | Method: POST | IP: 127.0.0.1
+2025-10-24 23:10:57 | ERROR    | user_api | send_message:328 | Ошибка отправки сообщения: (sqlalchemy.dialects.postgresql.asyncpg.IntegrityError) <class 'asyncpg.exceptions.ForeignKeyViolationError'>: INSERT или UPDATE в таблице "messages" нарушает ограничение внешнего ключа "messages_reply_to_fkey"
+DETAIL:  Ключ (reply_to)=(0) отсутствует в таблице "messages".
+[SQL: INSERT INTO messages (room_id, sender_id, content, message_type, edited_at, status, is_deleted, reply_to) VALUES ($1::INTEGER, $2::INTEGER, $3::VARCHAR, $4::VARCHAR, $5::TIMESTAMP WITHOUT TIME ZONE, $6::messagestatus, $7::BOOLEAN, $8::INTEGER) RETURNING messages.message_id, messages.created_at]
+[parameters: (1, 1, 'string', 'text', None, 'SENT', False, 0)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-10-24 23:10:57 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 500: Ошибка отправки сообщения
+2025-10-24 23:10:57 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Ошибка отправки сообщения | Path: /chat/rooms/1/messages | Method: POST | IP: 127.0.0.1
+2025-10-24 23:11:30 | ERROR    | user_api | send_message:328 | Ошибка отправки сообщения: (sqlalchemy.dialects.postgresql.asyncpg.IntegrityError) <class 'asyncpg.exceptions.ForeignKeyViolationError'>: INSERT или UPDATE в таблице "messages" нарушает ограничение внешнего ключа "messages_reply_to_fkey"
+DETAIL:  Ключ (reply_to)=(1) отсутствует в таблице "messages".
+[SQL: INSERT INTO messages (room_id, sender_id, content, message_type, edited_at, status, is_deleted, reply_to) VALUES ($1::INTEGER, $2::INTEGER, $3::VARCHAR, $4::VARCHAR, $5::TIMESTAMP WITHOUT TIME ZONE, $6::messagestatus, $7::BOOLEAN, $8::INTEGER) RETURNING messages.message_id, messages.created_at]
+[parameters: (1, 1, 'string', 'text', None, 'SENT', False, 1)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-10-24 23:11:30 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 500: Ошибка отправки сообщения
+2025-10-24 23:11:30 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Ошибка отправки сообщения | Path: /chat/rooms/1/messages | Method: POST | IP: 127.0.0.1
+2025-10-24 23:11:39 | WARNING  | user_api | validation_exception_handler:205 | Validation Error: 1 errors | Path: /chat/rooms/1/messages | Method: POST | IP: 127.0.0.1
+2025-10-24 23:11:49 | ERROR    | user_api | send_message:328 | Ошибка отправки сообщения: (sqlalchemy.dialects.postgresql.asyncpg.IntegrityError) <class 'asyncpg.exceptions.ForeignKeyViolationError'>: INSERT или UPDATE в таблице "messages" нарушает ограничение внешнего ключа "messages_reply_to_fkey"
+DETAIL:  Ключ (reply_to)=(0) отсутствует в таблице "messages".
+[SQL: INSERT INTO messages (room_id, sender_id, content, message_type, edited_at, status, is_deleted, reply_to) VALUES ($1::INTEGER, $2::INTEGER, $3::VARCHAR, $4::VARCHAR, $5::TIMESTAMP WITHOUT TIME ZONE, $6::messagestatus, $7::BOOLEAN, $8::INTEGER) RETURNING messages.message_id, messages.created_at]
+[parameters: (1, 1, 'string', 'text', None, 'SENT', False, 0)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-10-24 23:11:49 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 500: Ошибка отправки сообщения
+2025-10-24 23:11:49 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Ошибка отправки сообщения | Path: /chat/rooms/1/messages | Method: POST | IP: 127.0.0.1
+2025-10-24 23:13:00 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 400: Пользователь уже участник комнаты
+2025-10-24 23:13:00 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Пользователь уже участник комнаты | Path: /chat/rooms/1/participants | Method: POST | IP: 127.0.0.1
+2025-10-24 23:13:10 | ERROR    | user_api | add_participant:586 | Ошибка добавления участника: (sqlalchemy.dialects.postgresql.asyncpg.IntegrityError) <class 'asyncpg.exceptions.ForeignKeyViolationError'>: INSERT или UPDATE в таблице "chat_participants" нарушает ограничение внешнего ключа "chat_participants_user_id_fkey"
+DETAIL:  Ключ (user_id)=(2) отсутствует в таблице "users".
+[SQL: INSERT INTO chat_participants (room_id, user_id, is_admin, is_muted, last_read_at) VALUES ($1::INTEGER, $2::INTEGER, $3::BOOLEAN, $4::BOOLEAN, $5::TIMESTAMP WITHOUT TIME ZONE) RETURNING chat_participants.participant_id, chat_participants.joined_at]
+[parameters: (1, 2, False, False, None)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-10-24 23:13:10 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 500: Ошибка добавления участника
+2025-10-24 23:13:10 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Ошибка добавления участника | Path: /chat/rooms/1/participants | Method: POST | IP: 127.0.0.1
+2025-10-24 23:14:05 | ERROR    | user_api | create_video_room:121 | Ошибка создания видеокомнаты: (sqlalchemy.dialects.postgresql.asyncpg.Error) <class 'asyncpg.exceptions.DataError'>: invalid input for query argument $9: {'can_mute_others': True, 'can_remove_ot... (expected str, got dict)
+[SQL: INSERT INTO video_participants (room_id, user_id, left_at, is_online, is_muted, is_video_enabled, is_screen_sharing, role, permissions, last_activity) VALUES ($1::INTEGER, $2::INTEGER, $3::TIMESTAMP WITHOUT TIME ZONE, $4::BOOLEAN, $5::BOOLEAN, $6::BOOLEAN, $7::BOOLEAN, $8::VARCHAR, $9::VARCHAR, $10::TIMESTAMP WITHOUT TIME ZONE) RETURNING video_participants.participant_id, video_participants.joined_at]
+[parameters: (3, 1, None, True, False, True, False, 'host', {'can_mute_others': True, 'can_remove_others': True, 'can_start_recording': True}, None)]
+(Background on this error at: https://sqlalche.me/e/20/dbapi)
+2025-10-24 23:14:05 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 500: Ошибка создания видеокомнаты
+2025-10-24 23:14:05 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Ошибка создания видеокомнаты | Path: /video/rooms | Method: POST | IP: 127.0.0.1
+2025-10-24 23:17:04 | INFO     | user_api | lifespan:84 | Завершение работы приложения начато
+2025-10-24 23:17:04 | INFO     | user_api | lifespan:86 | Соединение с БД закрыто
+2025-10-24 23:17:04 | INFO     | user_api | lifespan:87 | Приложение полностью остановлено
+2025-10-24 23:17:30 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-24 23:17:31 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-24 23:17:31 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-24 23:17:31 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-24 23:17:38 | INFO     | user_api | lifespan:84 | Завершение работы приложения начато
+2025-10-24 23:17:38 | INFO     | user_api | lifespan:86 | Соединение с БД закрыто
+2025-10-24 23:17:38 | INFO     | user_api | lifespan:87 | Приложение полностью остановлено
+2025-10-24 23:17:51 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-24 23:17:52 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-24 23:17:52 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-24 23:17:52 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-24 23:18:25 | ERROR    | user_api | send_message:351 | Ошибка отправки сообщения: (sqlalchemy.dialects.postgresql.asyncpg.IntegrityError) <class 'asyncpg.exceptions.ForeignKeyViolationError'>: INSERT или UPDATE в таблице "messages" нарушает ограничение внешнего ключа "messages_reply_to_fkey"
+DETAIL:  Ключ (reply_to)=(0) отсутствует в таблице "messages".
+[SQL: INSERT INTO messages (room_id, sender_id, content, message_type, edited_at, status, is_deleted, reply_to) VALUES ($1::INTEGER, $2::INTEGER, $3::VARCHAR, $4::VARCHAR, $5::TIMESTAMP WITHOUT TIME ZONE, $6::messagestatus, $7::BOOLEAN, $8::INTEGER) RETURNING messages.message_id, messages.created_at]
+[parameters: (1, 1, 'string', 'text', None, 'SENT', False, 0)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-10-24 23:18:25 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 500: Ошибка отправки сообщения
+2025-10-24 23:18:25 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Ошибка отправки сообщения | Path: /chat/rooms/1/messages | Method: POST | IP: 127.0.0.1
+2025-10-24 23:22:32 | WARNING  | user_api | validation_exception_handler:205 | Validation Error: 1 errors | Path: /chat/rooms/1/messages | Method: POST | IP: 127.0.0.1
+2025-10-24 23:24:56 | INFO     | user_api | lifespan:84 | Завершение работы приложения начато
+2025-10-24 23:24:56 | INFO     | user_api | lifespan:86 | Соединение с БД закрыто
+2025-10-24 23:24:56 | INFO     | user_api | lifespan:87 | Приложение полностью остановлено
+2025-10-24 23:25:13 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-24 23:25:14 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-24 23:25:14 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-24 23:25:14 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-24 23:25:46 | INFO     | user_api | lifespan:84 | Завершение работы приложения начато
+2025-10-24 23:25:47 | INFO     | user_api | lifespan:86 | Соединение с БД закрыто
+2025-10-24 23:25:47 | INFO     | user_api | lifespan:87 | Приложение полностью остановлено
+2025-10-24 23:25:59 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-24 23:25:59 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-24 23:25:59 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-24 23:25:59 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-24 23:28:53 | WARNING  | user_api | validation_exception_handler:205 | Validation Error: 1 errors | Path: /chat/rooms/1/messages | Method: POST | IP: 127.0.0.1
+2025-10-24 23:29:52 | INFO     | user_api | lifespan:84 | Завершение работы приложения начато
+2025-10-24 23:29:52 | INFO     | user_api | lifespan:86 | Соединение с БД закрыто
+2025-10-24 23:29:52 | INFO     | user_api | lifespan:87 | Приложение полностью остановлено
+2025-10-24 23:30:30 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-24 23:30:31 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-24 23:30:31 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-24 23:30:31 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-24 23:31:02 | WARNING  | user_api | validation_exception_handler:205 | Validation Error: 1 errors | Path: /chat/rooms/1/messages | Method: POST | IP: 127.0.0.1
+2025-10-24 23:34:00 | WARNING  | user_api | validation_exception_handler:205 | Validation Error: 1 errors | Path: /chat/rooms/1/messages | Method: POST | IP: 127.0.0.1
+2025-10-24 23:35:25 | INFO     | user_api | lifespan:84 | Завершение работы приложения начато
+2025-10-24 23:35:25 | INFO     | user_api | lifespan:86 | Соединение с БД закрыто
+2025-10-24 23:35:25 | INFO     | user_api | lifespan:87 | Приложение полностью остановлено
+2025-10-24 23:37:00 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-24 23:37:00 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-24 23:37:00 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-24 23:37:00 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-25 00:07:08 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-25 00:07:09 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 00:07:09 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-25 00:07:09 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-25 00:07:35 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 00:07:50 | INFO     | user_api | send_message:267 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 00:07:50 | INFO     | user_api | send_message:268 | Данные сообщения: {'content': 'string', 'message_type': <MessageTypeEnum.TEXT: 'text'>, 'reply_to': 0}
+2025-10-25 00:07:50 | ERROR    | user_api | send_message:320 | Ошибка отправки сообщения: (sqlalchemy.dialects.postgresql.asyncpg.IntegrityError) <class 'asyncpg.exceptions.ForeignKeyViolationError'>: INSERT или UPDATE в таблице "messages" нарушает ограничение внешнего ключа "messages_reply_to_fkey"
+DETAIL:  Ключ (reply_to)=(0) отсутствует в таблице "messages".
+[SQL: INSERT INTO messages (room_id, sender_id, content, message_type, edited_at, status, is_deleted, reply_to) VALUES ($1::INTEGER, $2::INTEGER, $3::VARCHAR, $4::VARCHAR, $5::TIMESTAMP WITHOUT TIME ZONE, $6::messagestatus, $7::BOOLEAN, $8::INTEGER) RETURNING messages.message_id, messages.created_at]
+[parameters: (1, 1, 'string', 'text', None, 'SENT', False, 0)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-10-25 00:07:50 | ERROR    | user_api | send_message:368 | HTTP ошибка при отправке сообщения: Ошибка отправки сообщения
+2025-10-25 00:07:50 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 500: Ошибка отправки сообщения
+2025-10-25 00:07:50 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Ошибка отправки сообщения | Path: /chat/rooms/1/messages | Method: POST | IP: 127.0.0.1
+2025-10-25 00:10:27 | INFO     | user_api | lifespan:84 | Завершение работы приложения начато
+2025-10-25 00:10:27 | INFO     | user_api | lifespan:86 | Соединение с БД закрыто
+2025-10-25 00:10:27 | INFO     | user_api | lifespan:87 | Приложение полностью остановлено
+2025-10-25 00:12:55 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-25 00:12:56 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 00:12:56 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-25 00:12:56 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-25 00:12:59 | INFO     | user_api | send_message:267 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 00:12:59 | INFO     | user_api | send_message:268 | Данные сообщения: {'content': 'string', 'message_type': <MessageTypeEnum.TEXT: 'text'>, 'reply_to': None}
+2025-10-25 00:12:59 | INFO     | user_api | send_message:269 | reply_to значение: None (тип: <class 'NoneType'>)
+2025-10-25 00:12:59 | INFO     | user_api | send_message:327 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 00:12:59 | ERROR    | user_api | send_message:371 | Ошибка отправки через WebSocket: 'ConnectionManager' object has no attribute 'broadcast_to_room'
+2025-10-25 00:12:59 | INFO     | user_api | send_message:379 | Успешно отправлено сообщение 8 в комнату 1
+2025-10-25 00:21:54 | INFO     | user_api | lifespan:84 | Завершение работы приложения начато
+2025-10-25 00:21:54 | INFO     | user_api | lifespan:86 | Соединение с БД закрыто
+2025-10-25 00:21:54 | INFO     | user_api | lifespan:87 | Приложение полностью остановлено
+2025-10-25 00:22:26 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-25 00:22:28 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 00:22:28 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-25 00:22:28 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-25 00:22:45 | INFO     | user_api | lifespan:84 | Завершение работы приложения начато
+2025-10-25 00:22:45 | INFO     | user_api | lifespan:86 | Соединение с БД закрыто
+2025-10-25 00:22:45 | INFO     | user_api | lifespan:87 | Приложение полностью остановлено
+2025-10-25 00:23:02 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-25 00:23:03 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 00:23:03 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-25 00:23:03 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-25 00:23:21 | WARNING  | user_api | get_current_user:68 | Отсутствует токен доступа, IP: 127.0.0.1
+2025-10-25 00:23:21 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Не удалось проверить учетные данные
+2025-10-25 00:23:21 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Не удалось проверить учетные данные | Path: /chat/moderation/messages/8 | Method: POST | IP: 127.0.0.1
+2025-10-25 00:23:50 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 00:24:06 | INFO     | user_api | moderate_message:161 | Сообщение 8 отмодерировано: delete
+2025-10-25 00:25:01 | INFO     | user_api | lifespan:84 | Завершение работы приложения начато
+2025-10-25 00:25:01 | INFO     | user_api | lifespan:86 | Соединение с БД закрыто
+2025-10-25 00:25:01 | INFO     | user_api | lifespan:87 | Приложение полностью остановлено
+2025-10-25 00:25:10 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-25 00:25:11 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 00:25:11 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-25 00:25:11 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-25 00:26:28 | INFO     | user_api | lifespan:84 | Завершение работы приложения начато
+2025-10-25 00:26:28 | INFO     | user_api | lifespan:86 | Соединение с БД закрыто
+2025-10-25 00:26:28 | INFO     | user_api | lifespan:87 | Приложение полностью остановлено
+2025-10-25 00:26:46 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-25 00:26:47 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 00:26:47 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-25 00:26:47 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-25 00:28:53 | INFO     | user_api | lifespan:84 | Завершение работы приложения начато
+2025-10-25 00:28:53 | INFO     | user_api | lifespan:86 | Соединение с БД закрыто
+2025-10-25 00:28:53 | INFO     | user_api | lifespan:87 | Приложение полностью остановлено
+2025-10-25 00:30:39 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-25 00:30:39 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 00:30:39 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-25 00:30:39 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-25 00:30:59 | INFO     | user_api | send_message:267 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 00:30:59 | INFO     | user_api | auto_moderate_message:192 | Сообщение 9 автоматически отмодерировано
+2025-10-25 00:30:59 | INFO     | user_api | send_message:325 | Результат модерации: {'moderated': True, 'action': 'reject', 'reason': ['Запрещенное слово: спам']}
+2025-10-25 00:30:59 | ERROR    | user_api | send_message:369 | Ошибка отправки через WebSocket: 'ConnectionManager' object has no attribute 'broadcast_to_room'
+2025-10-25 00:30:59 | INFO     | user_api | send_message:377 | Успешно отправлено сообщение 9 в комнату 1
+2025-10-25 00:32:40 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: [{'type': 'value_error', 'loc': ('body', 'user_password'), 'msg': 'Value error, Пароль должен содержать минимум 8 символов, включая хотя бы одну заглавную букву, одну строчную букву, одну цифру и один специальный символ (!@#$%^&*)', 'input': 'stringst', 'ctx': {'error': ValueError('Пароль должен содержать минимум 8 символов, включая хотя бы одну заглавную букву, одну строчную букву, одну цифру и один специальный символ (!@#$%^&*)')}}]
+2025-10-25 00:32:40 | WARNING  | user_api | validation_exception_handler:205 | Validation Error: 1 errors | Path: /auth/register | Method: POST | IP: 127.0.0.1
+2025-10-25 00:33:04 | INFO     | user_api | send_email:40 | Письмо отправлено на user@example.com
+2025-10-25 00:33:04 | INFO     | user_api | register:83 | Пользователь string успешно зарегистрирован
+2025-10-25 00:34:21 | INFO     | user_api | lifespan:84 | Завершение работы приложения начато
+2025-10-25 00:34:21 | INFO     | user_api | lifespan:86 | Соединение с БД закрыто
+2025-10-25 00:34:21 | INFO     | user_api | lifespan:87 | Приложение полностью остановлено
+2025-10-25 00:34:48 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-25 00:34:49 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 00:34:49 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-25 00:34:49 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-25 00:36:14 | INFO     | user_api | login:220 | Пользователь string успешно вошел в систему
+2025-10-25 00:36:45 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Недостаточно прав для добавления участников
+2025-10-25 00:36:45 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Недостаточно прав для добавления участников | Path: /chat/rooms/1/participants | Method: POST | IP: 127.0.0.1
+2025-10-25 00:37:08 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 00:37:21 | INFO     | user_api | login:220 | Пользователь string успешно вошел в систему
+2025-10-25 00:38:09 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 00:38:43 | INFO     | user_api | send_message:267 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 00:38:43 | INFO     | user_api | send_message:325 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 00:38:43 | ERROR    | user_api | send_message:369 | Ошибка отправки через WebSocket: 'ConnectionManager' object has no attribute 'broadcast_to_room'
+2025-10-25 00:38:43 | INFO     | user_api | send_message:377 | Успешно отправлено сообщение 10 в комнату 1
+2025-10-25 00:41:50 | INFO     | user_api | lifespan:84 | Завершение работы приложения начато
+2025-10-25 00:41:50 | INFO     | user_api | lifespan:86 | Соединение с БД закрыто
+2025-10-25 00:41:50 | INFO     | user_api | lifespan:87 | Приложение полностью остановлено
+2025-10-25 01:00:16 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-25 01:00:16 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 01:00:16 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-25 01:00:16 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-25 01:00:26 | WARNING  | user_api | get_current_user:68 | Отсутствует токен доступа, IP: 127.0.0.1
+2025-10-25 01:00:26 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Не удалось проверить учетные данные
+2025-10-25 01:00:26 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Не удалось проверить учетные данные | Path: /chat/rooms/1/messages | Method: POST | IP: 127.0.0.1
+2025-10-25 01:00:33 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 400: Электронная почта или логин уже зарегистрированы
+2025-10-25 01:00:33 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Электронная почта или логин уже зарегистрированы | Path: /auth/register | Method: POST | IP: 127.0.0.1
+2025-10-25 01:00:41 | INFO     | user_api | login:220 | Пользователь string успешно вошел в систему
+2025-10-25 01:00:44 | INFO     | user_api | send_message:263 | Попытка отправки сообщения в комнату 1 пользователем 2
+2025-10-25 01:00:44 | INFO     | user_api | auto_moderate_message:179 | Сообщение 11 автоматически отмодерировано
+2025-10-25 01:00:44 | INFO     | user_api | send_message:321 | Результат модерации: {'moderated': True, 'action': 'reject', 'reason': ['Запрещенное слово: спам']}
+2025-10-25 01:00:44 | ERROR    | user_api | send_message:365 | Ошибка отправки через WebSocket: 'ConnectionManager' object has no attribute 'broadcast_to_room'
+2025-10-25 01:00:44 | ERROR    | user_api | create_message_notifications:217 | Ошибка создания уведомлений о сообщении: SQL expression element or literal value expected, got <src.db.models.Message object at 0x000002306F543B60>.
+2025-10-25 01:00:44 | INFO     | user_api | send_message:375 | Успешно отправлено сообщение 11 в комнату 1
+2025-10-25 01:01:04 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 01:02:04 | INFO     | user_api | send_message:263 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 01:02:04 | INFO     | user_api | send_message:321 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 01:02:04 | ERROR    | user_api | send_message:365 | Ошибка отправки через WebSocket: 'ConnectionManager' object has no attribute 'broadcast_to_room'
+2025-10-25 01:02:04 | ERROR    | user_api | create_message_notifications:217 | Ошибка создания уведомлений о сообщении: SQL expression element or literal value expected, got <src.db.models.Message object at 0x000002306F9CE990>.
+2025-10-25 01:02:05 | INFO     | user_api | send_message:375 | Успешно отправлено сообщение 12 в комнату 1
+2025-10-25 01:05:58 | INFO     | user_api | lifespan:84 | Завершение работы приложения начато
+2025-10-25 01:05:58 | INFO     | user_api | lifespan:86 | Соединение с БД закрыто
+2025-10-25 01:05:58 | INFO     | user_api | lifespan:87 | Приложение полностью остановлено
+2025-10-25 01:14:12 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-25 01:14:13 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 01:14:13 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-25 01:14:13 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-25 01:14:23 | INFO     | user_api | send_message:263 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 01:14:23 | INFO     | user_api | auto_moderate_message:179 | Сообщение 13 автоматически отмодерировано
+2025-10-25 01:14:23 | INFO     | user_api | send_message:321 | Результат модерации: {'moderated': True, 'action': 'reject', 'reason': ['Запрещенное слово: спам']}
+2025-10-25 01:14:23 | INFO     | user_api | send_message:363 | Сообщение 13 отправлено через WebSocket в комнату 1
+2025-10-25 01:14:23 | ERROR    | user_api | send_message:373 | Ошибка создания уведомлений: NotificationService.create_message_notifications() missing 1 required positional argument: 'room_id'
+2025-10-25 01:14:23 | INFO     | user_api | send_message:375 | Успешно отправлено сообщение 13 в комнату 1
+2025-10-25 01:16:21 | INFO     | user_api | lifespan:84 | Завершение работы приложения начато
+2025-10-25 01:16:21 | INFO     | user_api | lifespan:86 | Соединение с БД закрыто
+2025-10-25 01:16:21 | INFO     | user_api | lifespan:87 | Приложение полностью остановлено
+2025-10-25 01:18:10 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-25 01:18:11 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 01:18:11 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-25 01:18:11 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-25 01:18:16 | WARNING  | user_api | get_current_user:68 | Отсутствует токен доступа, IP: 127.0.0.1
+2025-10-25 01:18:16 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Не удалось проверить учетные данные
+2025-10-25 01:18:16 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Не удалось проверить учетные данные | Path: /chat/rooms/1/messages | Method: POST | IP: 127.0.0.1
+2025-10-25 01:18:25 | INFO     | user_api | login:220 | Пользователь string успешно вошел в систему
+2025-10-25 01:18:30 | INFO     | user_api | send_message:263 | Попытка отправки сообщения в комнату 1 пользователем 2
+2025-10-25 01:18:30 | INFO     | user_api | auto_moderate_message:179 | Сообщение 14 автоматически отмодерировано
+2025-10-25 01:18:30 | INFO     | user_api | send_message:321 | Результат модерации: {'moderated': True, 'action': 'reject', 'reason': ['Запрещенное слово: спам']}
+2025-10-25 01:18:30 | WARNING  | user_api | send_message:327 | Сообщение отклонено модерацией: ['Запрещенное слово: спам']
+2025-10-25 01:18:30 | WARNING  | user_api | send_message:338 | Ошибка автоматической модерации: 400: Сообщение отклонено: Запрещенное слово: спам
+2025-10-25 01:18:30 | INFO     | user_api | send_message:375 | Сообщение 14 отправлено через WebSocket в комнату 1
+2025-10-25 01:18:30 | ERROR    | user_api | send_message:385 | Ошибка создания уведомлений: NotificationService.create_message_notifications() missing 1 required positional argument: 'room_id'
+2025-10-25 01:18:30 | INFO     | user_api | send_message:387 | Успешно отправлено сообщение 14 в комнату 1
+2025-10-25 01:18:40 | INFO     | user_api | lifespan:84 | Завершение работы приложения начато
+2025-10-25 01:18:40 | INFO     | user_api | lifespan:86 | Соединение с БД закрыто
+2025-10-25 01:18:40 | INFO     | user_api | lifespan:87 | Приложение полностью остановлено
+2025-10-25 01:18:59 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-25 01:19:00 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 01:19:00 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-25 01:19:00 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-25 01:19:40 | INFO     | user_api | send_message:263 | Попытка отправки сообщения в комнату 1 пользователем 2
+2025-10-25 01:19:40 | INFO     | user_api | auto_moderate_message:179 | Сообщение 15 автоматически отмодерировано
+2025-10-25 01:19:40 | INFO     | user_api | send_message:321 | Результат модерации: {'moderated': True, 'action': 'reject', 'reason': ['Запрещенное слово: спам']}
+2025-10-25 01:19:40 | INFO     | user_api | send_message:363 | Сообщение 15 отправлено через WebSocket в комнату 1
+2025-10-25 01:19:40 | ERROR    | user_api | send_message:373 | Ошибка создания уведомлений: NotificationService.create_message_notifications() missing 1 required positional argument: 'room_id'
+2025-10-25 01:19:40 | INFO     | user_api | send_message:375 | Успешно отправлено сообщение 15 в комнату 1
+2025-10-25 01:25:28 | INFO     | user_api | lifespan:84 | Завершение работы приложения начато
+2025-10-25 01:25:28 | INFO     | user_api | lifespan:86 | Соединение с БД закрыто
+2025-10-25 01:25:28 | INFO     | user_api | lifespan:87 | Приложение полностью остановлено
+2025-10-25 03:51:21 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-25 03:51:22 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 03:51:26 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('127.0.0.1', 6379), [Errno 10061] Connect call failed ('::1', 6379, 0, 0) connecting to localhost:6379.
+2025-10-25 03:51:33 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('127.0.0.1', 6379), [Errno 10061] Connect call failed ('::1', 6379, 0, 0) connecting to localhost:6379.
+2025-10-25 03:51:39 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('127.0.0.1', 6379), [Errno 10061] Connect call failed ('::1', 6379, 0, 0) connecting to localhost:6379.
+2025-10-25 03:51:39 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 03:51:39 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-25 03:52:12 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 03:53:35 | WARNING  | user_api | validation_exception_handler:205 | Validation Error: 1 errors | Path: /chat/rooms/1/messages | Method: POST | IP: 127.0.0.1
+2025-10-25 03:53:49 | WARNING  | user_api | validation_exception_handler:205 | Validation Error: 1 errors | Path: /chat/rooms/1/messages | Method: POST | IP: 127.0.0.1
+2025-10-25 03:53:58 | WARNING  | user_api | validation_exception_handler:205 | Validation Error: 1 errors | Path: /chat/rooms/1/messages | Method: POST | IP: 127.0.0.1
+2025-10-25 03:54:13 | INFO     | user_api | send_message:262 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 03:54:15 | INFO     | user_api | send_message:320 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 03:54:15 | INFO     | user_api | send_message:362 | Сообщение 16 отправлено через WebSocket в комнату 1
+2025-10-25 03:54:16 | ERROR    | user_api | send_message:372 | Ошибка создания уведомлений: NotificationService.create_message_notifications() missing 1 required positional argument: 'room_id'
+2025-10-25 03:54:16 | INFO     | user_api | send_message:374 | Успешно отправлено сообщение 16 в комнату 1
+2025-10-25 03:55:23 | INFO     | user_api | lifespan:84 | Завершение работы приложения начато
+2025-10-25 03:55:23 | INFO     | user_api | lifespan:86 | Соединение с БД закрыто
+2025-10-25 03:55:23 | INFO     | user_api | lifespan:87 | Приложение полностью остановлено
+2025-10-25 03:55:36 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-25 03:55:37 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 03:55:41 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('127.0.0.1', 6379), [Errno 10061] Connect call failed ('::1', 6379, 0, 0) connecting to localhost:6379.
+2025-10-25 03:55:47 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('127.0.0.1', 6379), [Errno 10061] Connect call failed ('::1', 6379, 0, 0) connecting to localhost:6379.
+2025-10-25 03:55:53 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-25 03:55:53 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-25 03:55:56 | INFO     | user_api | send_message:262 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 03:55:56 | INFO     | user_api | send_message:320 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 03:55:56 | INFO     | user_api | send_message:362 | Сообщение 17 отправлено через WebSocket в комнату 1
+2025-10-25 03:55:56 | ERROR    | user_api | create_message_notifications:215 | Ошибка создания уведомлений о сообщении: 'NotificationService' object has no attribute 'create_notification'
+2025-10-25 03:55:56 | INFO     | user_api | send_message:374 | Успешно отправлено сообщение 17 в комнату 1
+2025-10-25 03:58:15 | INFO     | user_api | lifespan:84 | Завершение работы приложения начато
+2025-10-25 03:58:15 | INFO     | user_api | lifespan:86 | Соединение с БД закрыто
+2025-10-25 03:58:15 | INFO     | user_api | lifespan:87 | Приложение полностью остановлено
+2025-10-25 04:21:02 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-25 04:21:03 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 04:21:03 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-25 04:21:03 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-25 04:21:49 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /room/string2 | Method: GET | IP: 127.0.0.1
+2025-10-25 04:21:49 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /favicon.ico | Method: GET | IP: 127.0.0.1
+2025-10-25 04:22:42 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /room/string2 | Method: GET | IP: 127.0.0.1
+2025-10-25 04:23:02 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /video/room/string2 | Method: GET | IP: 127.0.0.1
+2025-10-25 04:23:50 | INFO     | user_api | lifespan:84 | Завершение работы приложения начато
+2025-10-25 04:23:50 | INFO     | user_api | lifespan:86 | Соединение с БД закрыто
+2025-10-25 04:23:50 | INFO     | user_api | lifespan:87 | Приложение полностью остановлено
+2025-10-25 04:23:58 | INFO     | user_api | lifespan:24 | Запуск приложения начат
+2025-10-25 04:23:58 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 04:23:58 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-25 04:23:58 | INFO     | user_api | lifespan:27 | Подключение к PostgeSQL и Redis завершено
+2025-10-25 04:24:00 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /ws/1 | Method: GET | IP: 127.0.0.1
+2025-10-25 04:26:50 | INFO     | user_api | lifespan:84 | Завершение работы приложения начато
+2025-10-25 04:26:50 | INFO     | user_api | lifespan:86 | Соединение с БД закрыто
+2025-10-25 04:26:50 | INFO     | user_api | lifespan:87 | Приложение полностью остановлено
+2025-10-25 05:03:53 | INFO     | user_api | lifespan:25 | Запуск приложения начат
+2025-10-25 05:03:54 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 05:03:54 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-25 05:03:54 | INFO     | user_api | lifespan:28 | Подключение к PostgeSQL и Redis завершено
+2025-10-25 05:03:56 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /ws/1 | Method: GET | IP: 127.0.0.1
+2025-10-25 05:04:40 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: / | Method: GET | IP: 127.0.0.1
+2025-10-25 05:06:29 | INFO     | user_api | lifespan:85 | Завершение работы приложения начато
+2025-10-25 05:06:30 | INFO     | user_api | lifespan:87 | Соединение с БД закрыто
+2025-10-25 05:06:30 | INFO     | user_api | lifespan:88 | Приложение полностью остановлено
+2025-10-25 05:06:51 | INFO     | user_api | lifespan:27 | Запуск приложения начат
+2025-10-25 05:06:52 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 05:06:52 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-25 05:06:52 | INFO     | user_api | lifespan:30 | Подключение к PostgeSQL и Redis завершено
+2025-10-25 05:07:13 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /favicon.ico | Method: GET | IP: 127.0.0.1
+2025-10-25 05:07:19 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /favicon.ico | Method: GET | IP: 127.0.0.1
+2025-10-25 05:12:02 | INFO     | user_api | lifespan:87 | Завершение работы приложения начато
+2025-10-25 05:12:02 | INFO     | user_api | lifespan:89 | Соединение с БД закрыто
+2025-10-25 05:12:02 | INFO     | user_api | lifespan:90 | Приложение полностью остановлено
+2025-10-25 05:30:18 | INFO     | user_api | lifespan:27 | Запуск приложения начат
+2025-10-25 05:30:19 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 05:30:19 | INFO     | user_api | init_redis:27 | init_redis: Подключение к Redis успешно
+2025-10-25 05:30:19 | INFO     | user_api | lifespan:30 | Подключение к PostgeSQL и Redis завершено
+2025-10-25 05:30:36 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /favicon.ico | Method: GET | IP: 127.0.0.1
+2025-10-25 05:30:37 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /favicon.ico | Method: GET | IP: 127.0.0.1
+2025-10-25 05:31:01 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /favicon.ico | Method: GET | IP: 127.0.0.1
+2025-10-25 05:31:37 | INFO     | user_api | lifespan:87 | Завершение работы приложения начато
+2025-10-25 05:31:37 | INFO     | user_api | lifespan:89 | Соединение с БД закрыто
+2025-10-25 05:31:37 | INFO     | user_api | lifespan:90 | Приложение полностью остановлено
+2025-10-25 06:09:00 | INFO     | user_api | lifespan:27 | Запуск приложения начат
+2025-10-25 06:09:00 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 06:09:04 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 06:09:10 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 06:09:16 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 06:09:16 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 06:09:16 | INFO     | user_api | lifespan:30 | Подключение к PostgeSQL и Redis завершено
+2025-10-25 06:09:16 | INFO     | user_api | lifespan:47 | Созданы недостающие роли: [1, 2, 3]
+2025-10-25 06:09:16 | INFO     | user_api | lifespan:59 | Создание администратора по умолчанию
+2025-10-25 06:09:17 | INFO     | user_api | lifespan:81 | Администратор по умолчанию создан
+2025-10-25 06:09:20 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /favicon.ico | Method: GET | IP: 127.0.0.1
+2025-10-25 06:17:12 | INFO     | user_api | lifespan:87 | Завершение работы приложения начато
+2025-10-25 06:17:12 | INFO     | user_api | lifespan:89 | Соединение с БД закрыто
+2025-10-25 06:17:12 | INFO     | user_api | lifespan:90 | Приложение полностью остановлено
+2025-10-25 06:17:15 | INFO     | user_api | lifespan:27 | Запуск приложения начат
+2025-10-25 06:17:15 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 06:17:19 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 06:17:25 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 06:17:31 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 06:17:31 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 06:17:31 | INFO     | user_api | lifespan:30 | Подключение к PostgeSQL и Redis завершено
+2025-10-25 06:18:37 | INFO     | user_api | lifespan:87 | Завершение работы приложения начато
+2025-10-25 06:18:37 | INFO     | user_api | lifespan:89 | Соединение с БД закрыто
+2025-10-25 06:18:37 | INFO     | user_api | lifespan:90 | Приложение полностью остановлено
+2025-10-25 06:26:49 | INFO     | user_api | lifespan:27 | Запуск приложения начат
+2025-10-25 06:26:49 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 06:26:53 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 06:26:59 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 06:27:05 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 06:27:05 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 06:27:05 | INFO     | user_api | lifespan:30 | Подключение к PostgeSQL и Redis завершено
+2025-10-25 06:27:55 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /favicon.ico | Method: GET | IP: 127.0.0.1
+2025-10-25 06:32:48 | INFO     | user_api | lifespan:87 | Завершение работы приложения начато
+2025-10-25 06:32:48 | INFO     | user_api | lifespan:89 | Соединение с БД закрыто
+2025-10-25 06:32:48 | INFO     | user_api | lifespan:90 | Приложение полностью остановлено
+2025-10-25 06:32:50 | INFO     | user_api | lifespan:27 | Запуск приложения начат
+2025-10-25 06:32:51 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 06:32:55 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 06:33:01 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 06:33:07 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 06:33:07 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 06:33:07 | INFO     | user_api | lifespan:30 | Подключение к PostgeSQL и Redis завершено
+2025-10-25 06:33:07 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /favicon.ico | Method: GET | IP: 127.0.0.1
+2025-10-25 06:33:12 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /favicon.ico | Method: GET | IP: 127.0.0.1
+2025-10-25 06:36:22 | INFO     | user_api | lifespan:87 | Завершение работы приложения начато
+2025-10-25 06:36:22 | INFO     | user_api | lifespan:89 | Соединение с БД закрыто
+2025-10-25 06:36:22 | INFO     | user_api | lifespan:90 | Приложение полностью остановлено
+2025-10-25 06:36:24 | INFO     | user_api | lifespan:27 | Запуск приложения начат
+2025-10-25 06:36:24 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 06:36:28 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 06:36:34 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 06:36:40 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 06:36:40 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 06:36:40 | INFO     | user_api | lifespan:30 | Подключение к PostgeSQL и Redis завершено
+2025-10-25 06:41:44 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /favicon.ico | Method: GET | IP: 127.0.0.1
+2025-10-25 06:41:46 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /favicon.ico | Method: GET | IP: 127.0.0.1
+2025-10-25 06:41:58 | INFO     | user_api | lifespan:87 | Завершение работы приложения начато
+2025-10-25 06:41:58 | INFO     | user_api | lifespan:89 | Соединение с БД закрыто
+2025-10-25 06:41:58 | INFO     | user_api | lifespan:90 | Приложение полностью остановлено
+2025-10-25 06:42:02 | INFO     | user_api | lifespan:27 | Запуск приложения начат
+2025-10-25 06:42:02 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 06:42:06 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 06:42:12 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 06:42:18 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 06:42:18 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 06:42:18 | INFO     | user_api | lifespan:30 | Подключение к PostgeSQL и Redis завершено
+2025-10-25 06:42:35 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /favicon.ico | Method: GET | IP: 127.0.0.1
+2025-10-25 06:43:18 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /favicon.ico | Method: GET | IP: 127.0.0.1
+2025-10-25 06:43:31 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /favicon.ico | Method: GET | IP: 127.0.0.1
+2025-10-25 06:44:04 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 06:45:16 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /favicon.ico | Method: GET | IP: 127.0.0.1
+2025-10-25 06:46:18 | INFO     | user_api | lifespan:87 | Завершение работы приложения начато
+2025-10-25 06:46:18 | INFO     | user_api | lifespan:89 | Соединение с БД закрыто
+2025-10-25 06:46:18 | INFO     | user_api | lifespan:90 | Приложение полностью остановлено
+2025-10-25 06:48:14 | INFO     | user_api | lifespan:27 | Запуск приложения начат
+2025-10-25 06:48:14 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 06:48:18 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 06:48:24 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 06:48:30 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 06:48:30 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 06:48:30 | INFO     | user_api | lifespan:30 | Подключение к PostgeSQL и Redis завершено
+2025-10-25 06:48:52 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 06:48:56 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /ws-auth/token | Method: GET | IP: 127.0.0.1
+2025-10-25 06:50:02 | INFO     | user_api | lifespan:87 | Завершение работы приложения начато
+2025-10-25 06:50:02 | INFO     | user_api | lifespan:89 | Соединение с БД закрыто
+2025-10-25 06:50:02 | INFO     | user_api | lifespan:90 | Приложение полностью остановлено
+2025-10-25 06:50:03 | INFO     | user_api | lifespan:28 | Запуск приложения начат
+2025-10-25 06:50:03 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 06:50:07 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 06:50:13 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 06:50:19 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 06:50:19 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 06:50:19 | INFO     | user_api | lifespan:31 | Подключение к PostgeSQL и Redis завершено
+2025-10-25 06:50:32 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 06:50:35 | ERROR    | user_api | general_exception_handler:223 | Unhandled Exception: TemplateNotFound: 'video_client.html' not found in search path: 'templates' | Path: / | Method: GET | IP: 127.0.0.1 | Traceback: Traceback (most recent call last):
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\fastapi\routing.py", line 124, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\fastapi\routing.py", line 110, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\fastapi\routing.py", line 390, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\fastapi\routing.py", line 289, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Data\Projects\axenix\backend\main.py", line 132, in root
+    return templates.TemplateResponse("video_client.html", {"request": request})
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\starlette\templating.py", line 209, in TemplateResponse
+    template = self.get_template(name)
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\starlette\templating.py", line 132, in get_template
+    return self.env.get_template(name)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\jinja2\environment.py", line 1016, in get_template
+    return self._load_template(name, globals)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\jinja2\environment.py", line 975, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\jinja2\loaders.py", line 126, in load
+    source, filename, uptodate = self.get_source(environment, name)
+                                 ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\jinja2\loaders.py", line 209, in get_source
+    raise TemplateNotFound(
+    ...<2 lines>...
+    )
+jinja2.exceptions.TemplateNotFound: 'video_client.html' not found in search path: 'templates'
+
+2025-10-25 06:51:14 | INFO     | user_api | lifespan:88 | Завершение работы приложения начато
+2025-10-25 06:51:14 | INFO     | user_api | lifespan:90 | Соединение с БД закрыто
+2025-10-25 06:51:14 | INFO     | user_api | lifespan:91 | Приложение полностью остановлено
+2025-10-25 06:51:15 | INFO     | user_api | lifespan:28 | Запуск приложения начат
+2025-10-25 06:51:15 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 06:51:19 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 06:51:25 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 06:51:32 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 06:51:32 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 06:51:32 | INFO     | user_api | lifespan:31 | Подключение к PostgeSQL и Redis завершено
+2025-10-25 06:51:32 | ERROR    | user_api | general_exception_handler:223 | Unhandled Exception: TemplateNotFound: 'video_client.html' not found in search path: 'templates' | Path: / | Method: GET | IP: 127.0.0.1 | Traceback: Traceback (most recent call last):
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\fastapi\routing.py", line 124, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\fastapi\routing.py", line 110, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\fastapi\routing.py", line 390, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\fastapi\routing.py", line 289, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Data\Projects\axenix\backend\main.py", line 132, in root
+    return templates.TemplateResponse("video_client.html", {"request": request})
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\starlette\templating.py", line 209, in TemplateResponse
+    template = self.get_template(name)
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\starlette\templating.py", line 132, in get_template
+    return self.env.get_template(name)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\jinja2\environment.py", line 1016, in get_template
+    return self._load_template(name, globals)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\jinja2\environment.py", line 975, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\jinja2\loaders.py", line 126, in load
+    source, filename, uptodate = self.get_source(environment, name)
+                                 ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Data\Projects\axenix\backend\.venv\Lib\site-packages\jinja2\loaders.py", line 209, in get_source
+    raise TemplateNotFound(
+    ...<2 lines>...
+    )
+jinja2.exceptions.TemplateNotFound: 'video_client.html' not found in search path: 'templates'
+
+2025-10-25 06:52:19 | INFO     | user_api | lifespan:88 | Завершение работы приложения начато
+2025-10-25 06:52:19 | INFO     | user_api | lifespan:90 | Соединение с БД закрыто
+2025-10-25 06:52:19 | INFO     | user_api | lifespan:91 | Приложение полностью остановлено
+2025-10-25 06:52:20 | INFO     | user_api | lifespan:28 | Запуск приложения начат
+2025-10-25 06:52:20 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 06:52:24 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 06:52:30 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 06:52:36 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 06:52:36 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 06:52:36 | INFO     | user_api | lifespan:31 | Подключение к PostgeSQL и Redis завершено
+2025-10-25 06:53:00 | INFO     | user_api | lifespan:88 | Завершение работы приложения начато
+2025-10-25 06:53:00 | INFO     | user_api | lifespan:90 | Соединение с БД закрыто
+2025-10-25 06:53:00 | INFO     | user_api | lifespan:91 | Приложение полностью остановлено
+2025-10-25 06:53:04 | INFO     | user_api | lifespan:28 | Запуск приложения начат
+2025-10-25 06:53:04 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 06:53:08 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 06:53:14 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 06:53:20 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 06:53:20 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 06:53:20 | INFO     | user_api | lifespan:31 | Подключение к PostgeSQL и Redis завершено
+2025-10-25 06:53:29 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 06:53:32 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /ws-auth/token | Method: GET | IP: 127.0.0.1
+2025-10-25 09:11:13 | INFO     | user_api | lifespan:30 | Запуск приложения начат
+2025-10-25 09:11:13 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 09:11:17 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:11:23 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:11:29 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:11:29 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 09:11:29 | INFO     | user_api | lifespan:33 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 09:14:00 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 09:14:08 | INFO     | user_api | logout:249 | Пользователь 1 успешно вышел из системы
+2025-10-25 09:22:57 | INFO     | user_api | lifespan:87 | Завершение работы приложения начато
+2025-10-25 09:22:57 | INFO     | user_api | lifespan:89 | Соединение с БД закрыто
+2025-10-25 09:22:57 | INFO     | user_api | lifespan:90 | Приложение полностью остановлено
+2025-10-25 09:22:58 | INFO     | user_api | lifespan:30 | Запуск приложения начат
+2025-10-25 09:22:58 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 09:23:02 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:23:08 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:23:15 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:23:15 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 09:23:15 | INFO     | user_api | lifespan:33 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 09:23:37 | INFO     | user_api | lifespan:87 | Завершение работы приложения начато
+2025-10-25 09:23:37 | INFO     | user_api | lifespan:89 | Соединение с БД закрыто
+2025-10-25 09:23:37 | INFO     | user_api | lifespan:90 | Приложение полностью остановлено
+2025-10-25 09:23:38 | INFO     | user_api | lifespan:30 | Запуск приложения начат
+2025-10-25 09:23:38 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 09:23:42 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:23:48 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:23:54 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:23:54 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 09:23:54 | INFO     | user_api | lifespan:33 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 09:25:07 | INFO     | user_api | lifespan:87 | Завершение работы приложения начато
+2025-10-25 09:25:07 | INFO     | user_api | lifespan:89 | Соединение с БД закрыто
+2025-10-25 09:25:07 | INFO     | user_api | lifespan:90 | Приложение полностью остановлено
+2025-10-25 09:25:10 | INFO     | user_api | lifespan:30 | Запуск приложения начат
+2025-10-25 09:25:10 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 09:25:14 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:25:20 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:25:26 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:25:26 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 09:25:26 | INFO     | user_api | lifespan:33 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 09:25:27 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /favicon.ico | Method: GET | IP: 127.0.0.1
+2025-10-25 09:25:34 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 09:25:34 | ERROR    | user_api | websocket_endpoint:947 | Ошибка WebSocket чата: 'async_generator' object does not support the asynchronous context manager protocol
+2025-10-25 09:26:03 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 09:26:03 | ERROR    | user_api | websocket_endpoint:947 | Ошибка WebSocket чата: 'async_generator' object does not support the asynchronous context manager protocol
+2025-10-25 09:26:13 | INFO     | user_api | create_chat_room:60 | Создана чат-комната 1 пользователем 1
+2025-10-25 09:26:16 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 09:26:16 | ERROR    | user_api | websocket_endpoint:947 | Ошибка WebSocket чата: 'async_generator' object does not support the asynchronous context manager protocol
+2025-10-25 09:26:23 | INFO     | user_api | send_message:262 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 09:26:23 | INFO     | user_api | send_message:320 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 09:26:23 | INFO     | user_api | send_message:362 | Сообщение 1 отправлено через WebSocket в комнату 1
+2025-10-25 09:26:23 | INFO     | user_api | send_message:366 | Успешно отправлено сообщение 1 в комнату 1
+2025-10-25 09:26:35 | INFO     | user_api | send_message:262 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 09:26:35 | INFO     | user_api | send_message:320 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 09:26:35 | INFO     | user_api | send_message:362 | Сообщение 2 отправлено через WebSocket в комнату 1
+2025-10-25 09:26:35 | INFO     | user_api | send_message:366 | Успешно отправлено сообщение 2 в комнату 1
+2025-10-25 09:28:59 | INFO     | user_api | lifespan:87 | Завершение работы приложения начато
+2025-10-25 09:28:59 | INFO     | user_api | lifespan:89 | Соединение с БД закрыто
+2025-10-25 09:28:59 | INFO     | user_api | lifespan:90 | Приложение полностью остановлено
+2025-10-25 09:29:00 | INFO     | user_api | lifespan:30 | Запуск приложения начат
+2025-10-25 09:29:00 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 09:29:04 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:29:10 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:29:16 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:29:16 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 09:29:16 | INFO     | user_api | lifespan:33 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 09:29:28 | INFO     | user_api | lifespan:87 | Завершение работы приложения начато
+2025-10-25 09:29:28 | INFO     | user_api | lifespan:89 | Соединение с БД закрыто
+2025-10-25 09:29:28 | INFO     | user_api | lifespan:90 | Приложение полностью остановлено
+2025-10-25 09:29:29 | INFO     | user_api | lifespan:31 | Запуск приложения начат
+2025-10-25 09:29:29 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 09:29:33 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:29:39 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:29:46 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:29:46 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 09:29:46 | INFO     | user_api | lifespan:34 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 09:30:04 | INFO     | user_api | lifespan:88 | Завершение работы приложения начато
+2025-10-25 09:30:04 | INFO     | user_api | lifespan:90 | Соединение с БД закрыто
+2025-10-25 09:30:04 | INFO     | user_api | lifespan:91 | Приложение полностью остановлено
+2025-10-25 09:30:05 | INFO     | user_api | lifespan:31 | Запуск приложения начат
+2025-10-25 09:30:05 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 09:30:09 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:30:15 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:30:21 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:30:21 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 09:30:21 | INFO     | user_api | lifespan:34 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 09:30:38 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 09:30:38 | ERROR    | user_api | websocket_endpoint:947 | Ошибка WebSocket чата: 'async_generator' object does not support the asynchronous context manager protocol
+2025-10-25 09:31:29 | INFO     | user_api | lifespan:88 | Завершение работы приложения начато
+2025-10-25 09:31:29 | INFO     | user_api | lifespan:90 | Соединение с БД закрыто
+2025-10-25 09:31:29 | INFO     | user_api | lifespan:91 | Приложение полностью остановлено
+2025-10-25 09:31:30 | INFO     | user_api | lifespan:31 | Запуск приложения начат
+2025-10-25 09:31:30 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 09:31:34 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:31:40 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:31:46 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:31:46 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 09:31:46 | INFO     | user_api | lifespan:34 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 09:33:15 | INFO     | user_api | lifespan:88 | Завершение работы приложения начато
+2025-10-25 09:33:15 | INFO     | user_api | lifespan:90 | Соединение с БД закрыто
+2025-10-25 09:33:15 | INFO     | user_api | lifespan:91 | Приложение полностью остановлено
+2025-10-25 09:33:18 | INFO     | user_api | lifespan:31 | Запуск приложения начат
+2025-10-25 09:33:18 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 09:33:22 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:33:28 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:33:34 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:33:34 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 09:33:34 | INFO     | user_api | lifespan:34 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 09:35:16 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 09:35:16 | INFO     | user_api | connect:100 | ✅ WebSocket: admin подключился к комнате global. Всего: 1
+2025-10-25 09:35:20 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 09:35:20 | INFO     | user_api | connect:100 | ✅ WebSocket: admin подключился к комнате global. Всего: 2
+2025-10-25 09:35:28 | INFO     | user_api | send_message:262 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 09:35:28 | INFO     | user_api | send_message:320 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 09:35:28 | INFO     | user_api | send_message:362 | Сообщение 3 отправлено через WebSocket в комнату 1
+2025-10-25 09:35:28 | INFO     | user_api | send_message:366 | Успешно отправлено сообщение 3 в комнату 1
+2025-10-25 09:35:41 | INFO     | user_api | send_message:262 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 09:35:41 | INFO     | user_api | send_message:320 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 09:35:41 | INFO     | user_api | send_message:362 | Сообщение 4 отправлено через WebSocket в комнату 1
+2025-10-25 09:35:41 | INFO     | user_api | send_message:366 | Успешно отправлено сообщение 4 в комнату 1
+2025-10-25 09:35:49 | INFO     | user_api | logout:249 | Пользователь 1 успешно вышел из системы
+2025-10-25 09:35:49 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: admin из комнаты global
+2025-10-25 09:35:49 | INFO     | user_api | disconnect:131 | ❌ WebSocket: admin отключился от комнаты global
+2025-10-25 09:35:54 | WARNING  | user_api | get_current_user:68 | Отсутствует токен доступа, IP: 127.0.0.1
+2025-10-25 09:35:54 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Не удалось проверить учетные данные
+2025-10-25 09:35:54 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Не удалось проверить учетные данные | Path: /chat/rooms/1/messages | Method: GET | IP: 127.0.0.1
+2025-10-25 09:36:02 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: admin из комнаты global
+2025-10-25 09:36:02 | INFO     | user_api | disconnect:131 | ❌ WebSocket: admin отключился от комнаты global
+2025-10-25 09:40:12 | INFO     | user_api | lifespan:88 | Завершение работы приложения начато
+2025-10-25 09:40:12 | INFO     | user_api | lifespan:90 | Соединение с БД закрыто
+2025-10-25 09:40:12 | INFO     | user_api | lifespan:91 | Приложение полностью остановлено
+2025-10-25 09:40:16 | INFO     | user_api | lifespan:31 | Запуск приложения начат
+2025-10-25 09:40:16 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 09:40:20 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:40:26 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:40:32 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:40:32 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 09:40:32 | INFO     | user_api | lifespan:34 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 09:40:45 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 09:40:45 | INFO     | user_api | connect:100 | ✅ WebSocket: admin подключился к комнате global. Всего: 1
+2025-10-25 09:40:53 | INFO     | user_api | send_message:262 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 09:40:53 | INFO     | user_api | send_message:320 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 09:40:53 | INFO     | user_api | send_message:362 | Сообщение 5 отправлено через WebSocket в комнату 1
+2025-10-25 09:40:53 | INFO     | user_api | send_message:366 | Успешно отправлено сообщение 5 в комнату 1
+2025-10-25 09:41:11 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 09:41:11 | INFO     | user_api | connect:100 | ✅ WebSocket: admin подключился к комнате global. Всего: 2
+2025-10-25 09:41:20 | INFO     | user_api | send_message:262 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 09:41:20 | INFO     | user_api | send_message:320 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 09:41:20 | INFO     | user_api | send_message:362 | Сообщение 6 отправлено через WebSocket в комнату 1
+2025-10-25 09:41:20 | INFO     | user_api | send_message:366 | Успешно отправлено сообщение 6 в комнату 1
+2025-10-25 09:41:21 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: admin из комнаты global
+2025-10-25 09:41:21 | INFO     | user_api | disconnect:131 | ❌ WebSocket: admin отключился от комнаты global
+2025-10-25 09:41:24 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 09:41:24 | INFO     | user_api | connect:100 | ✅ WebSocket: admin подключился к комнате global. Всего: 2
+2025-10-25 09:43:47 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: admin из комнаты global
+2025-10-25 09:43:47 | INFO     | user_api | disconnect:131 | ❌ WebSocket: admin отключился от комнаты global
+2025-10-25 09:43:47 | ERROR    | user_api | broadcast_to_room:151 | Ошибка отправки пользователю admin: 
+2025-10-25 09:43:47 | INFO     | user_api | disconnect:131 | ❌ WebSocket: admin отключился от комнаты global
+2025-10-25 09:43:47 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: admin из комнаты global
+2025-10-25 09:43:48 | INFO     | user_api | lifespan:88 | Завершение работы приложения начато
+2025-10-25 09:43:48 | INFO     | user_api | lifespan:90 | Соединение с БД закрыто
+2025-10-25 09:43:48 | INFO     | user_api | lifespan:91 | Приложение полностью остановлено
+2025-10-25 09:43:51 | INFO     | user_api | lifespan:31 | Запуск приложения начат
+2025-10-25 09:43:51 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 09:43:55 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:44:01 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:44:07 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:44:07 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 09:44:07 | INFO     | user_api | lifespan:34 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 09:44:23 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 09:44:23 | INFO     | user_api | connect:100 | ✅ WebSocket: admin подключился к комнате global. Всего: 1
+2025-10-25 09:44:26 | INFO     | user_api | send_message:262 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 09:44:27 | INFO     | user_api | send_message:320 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 09:44:27 | INFO     | user_api | send_message:362 | Сообщение 7 отправлено через WebSocket в комнату 1
+2025-10-25 09:44:27 | INFO     | user_api | send_message:366 | Успешно отправлено сообщение 7 в комнату 1
+2025-10-25 09:44:29 | INFO     | user_api | send_message:262 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 09:44:29 | INFO     | user_api | send_message:320 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 09:44:29 | INFO     | user_api | send_message:362 | Сообщение 8 отправлено через WebSocket в комнату 1
+2025-10-25 09:44:29 | INFO     | user_api | send_message:366 | Успешно отправлено сообщение 8 в комнату 1
+2025-10-25 09:44:36 | INFO     | user_api | logout:249 | Пользователь 1 успешно вышел из системы
+2025-10-25 09:44:37 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 09:44:37 | INFO     | user_api | connect:100 | ✅ WebSocket: admin подключился к комнате global. Всего: 2
+2025-10-25 09:45:34 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: admin из комнаты global
+2025-10-25 09:45:34 | INFO     | user_api | disconnect:131 | ❌ WebSocket: admin отключился от комнаты global
+2025-10-25 09:45:37 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 09:45:37 | INFO     | user_api | connect:100 | ✅ WebSocket: admin подключился к комнате global. Всего: 2
+2025-10-25 09:45:42 | INFO     | user_api | send_message:262 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 09:45:42 | INFO     | user_api | send_message:320 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 09:45:42 | INFO     | user_api | send_message:362 | Сообщение 9 отправлено через WebSocket в комнату 1
+2025-10-25 09:45:42 | INFO     | user_api | send_message:366 | Успешно отправлено сообщение 9 в комнату 1
+2025-10-25 09:45:46 | INFO     | user_api | send_message:262 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 09:45:46 | INFO     | user_api | send_message:320 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 09:45:46 | INFO     | user_api | send_message:362 | Сообщение 10 отправлено через WebSocket в комнату 1
+2025-10-25 09:45:46 | INFO     | user_api | send_message:366 | Успешно отправлено сообщение 10 в комнату 1
+2025-10-25 09:45:50 | INFO     | user_api | send_message:262 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 09:45:50 | INFO     | user_api | send_message:320 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 09:45:50 | INFO     | user_api | send_message:362 | Сообщение 11 отправлено через WebSocket в комнату 1
+2025-10-25 09:45:50 | INFO     | user_api | send_message:366 | Успешно отправлено сообщение 11 в комнату 1
+2025-10-25 09:45:59 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: admin из комнаты global
+2025-10-25 09:45:59 | INFO     | user_api | disconnect:131 | ❌ WebSocket: admin отключился от комнаты global
+2025-10-25 09:46:02 | INFO     | user_api | logout:249 | Пользователь 1 успешно вышел из системы
+2025-10-25 09:46:02 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: admin из комнаты global
+2025-10-25 09:46:02 | INFO     | user_api | disconnect:131 | ❌ WebSocket: admin отключился от комнаты global
+2025-10-25 09:46:05 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 09:46:05 | INFO     | user_api | connect:100 | ✅ WebSocket: admin подключился к комнате global. Всего: 1
+2025-10-25 09:46:09 | INFO     | user_api | send_message:262 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 09:46:09 | INFO     | user_api | send_message:320 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 09:46:09 | INFO     | user_api | send_message:362 | Сообщение 12 отправлено через WebSocket в комнату 1
+2025-10-25 09:46:09 | INFO     | user_api | send_message:366 | Успешно отправлено сообщение 12 в комнату 1
+2025-10-25 09:46:17 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: admin из комнаты global
+2025-10-25 09:46:17 | INFO     | user_api | disconnect:131 | ❌ WebSocket: admin отключился от комнаты global
+2025-10-25 09:46:20 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 09:46:20 | INFO     | user_api | connect:100 | ✅ WebSocket: admin подключился к комнате global. Всего: 1
+2025-10-25 09:46:22 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 09:46:22 | INFO     | user_api | connect:100 | ✅ WebSocket: admin подключился к комнате global. Всего: 2
+2025-10-25 09:46:32 | INFO     | user_api | send_message:262 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 09:46:32 | INFO     | user_api | send_message:320 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 09:46:32 | INFO     | user_api | send_message:362 | Сообщение 13 отправлено через WebSocket в комнату 1
+2025-10-25 09:46:32 | INFO     | user_api | send_message:366 | Успешно отправлено сообщение 13 в комнату 1
+2025-10-25 09:46:44 | INFO     | user_api | send_message:262 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 09:46:44 | INFO     | user_api | send_message:320 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 09:46:44 | INFO     | user_api | send_message:362 | Сообщение 14 отправлено через WebSocket в комнату 1
+2025-10-25 09:46:44 | INFO     | user_api | send_message:366 | Успешно отправлено сообщение 14 в комнату 1
+2025-10-25 09:47:23 | INFO     | user_api | send_message:262 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 09:47:23 | INFO     | user_api | send_message:320 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 09:47:23 | INFO     | user_api | send_message:362 | Сообщение 15 отправлено через WebSocket в комнату 1
+2025-10-25 09:47:23 | INFO     | user_api | send_message:366 | Успешно отправлено сообщение 15 в комнату 1
+2025-10-25 09:47:32 | INFO     | user_api | send_message:262 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 09:47:32 | INFO     | user_api | send_message:320 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 09:47:32 | INFO     | user_api | send_message:362 | Сообщение 16 отправлено через WebSocket в комнату 1
+2025-10-25 09:47:32 | INFO     | user_api | send_message:366 | Успешно отправлено сообщение 16 в комнату 1
+2025-10-25 09:47:36 | INFO     | user_api | send_message:262 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 09:47:36 | INFO     | user_api | send_message:320 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 09:47:36 | INFO     | user_api | send_message:362 | Сообщение 17 отправлено через WebSocket в комнату 1
+2025-10-25 09:47:36 | INFO     | user_api | send_message:366 | Успешно отправлено сообщение 17 в комнату 1
+2025-10-25 09:48:55 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: admin из комнаты global
+2025-10-25 09:48:55 | INFO     | user_api | disconnect:131 | ❌ WebSocket: admin отключился от комнаты global
+2025-10-25 09:48:55 | ERROR    | user_api | broadcast_to_room:151 | Ошибка отправки пользователю admin: 
+2025-10-25 09:48:55 | INFO     | user_api | disconnect:131 | ❌ WebSocket: admin отключился от комнаты global
+2025-10-25 09:48:55 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: admin из комнаты global
+2025-10-25 09:48:55 | INFO     | user_api | lifespan:88 | Завершение работы приложения начато
+2025-10-25 09:48:55 | INFO     | user_api | lifespan:90 | Соединение с БД закрыто
+2025-10-25 09:48:55 | INFO     | user_api | lifespan:91 | Приложение полностью остановлено
+2025-10-25 09:54:17 | INFO     | user_api | lifespan:31 | Запуск приложения начат
+2025-10-25 09:54:17 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 09:54:21 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:54:28 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:54:34 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 09:54:34 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 09:54:34 | INFO     | user_api | lifespan:34 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 09:54:41 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 09:54:41 | INFO     | user_api | connect:100 | ✅ WebSocket: admin подключился к комнате global. Всего: 1
+2025-10-25 09:54:46 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 09:54:46 | INFO     | user_api | connect:100 | ✅ WebSocket: admin подключился к комнате global. Всего: 2
+2025-10-25 09:54:50 | INFO     | user_api | send_message:262 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 09:54:50 | INFO     | user_api | send_message:320 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 09:54:50 | INFO     | user_api | send_message:362 | Сообщение 18 отправлено через WebSocket в комнату 1
+2025-10-25 09:54:50 | INFO     | user_api | send_message:366 | Успешно отправлено сообщение 18 в комнату 1
+2025-10-25 09:55:02 | INFO     | user_api | send_message:262 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 09:55:02 | INFO     | user_api | send_message:320 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 09:55:02 | INFO     | user_api | send_message:362 | Сообщение 19 отправлено через WebSocket в комнату 1
+2025-10-25 09:55:02 | INFO     | user_api | send_message:366 | Успешно отправлено сообщение 19 в комнату 1
+2025-10-25 09:55:07 | INFO     | user_api | logout:249 | Пользователь 1 успешно вышел из системы
+2025-10-25 09:55:07 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: admin из комнаты global
+2025-10-25 09:55:07 | INFO     | user_api | disconnect:131 | ❌ WebSocket: admin отключился от комнаты global
+2025-10-25 09:55:09 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 09:55:09 | INFO     | user_api | connect:100 | ✅ WebSocket: admin подключился к комнате global. Всего: 2
+2025-10-25 09:58:15 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: admin из комнаты global
+2025-10-25 09:58:15 | INFO     | user_api | disconnect:131 | ❌ WebSocket: admin отключился от комнаты global
+2025-10-25 09:58:16 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: admin из комнаты global
+2025-10-25 09:58:16 | INFO     | user_api | disconnect:131 | ❌ WebSocket: admin отключился от комнаты global
+2025-10-25 09:58:18 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 09:58:18 | INFO     | user_api | connect:100 | ✅ WebSocket: admin подключился к комнате global. Всего: 1
+2025-10-25 09:58:20 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 09:58:20 | INFO     | user_api | connect:100 | ✅ WebSocket: admin подключился к комнате global. Всего: 2
+2025-10-25 09:58:25 | INFO     | user_api | send_message:262 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 09:58:25 | INFO     | user_api | send_message:320 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 09:58:25 | INFO     | user_api | send_message:362 | Сообщение 20 отправлено через WebSocket в комнату 1
+2025-10-25 09:58:25 | INFO     | user_api | send_message:366 | Успешно отправлено сообщение 20 в комнату 1
+2025-10-25 09:58:30 | INFO     | user_api | send_message:262 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 09:58:30 | INFO     | user_api | send_message:320 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 09:58:30 | INFO     | user_api | send_message:362 | Сообщение 21 отправлено через WebSocket в комнату 1
+2025-10-25 09:58:30 | INFO     | user_api | send_message:366 | Успешно отправлено сообщение 21 в комнату 1
+2025-10-25 09:58:39 | INFO     | user_api | send_message:262 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 09:58:39 | INFO     | user_api | send_message:320 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 09:58:39 | INFO     | user_api | send_message:362 | Сообщение 22 отправлено через WebSocket в комнату 1
+2025-10-25 09:58:39 | INFO     | user_api | send_message:366 | Успешно отправлено сообщение 22 в комнату 1
+2025-10-25 09:58:45 | INFO     | user_api | logout:249 | Пользователь 1 успешно вышел из системы
+2025-10-25 09:58:45 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: admin из комнаты global
+2025-10-25 09:58:45 | INFO     | user_api | disconnect:131 | ❌ WebSocket: admin отключился от комнаты global
+2025-10-25 10:02:11 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: admin из комнаты global
+2025-10-25 10:02:11 | INFO     | user_api | disconnect:131 | ❌ WebSocket: admin отключился от комнаты global
+2025-10-25 10:02:11 | INFO     | user_api | lifespan:88 | Завершение работы приложения начато
+2025-10-25 10:02:11 | INFO     | user_api | lifespan:90 | Соединение с БД закрыто
+2025-10-25 10:02:11 | INFO     | user_api | lifespan:91 | Приложение полностью остановлено
+2025-10-25 10:02:12 | INFO     | user_api | lifespan:31 | Запуск приложения начат
+2025-10-25 10:02:12 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 10:02:16 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:02:22 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:02:29 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:02:29 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 10:02:29 | INFO     | user_api | lifespan:34 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 10:02:36 | INFO     | user_api | lifespan:88 | Завершение работы приложения начато
+2025-10-25 10:02:36 | INFO     | user_api | lifespan:90 | Соединение с БД закрыто
+2025-10-25 10:02:36 | INFO     | user_api | lifespan:91 | Приложение полностью остановлено
+2025-10-25 10:02:37 | INFO     | user_api | lifespan:31 | Запуск приложения начат
+2025-10-25 10:02:37 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 10:02:41 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:02:47 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:02:53 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:02:53 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 10:02:53 | INFO     | user_api | lifespan:34 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 10:03:07 | INFO     | user_api | lifespan:31 | Запуск приложения начат
+2025-10-25 10:03:07 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 10:03:11 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:03:17 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:03:23 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:03:23 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 10:03:23 | INFO     | user_api | lifespan:34 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 10:03:37 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 10:03:37 | INFO     | user_api | connect:100 | ✅ WebSocket: admin подключился к комнате global. Всего: 1
+2025-10-25 10:03:40 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 10:03:40 | INFO     | user_api | connect:100 | ✅ WebSocket: admin подключился к комнате global. Всего: 2
+2025-10-25 10:03:54 | INFO     | user_api | send_message:262 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 10:03:54 | INFO     | user_api | send_message:320 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 10:03:54 | INFO     | user_api | send_message:357 | 📢 Сообщение 23 отправлено через WebSocket в комнату 1
+2025-10-25 10:03:54 | INFO     | user_api | send_message:391 | Сообщение 23 отправлено через WebSocket в комнату 1
+2025-10-25 10:03:54 | INFO     | user_api | send_message:395 | Успешно отправлено сообщение 23 в комнату 1
+2025-10-25 10:04:03 | INFO     | user_api | send_message:262 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 10:04:03 | INFO     | user_api | send_message:320 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 10:04:03 | INFO     | user_api | send_message:357 | 📢 Сообщение 24 отправлено через WebSocket в комнату 1
+2025-10-25 10:04:03 | INFO     | user_api | send_message:391 | Сообщение 24 отправлено через WebSocket в комнату 1
+2025-10-25 10:04:03 | INFO     | user_api | send_message:395 | Успешно отправлено сообщение 24 в комнату 1
+2025-10-25 10:07:43 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: admin из комнаты global
+2025-10-25 10:07:43 | INFO     | user_api | disconnect:131 | ❌ WebSocket: admin отключился от комнаты global
+2025-10-25 10:07:43 | ERROR    | user_api | broadcast_to_room:151 | Ошибка отправки пользователю admin: 
+2025-10-25 10:07:43 | INFO     | user_api | disconnect:131 | ❌ WebSocket: admin отключился от комнаты global
+2025-10-25 10:07:43 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: admin из комнаты global
+2025-10-25 10:07:43 | INFO     | user_api | lifespan:88 | Завершение работы приложения начато
+2025-10-25 10:07:43 | INFO     | user_api | lifespan:90 | Соединение с БД закрыто
+2025-10-25 10:07:43 | INFO     | user_api | lifespan:91 | Приложение полностью остановлено
+2025-10-25 10:11:20 | INFO     | user_api | lifespan:31 | Запуск приложения начат
+2025-10-25 10:11:20 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 10:11:24 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:11:30 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:11:36 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:11:36 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 10:11:36 | INFO     | user_api | lifespan:34 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 10:11:51 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 10:11:52 | INFO     | user_api | connect:100 | ✅ WebSocket: admin подключился к комнате global. Всего: 1
+2025-10-25 10:12:01 | INFO     | user_api | send_message:262 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 10:12:01 | INFO     | user_api | send_message:320 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 10:12:01 | INFO     | user_api | send_message:357 | 📢 Сообщение 25 отправлено через WebSocket в комнату 1
+2025-10-25 10:12:01 | INFO     | user_api | send_message:391 | Сообщение 25 отправлено через WebSocket в комнату 1
+2025-10-25 10:12:01 | INFO     | user_api | send_message:395 | Успешно отправлено сообщение 25 в комнату 1
+2025-10-25 10:12:15 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 10:12:15 | INFO     | user_api | connect:100 | ✅ WebSocket: admin подключился к комнате global. Всего: 2
+2025-10-25 10:12:21 | INFO     | user_api | send_message:262 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 10:12:21 | INFO     | user_api | send_message:320 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 10:12:21 | INFO     | user_api | send_message:357 | 📢 Сообщение 26 отправлено через WebSocket в комнату 1
+2025-10-25 10:12:21 | INFO     | user_api | send_message:391 | Сообщение 26 отправлено через WebSocket в комнату 1
+2025-10-25 10:12:21 | INFO     | user_api | send_message:395 | Успешно отправлено сообщение 26 в комнату 1
+2025-10-25 10:16:05 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: admin из комнаты global
+2025-10-25 10:16:05 | INFO     | user_api | disconnect:131 | ❌ WebSocket: admin отключился от комнаты global
+2025-10-25 10:16:05 | ERROR    | user_api | broadcast_to_room:151 | Ошибка отправки пользователю admin: 
+2025-10-25 10:16:05 | INFO     | user_api | disconnect:131 | ❌ WebSocket: admin отключился от комнаты global
+2025-10-25 10:16:05 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: admin из комнаты global
+2025-10-25 10:16:05 | INFO     | user_api | lifespan:88 | Завершение работы приложения начато
+2025-10-25 10:16:05 | INFO     | user_api | lifespan:90 | Соединение с БД закрыто
+2025-10-25 10:16:05 | INFO     | user_api | lifespan:91 | Приложение полностью остановлено
+2025-10-25 10:16:06 | INFO     | user_api | lifespan:31 | Запуск приложения начат
+2025-10-25 10:16:06 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 10:16:10 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:16:16 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:16:23 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:16:23 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 10:16:23 | INFO     | user_api | lifespan:34 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 10:16:37 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 10:16:37 | INFO     | user_api | connect:100 | ✅ WebSocket: admin подключился к комнате global. Всего: 1
+2025-10-25 10:16:39 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 10:16:39 | INFO     | user_api | connect:100 | ✅ WebSocket: admin подключился к комнате global. Всего: 2
+2025-10-25 10:16:47 | INFO     | user_api | send_message:262 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 10:16:47 | INFO     | user_api | send_message:320 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 10:16:47 | INFO     | user_api | send_message:357 | 📢 Сообщение 27 отправлено через WebSocket в комнату 1
+2025-10-25 10:16:47 | INFO     | user_api | send_message:391 | Сообщение 27 отправлено через WebSocket в комнату 1
+2025-10-25 10:16:47 | INFO     | user_api | send_message:395 | Успешно отправлено сообщение 27 в комнату 1
+2025-10-25 10:19:51 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: admin из комнаты global
+2025-10-25 10:19:51 | INFO     | user_api | disconnect:131 | ❌ WebSocket: admin отключился от комнаты global
+2025-10-25 10:19:51 | ERROR    | user_api | broadcast_to_room:151 | Ошибка отправки пользователю admin: 
+2025-10-25 10:19:51 | INFO     | user_api | disconnect:131 | ❌ WebSocket: admin отключился от комнаты global
+2025-10-25 10:19:51 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: admin из комнаты global
+2025-10-25 10:19:51 | INFO     | user_api | lifespan:88 | Завершение работы приложения начато
+2025-10-25 10:19:51 | INFO     | user_api | lifespan:90 | Соединение с БД закрыто
+2025-10-25 10:19:51 | INFO     | user_api | lifespan:91 | Приложение полностью остановлено
+2025-10-25 10:19:52 | INFO     | user_api | lifespan:31 | Запуск приложения начат
+2025-10-25 10:19:52 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 10:19:56 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:20:02 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:20:08 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:20:08 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 10:20:08 | INFO     | user_api | lifespan:34 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 10:26:22 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 10:26:22 | INFO     | user_api | connect:100 | ✅ WebSocket: admin подключился к комнате global. Всего: 1
+2025-10-25 10:26:27 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 10:26:27 | INFO     | user_api | connect:100 | ✅ WebSocket: admin подключился к комнате global. Всего: 2
+2025-10-25 10:26:32 | INFO     | user_api | send_message:262 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 10:26:32 | INFO     | user_api | send_message:320 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 10:26:32 | INFO     | user_api | send_message:357 | 📢 Сообщение 28 отправлено через WebSocket в комнату 1
+2025-10-25 10:26:32 | INFO     | user_api | send_message:391 | Сообщение 28 отправлено через WebSocket в комнату 1
+2025-10-25 10:26:32 | INFO     | user_api | send_message:395 | Успешно отправлено сообщение 28 в комнату 1
+2025-10-25 10:27:47 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: admin из комнаты global
+2025-10-25 10:27:47 | INFO     | user_api | disconnect:131 | ❌ WebSocket: admin отключился от комнаты global
+2025-10-25 10:27:49 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: admin из комнаты global
+2025-10-25 10:27:49 | INFO     | user_api | disconnect:131 | ❌ WebSocket: admin отключился от комнаты global
+2025-10-25 10:27:50 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 10:27:51 | INFO     | user_api | connect:100 | ✅ WebSocket: admin подключился к комнате global. Всего: 1
+2025-10-25 10:28:01 | INFO     | user_api | send_message:262 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 10:28:01 | INFO     | user_api | send_message:320 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 10:28:01 | INFO     | user_api | send_message:357 | 📢 Сообщение 29 отправлено через WebSocket в комнату 1
+2025-10-25 10:28:01 | INFO     | user_api | send_message:391 | Сообщение 29 отправлено через WebSocket в комнату 1
+2025-10-25 10:28:01 | INFO     | user_api | send_message:395 | Успешно отправлено сообщение 29 в комнату 1
+2025-10-25 10:34:19 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: admin из комнаты global
+2025-10-25 10:34:19 | INFO     | user_api | disconnect:131 | ❌ WebSocket: admin отключился от комнаты global
+2025-10-25 10:34:19 | INFO     | user_api | lifespan:88 | Завершение работы приложения начато
+2025-10-25 10:34:19 | INFO     | user_api | lifespan:90 | Соединение с БД закрыто
+2025-10-25 10:34:19 | INFO     | user_api | lifespan:91 | Приложение полностью остановлено
+2025-10-25 10:34:21 | INFO     | user_api | register:65 | ✅ WebSocketSubscriber зарегистрирован
+2025-10-25 10:34:22 | INFO     | user_api | register:65 | ✅ WebSocketSubscriber зарегистрирован
+2025-10-25 10:34:22 | INFO     | user_api | lifespan:31 | Запуск приложения начат
+2025-10-25 10:34:22 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 10:34:26 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:34:32 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:34:38 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:34:38 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 10:34:38 | INFO     | user_api | lifespan:34 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 10:34:45 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 10:34:45 | INFO     | user_api | connect:100 | ✅ WebSocket: admin подключился к комнате global. Всего: 1
+2025-10-25 10:35:37 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: admin из комнаты global
+2025-10-25 10:35:37 | INFO     | user_api | disconnect:131 | ❌ WebSocket: admin отключился от комнаты global
+2025-10-25 10:35:39 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 10:35:39 | INFO     | user_api | connect:100 | ✅ WebSocket: admin подключился к комнате global. Всего: 1
+2025-10-25 10:35:46 | INFO     | user_api | send_message:267 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 10:35:46 | INFO     | user_api | send_message:325 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 10:35:46 | INFO     | user_api | send_message:355 | 🔔 Observer: новое сообщение 30 в комнате 1
+2025-10-25 10:35:46 | INFO     | user_api | send_message:384 | 📢 Сообщение 30 отправлено через WebSocket в комнату 1
+2025-10-25 10:35:46 | INFO     | user_api | send_message:418 | Сообщение 30 отправлено через WebSocket в комнату 1
+2025-10-25 10:35:46 | INFO     | user_api | send_message:422 | Успешно отправлено сообщение 30 в комнату 1
+2025-10-25 10:35:53 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 10:35:54 | INFO     | user_api | connect:100 | ✅ WebSocket: admin подключился к комнате global. Всего: 2
+2025-10-25 10:35:58 | INFO     | user_api | send_message:267 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 10:35:58 | INFO     | user_api | send_message:325 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 10:35:58 | INFO     | user_api | send_message:355 | 🔔 Observer: новое сообщение 31 в комнате 1
+2025-10-25 10:35:58 | INFO     | user_api | send_message:384 | 📢 Сообщение 31 отправлено через WebSocket в комнату 1
+2025-10-25 10:35:58 | INFO     | user_api | send_message:418 | Сообщение 31 отправлено через WebSocket в комнату 1
+2025-10-25 10:35:58 | INFO     | user_api | send_message:422 | Успешно отправлено сообщение 31 в комнату 1
+2025-10-25 10:36:19 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: [{'type': 'value_error', 'loc': ('body', 'user_password'), 'msg': 'Value error, Пароль должен содержать минимум 8 символов, включая хотя бы одну заглавную букву, одну строчную букву, одну цифру и один специальный символ (!@#$%^&*)', 'input': 'stringst', 'ctx': {'error': ValueError('Пароль должен содержать минимум 8 символов, включая хотя бы одну заглавную букву, одну строчную букву, одну цифру и один специальный символ (!@#$%^&*)')}}]
+2025-10-25 10:36:19 | WARNING  | user_api | validation_exception_handler:205 | Validation Error: 1 errors | Path: /auth/register | Method: POST | IP: 127.0.0.1
+2025-10-25 10:36:45 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: [{'type': 'value_error', 'loc': ('body', 'user_password'), 'msg': 'Value error, Пароль должен содержать минимум 8 символов, включая хотя бы одну заглавную букву, одну строчную букву, одну цифру и один специальный символ (!@#$%^&*)', 'input': 'String_111', 'ctx': {'error': ValueError('Пароль должен содержать минимум 8 символов, включая хотя бы одну заглавную букву, одну строчную букву, одну цифру и один специальный символ (!@#$%^&*)')}}]
+2025-10-25 10:36:45 | WARNING  | user_api | validation_exception_handler:205 | Validation Error: 1 errors | Path: /auth/register | Method: POST | IP: 127.0.0.1
+2025-10-25 10:37:25 | ERROR    | user_api | send_email:43 | Ошибка отправки письма на user@example.com: No From header provided in message
+2025-10-25 10:37:25 | ERROR    | user_api | register:71 | Ошибка отправки письма на user@example.com: No From header provided in message
+2025-10-25 10:37:25 | INFO     | user_api | register:83 | Пользователь string успешно зарегистрирован
+2025-10-25 10:37:41 | INFO     | user_api | logout:249 | Пользователь 1 успешно вышел из системы
+2025-10-25 10:37:41 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: admin из комнаты global
+2025-10-25 10:37:41 | INFO     | user_api | disconnect:131 | ❌ WebSocket: admin отключился от комнаты global
+2025-10-25 10:37:59 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Неверный логин или пароль
+2025-10-25 10:37:59 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Неверный логин или пароль | Path: /auth/login | Method: POST | IP: 127.0.0.1
+2025-10-25 10:38:32 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Подтвердите email перед входом
+2025-10-25 10:38:32 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Подтвердите email перед входом | Path: /auth/login | Method: POST | IP: 127.0.0.1
+2025-10-25 10:38:49 | INFO     | user_api | logout:249 | Пользователь 2 успешно вышел из системы
+2025-10-25 10:39:09 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Подтвердите email перед входом
+2025-10-25 10:39:09 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Подтвердите email перед входом | Path: /auth/login | Method: POST | IP: 127.0.0.1
+2025-10-25 10:40:01 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 400: Электронная почта или логин уже зарегистрированы
+2025-10-25 10:40:01 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Электронная почта или логин уже зарегистрированы | Path: /auth/register | Method: POST | IP: 127.0.0.1
+2025-10-25 10:41:11 | ERROR    | user_api | send_email:43 | Ошибка отправки письма на liveri1112@gmail.com: No From header provided in message
+2025-10-25 10:41:11 | ERROR    | user_api | register:71 | Ошибка отправки письма на liveri1112@gmail.com: No From header provided in message
+2025-10-25 10:41:11 | INFO     | user_api | register:83 | Пользователь string1 успешно зарегистрирован
+2025-10-25 10:43:26 | INFO     | user_api | login:220 | Пользователь string успешно вошел в систему
+2025-10-25 10:43:30 | INFO     | user_api | login:220 | Пользователь string успешно вошел в систему
+2025-10-25 10:43:30 | INFO     | user_api | connect:100 | ✅ WebSocket: string подключился к комнате global. Всего: 2
+2025-10-25 10:43:43 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 10:43:43 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 127.0.0.1
+2025-10-25 10:43:45 | INFO     | user_api | logout:249 | Пользователь 2 успешно вышел из системы
+2025-10-25 10:43:45 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: admin из комнаты global
+2025-10-25 10:43:45 | INFO     | user_api | disconnect:131 | ❌ WebSocket: admin отключился от комнаты global
+2025-10-25 10:43:47 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 10:43:47 | INFO     | user_api | connect:100 | ✅ WebSocket: admin подключился к комнате global. Всего: 2
+2025-10-25 10:43:58 | INFO     | user_api | send_message:267 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 10:43:58 | INFO     | user_api | send_message:325 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 10:43:58 | INFO     | user_api | send_message:355 | 🔔 Observer: новое сообщение 32 в комнате 1
+2025-10-25 10:43:58 | INFO     | user_api | send_message:384 | 📢 Сообщение 32 отправлено через WebSocket в комнату 1
+2025-10-25 10:43:58 | INFO     | user_api | send_message:418 | Сообщение 32 отправлено через WebSocket в комнату 1
+2025-10-25 10:43:58 | INFO     | user_api | send_message:422 | Успешно отправлено сообщение 32 в комнату 1
+2025-10-25 10:47:04 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: string из комнаты global
+2025-10-25 10:47:04 | INFO     | user_api | disconnect:131 | ❌ WebSocket: string отключился от комнаты global
+2025-10-25 10:47:04 | ERROR    | user_api | broadcast_to_room:151 | Ошибка отправки пользователю admin: 
+2025-10-25 10:47:04 | INFO     | user_api | disconnect:131 | ❌ WebSocket: admin отключился от комнаты global
+2025-10-25 10:47:04 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: admin из комнаты global
+2025-10-25 10:47:05 | INFO     | user_api | lifespan:88 | Завершение работы приложения начато
+2025-10-25 10:47:05 | INFO     | user_api | lifespan:90 | Соединение с БД закрыто
+2025-10-25 10:47:05 | INFO     | user_api | lifespan:91 | Приложение полностью остановлено
+2025-10-25 10:47:06 | INFO     | user_api | register:68 | ✅ WebSocketSubscriber зарегистрирован для всех комнат
+2025-10-25 10:47:06 | INFO     | user_api | lifespan:31 | Запуск приложения начат
+2025-10-25 10:47:06 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 10:47:10 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:47:16 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:47:22 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:47:22 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 10:47:22 | INFO     | user_api | lifespan:34 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 10:47:25 | INFO     | user_api | lifespan:88 | Завершение работы приложения начато
+2025-10-25 10:47:25 | INFO     | user_api | lifespan:90 | Соединение с БД закрыто
+2025-10-25 10:47:25 | INFO     | user_api | lifespan:91 | Приложение полностью остановлено
+2025-10-25 10:47:26 | INFO     | user_api | register:68 | ✅ WebSocketSubscriber зарегистрирован для всех комнат
+2025-10-25 10:47:26 | INFO     | user_api | lifespan:31 | Запуск приложения начат
+2025-10-25 10:47:26 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 10:47:30 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:47:37 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:47:43 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:47:43 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 10:47:43 | INFO     | user_api | lifespan:34 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 10:47:57 | INFO     | user_api | lifespan:88 | Завершение работы приложения начато
+2025-10-25 10:47:57 | INFO     | user_api | lifespan:90 | Соединение с БД закрыто
+2025-10-25 10:47:57 | INFO     | user_api | lifespan:91 | Приложение полностью остановлено
+2025-10-25 10:47:58 | INFO     | user_api | <module>:29 | ✅ WebSocket подписчик зарегистрирован как глобальный обработчик событий чата
+2025-10-25 10:47:58 | INFO     | user_api | lifespan:31 | Запуск приложения начат
+2025-10-25 10:47:58 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 10:48:02 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:48:08 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:48:14 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:48:14 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 10:48:14 | INFO     | user_api | lifespan:34 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 10:49:01 | INFO     | user_api | lifespan:88 | Завершение работы приложения начато
+2025-10-25 10:49:01 | INFO     | user_api | lifespan:90 | Соединение с БД закрыто
+2025-10-25 10:49:01 | INFO     | user_api | lifespan:91 | Приложение полностью остановлено
+2025-10-25 10:49:02 | INFO     | user_api | <module>:29 | ✅ WebSocket подписчик зарегистрирован как глобальный обработчик событий чата
+2025-10-25 10:49:03 | INFO     | user_api | <module>:29 | ✅ WebSocket подписчик зарегистрирован как глобальный обработчик событий чата
+2025-10-25 10:49:03 | INFO     | user_api | lifespan:31 | Запуск приложения начат
+2025-10-25 10:49:03 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 10:49:07 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:49:14 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:49:20 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:49:20 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 10:49:20 | INFO     | user_api | lifespan:34 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 10:49:23 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Неверный логин или пароль
+2025-10-25 10:49:23 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Неверный логин или пароль | Path: /auth/login | Method: POST | IP: 127.0.0.1
+2025-10-25 10:49:56 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 10:49:57 | INFO     | user_api | connect:100 | ✅ WebSocket: admin подключился к комнате global. Всего: 1
+2025-10-25 10:49:58 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Неверный логин или пароль
+2025-10-25 10:49:58 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Неверный логин или пароль | Path: /auth/login | Method: POST | IP: 127.0.0.1
+2025-10-25 10:50:11 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Неверный логин или пароль
+2025-10-25 10:50:11 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Неверный логин или пароль | Path: /auth/login | Method: POST | IP: 127.0.0.1
+2025-10-25 10:50:22 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 10:50:22 | INFO     | user_api | connect:100 | ✅ WebSocket: admin подключился к комнате global. Всего: 2
+2025-10-25 10:50:30 | INFO     | user_api | send_message:271 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 10:50:30 | INFO     | user_api | send_message:329 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 10:50:30 | INFO     | user_api | notify:39 | 🔔 Observer: уведомление new_message для комнаты 1
+2025-10-25 10:50:30 | INFO     | user_api | handle_chat_event:21 | 🔔 WebSocketSubscriber: событие new_message для комнаты 1
+2025-10-25 10:50:30 | INFO     | user_api | handle_chat_event:35 | 📢 WebSocket: сообщение 33 отправлено в комнату 1
+2025-10-25 10:50:30 | INFO     | user_api | send_message:359 | 🔔 Observer: новое сообщение 33 в комнате 1
+2025-10-25 10:50:30 | INFO     | user_api | send_message:388 | 📢 Сообщение 33 отправлено через WebSocket в комнату 1
+2025-10-25 10:50:30 | INFO     | user_api | send_message:422 | Сообщение 33 отправлено через WebSocket в комнату 1
+2025-10-25 10:50:30 | INFO     | user_api | send_message:426 | Успешно отправлено сообщение 33 в комнату 1
+2025-10-25 10:51:03 | INFO     | user_api | logout:249 | Пользователь 1 успешно вышел из системы
+2025-10-25 10:51:03 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: admin из комнаты global
+2025-10-25 10:51:03 | INFO     | user_api | disconnect:131 | ❌ WebSocket: admin отключился от комнаты global
+2025-10-25 10:51:20 | INFO     | user_api | login:220 | Пользователь string успешно вошел в систему
+2025-10-25 10:51:20 | INFO     | user_api | connect:100 | ✅ WebSocket: string подключился к комнате global. Всего: 2
+2025-10-25 10:51:22 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 10:51:22 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 127.0.0.1
+2025-10-25 10:51:28 | INFO     | user_api | send_message:271 | Попытка отправки сообщения в комнату 1 пользователем 2
+2025-10-25 10:51:28 | WARNING  | user_api | send_message:284 | Пользователь 2 не участник комнаты 1
+2025-10-25 10:51:28 | ERROR    | user_api | send_message:431 | HTTP ошибка при отправке сообщения: Доступ запрещен
+2025-10-25 10:51:28 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 10:51:28 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: POST | IP: 127.0.0.1
+2025-10-25 10:51:31 | INFO     | user_api | send_message:271 | Попытка отправки сообщения в комнату 1 пользователем 2
+2025-10-25 10:51:31 | WARNING  | user_api | send_message:284 | Пользователь 2 не участник комнаты 1
+2025-10-25 10:51:31 | ERROR    | user_api | send_message:431 | HTTP ошибка при отправке сообщения: Доступ запрещен
+2025-10-25 10:51:31 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 10:51:31 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: POST | IP: 127.0.0.1
+2025-10-25 10:51:36 | INFO     | user_api | send_message:271 | Попытка отправки сообщения в комнату 1 пользователем 2
+2025-10-25 10:51:36 | WARNING  | user_api | send_message:284 | Пользователь 2 не участник комнаты 1
+2025-10-25 10:51:36 | ERROR    | user_api | send_message:431 | HTTP ошибка при отправке сообщения: Доступ запрещен
+2025-10-25 10:51:36 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 10:51:36 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: POST | IP: 127.0.0.1
+2025-10-25 10:51:38 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: admin из комнаты global
+2025-10-25 10:51:38 | INFO     | user_api | disconnect:131 | ❌ WebSocket: admin отключился от комнаты global
+2025-10-25 10:51:40 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: string из комнаты global
+2025-10-25 10:51:40 | INFO     | user_api | disconnect:131 | ❌ WebSocket: string отключился от комнаты global
+2025-10-25 10:51:49 | INFO     | user_api | login:220 | Пользователь string успешно вошел в систему
+2025-10-25 10:51:50 | INFO     | user_api | connect:100 | ✅ WebSocket: string подключился к комнате global. Всего: 1
+2025-10-25 10:51:53 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 10:51:53 | INFO     | user_api | connect:100 | ✅ WebSocket: admin подключился к комнате global. Всего: 2
+2025-10-25 10:52:03 | INFO     | user_api | send_message:271 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 10:52:03 | INFO     | user_api | send_message:329 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 10:52:03 | INFO     | user_api | notify:39 | 🔔 Observer: уведомление new_message для комнаты 1
+2025-10-25 10:52:03 | INFO     | user_api | handle_chat_event:21 | 🔔 WebSocketSubscriber: событие new_message для комнаты 1
+2025-10-25 10:52:03 | INFO     | user_api | handle_chat_event:35 | 📢 WebSocket: сообщение 34 отправлено в комнату 1
+2025-10-25 10:52:03 | INFO     | user_api | send_message:359 | 🔔 Observer: новое сообщение 34 в комнате 1
+2025-10-25 10:52:03 | INFO     | user_api | send_message:388 | 📢 Сообщение 34 отправлено через WebSocket в комнату 1
+2025-10-25 10:52:03 | INFO     | user_api | send_message:422 | Сообщение 34 отправлено через WebSocket в комнату 1
+2025-10-25 10:52:03 | INFO     | user_api | send_message:426 | Успешно отправлено сообщение 34 в комнату 1
+2025-10-25 10:52:08 | INFO     | user_api | send_message:271 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 10:52:08 | INFO     | user_api | send_message:329 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 10:52:08 | INFO     | user_api | notify:39 | 🔔 Observer: уведомление new_message для комнаты 1
+2025-10-25 10:52:08 | INFO     | user_api | handle_chat_event:21 | 🔔 WebSocketSubscriber: событие new_message для комнаты 1
+2025-10-25 10:52:08 | INFO     | user_api | handle_chat_event:35 | 📢 WebSocket: сообщение 35 отправлено в комнату 1
+2025-10-25 10:52:08 | INFO     | user_api | send_message:359 | 🔔 Observer: новое сообщение 35 в комнате 1
+2025-10-25 10:52:08 | INFO     | user_api | send_message:388 | 📢 Сообщение 35 отправлено через WebSocket в комнату 1
+2025-10-25 10:52:08 | INFO     | user_api | send_message:422 | Сообщение 35 отправлено через WebSocket в комнату 1
+2025-10-25 10:52:08 | INFO     | user_api | send_message:426 | Успешно отправлено сообщение 35 в комнату 1
+2025-10-25 10:52:44 | INFO     | user_api | send_message:271 | Попытка отправки сообщения в комнату 1 пользователем 1
+2025-10-25 10:52:44 | INFO     | user_api | send_message:329 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 10:52:44 | INFO     | user_api | notify:39 | 🔔 Observer: уведомление new_message для комнаты 1
+2025-10-25 10:52:44 | INFO     | user_api | handle_chat_event:21 | 🔔 WebSocketSubscriber: событие new_message для комнаты 1
+2025-10-25 10:52:44 | INFO     | user_api | handle_chat_event:35 | 📢 WebSocket: сообщение 36 отправлено в комнату 1
+2025-10-25 10:52:44 | INFO     | user_api | send_message:359 | 🔔 Observer: новое сообщение 36 в комнате 1
+2025-10-25 10:52:44 | INFO     | user_api | send_message:388 | 📢 Сообщение 36 отправлено через WebSocket в комнату 1
+2025-10-25 10:52:44 | INFO     | user_api | send_message:422 | Сообщение 36 отправлено через WebSocket в комнату 1
+2025-10-25 10:52:44 | INFO     | user_api | send_message:426 | Успешно отправлено сообщение 36 в комнату 1
+2025-10-25 10:54:25 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: admin из комнаты global
+2025-10-25 10:54:25 | INFO     | user_api | disconnect:131 | ❌ WebSocket: admin отключился от комнаты global
+2025-10-25 10:54:25 | ERROR    | user_api | broadcast_to_room:151 | Ошибка отправки пользователю string: 
+2025-10-25 10:54:25 | INFO     | user_api | disconnect:131 | ❌ WebSocket: string отключился от комнаты global
+2025-10-25 10:54:25 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: string из комнаты global
+2025-10-25 10:54:25 | INFO     | user_api | lifespan:88 | Завершение работы приложения начато
+2025-10-25 10:54:25 | INFO     | user_api | lifespan:90 | Соединение с БД закрыто
+2025-10-25 10:54:25 | INFO     | user_api | lifespan:91 | Приложение полностью остановлено
+2025-10-25 10:54:26 | INFO     | user_api | <module>:29 | ✅ WebSocket подписчик зарегистрирован как глобальный обработчик событий чата
+2025-10-25 10:54:26 | INFO     | user_api | lifespan:31 | Запуск приложения начат
+2025-10-25 10:54:27 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 10:54:31 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:54:37 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:54:43 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 10061] Connect call failed ('::1', 6379, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 10:54:43 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 10:54:43 | INFO     | user_api | lifespan:34 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 10:55:47 | INFO     | user_api | login:220 | Пользователь string успешно вошел в систему
+2025-10-25 10:55:47 | INFO     | user_api | connect:100 | ✅ WebSocket: string подключился к комнате global. Всего: 1
+2025-10-25 10:55:50 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 10:55:50 | INFO     | user_api | connect:100 | ✅ WebSocket: admin подключился к комнате global. Всего: 2
+2025-10-25 10:55:53 | INFO     | user_api | create_chat_room:69 | Создана чат-комната 2 пользователем 1
+2025-10-25 10:55:59 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: admin из комнаты global
+2025-10-25 10:55:59 | INFO     | user_api | disconnect:131 | ❌ WebSocket: admin отключился от комнаты global
+2025-10-25 10:56:03 | INFO     | user_api | login:220 | Пользователь admin успешно вошел в систему
+2025-10-25 10:56:03 | INFO     | user_api | connect:100 | ✅ WebSocket: admin подключился к комнате global. Всего: 2
+2025-10-25 10:56:08 | INFO     | user_api | send_message:271 | Попытка отправки сообщения в комнату 2 пользователем 1
+2025-10-25 10:56:08 | INFO     | user_api | send_message:329 | Результат модерации: {'moderated': False, 'action': 'approve', 'reason': []}
+2025-10-25 10:56:08 | INFO     | user_api | notify:39 | 🔔 Observer: уведомление new_message для комнаты 2
+2025-10-25 10:56:08 | INFO     | user_api | handle_chat_event:21 | 🔔 WebSocketSubscriber: событие new_message для комнаты 2
+2025-10-25 10:56:08 | INFO     | user_api | handle_chat_event:35 | 📢 WebSocket: сообщение 37 отправлено в комнату 2
+2025-10-25 10:56:08 | INFO     | user_api | send_message:360 | 🔔 Observer: новое сообщение 37 в комнате 2
+2025-10-25 10:56:08 | INFO     | user_api | send_message:389 | 📢 Сообщение 37 отправлено через WebSocket в комнату 2
+2025-10-25 10:56:08 | INFO     | user_api | send_message:423 | Сообщение 37 отправлено через WebSocket в комнату 2
+2025-10-25 10:56:08 | INFO     | user_api | send_message:427 | Успешно отправлено сообщение 37 в комнату 2
+2025-10-25 11:02:40 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: admin из комнаты global
+2025-10-25 11:02:40 | INFO     | user_api | disconnect:131 | ❌ WebSocket: admin отключился от комнаты global
+2025-10-25 11:02:40 | ERROR    | user_api | broadcast_to_room:151 | Ошибка отправки пользователю string: 
+2025-10-25 11:02:40 | INFO     | user_api | disconnect:131 | ❌ WebSocket: string отключился от комнаты global
+2025-10-25 11:02:40 | INFO     | user_api | websocket_endpoint:161 | 🔌 WebSocket отключен: string из комнаты global
