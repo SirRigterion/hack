@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebRTC Video Call</title>
+    <style>
+        #videos {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .video-container {
+            position: relative;
+            width: 640px;
+            height: 480px;
+        }
+        .video-player {
+            width: 100%;
+            height: 100%;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        .local-video {
+            transform: scaleX(-1); /* Зеркальное отображение для локальной камеры */
+        }
+        #controls {
+            text-align: center;
+            margin: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #status {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Видеозвонок 1 на 1</h1>
+    
+    <div id="videos">
+        <div class="video-container">
+            <h3>Ваше видео</h3>
+            <video class="video-player local-video" id="local-video" autoplay muted playsinline></video>
+        </div>
+        <div class="video-container">
+            <h3>Удаленное видео</h3>
+            <video class="video-player" id="remote-video" autoplay playsinline></video>
+        </div>
+    </div>
+    
+    <div id="controls">
+        <button onclick="hangUp()">Завершить звонок</button>
+        <div id="status">Состояние: Не подключено</div>
+    </div>
+
+    <script src="{{ url_for('static', path='/index.js') }}"></script>
+</body>
+</html>
