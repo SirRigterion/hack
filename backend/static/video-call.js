@@ -12,13 +12,42 @@ class VideoCallManager {
         this.isScreenSharing = false;
         this.participants = new Map(); // user_id -> participant info
         
-        // Конфигурация ICE-серверов
+        // Настройки переподключения
+        this.reconnectAttempts = 0;
+        this.maxReconnectAttempts = 5;
+        this.reconnectDelay = 1000; // 1 секунда
+        this.connectionQuality = 'good'; // good, poor, bad
+        this.lastHeartbeat = Date.now();
+        this.heartbeatInterval = null;
+        
+        // Конфигурация ICE-серверов для лучшего NAT traversal
         this.iceConfig = {
             iceServers: [
+                // Google STUN серверы
                 { urls: 'stun:stun.l.google.com:19302' },
                 { urls: 'stun:stun1.l.google.com:19302' },
-                { urls: 'stun:stun2.l.google.com:19302' }
-            ]
+                { urls: 'stun:stun2.l.google.com:19302' },
+                { urls: 'stun:stun3.l.google.com:19302' },
+                { urls: 'stun:stun4.l.google.com:19302' },
+                
+                // Дополнительные STUN серверы для лучшей совместимости
+                { urls: 'stun:stun.ekiga.net' },
+                { urls: 'stun:stun.ideasip.com' },
+                { urls: 'stun:stun.schlund.de' },
+                { urls: 'stun:stun.stunprotocol.org:3478' },
+                { urls: 'stun:stun.voiparound.com' },
+                { urls: 'stun:stun.voipbuster.com' },
+                { urls: 'stun:stun.voipstunt.com' },
+                { urls: 'stun:stun.counterpath.com' },
+                { urls: 'stun:stun.1und1.de' },
+                { urls: 'stun:stun.gmx.net' },
+                { urls: 'stun:stun.callwithus.com' },
+                { urls: 'stun:stun.counterpath.net' },
+                { urls: 'stun:stun.internetcalls.com' }
+            ],
+            iceCandidatePoolSize: 10,
+            bundlePolicy: 'max-bundle',
+            rtcpMuxPolicy: 'require'
         };
 
         this.initializeElements();
@@ -81,6 +110,28 @@ class VideoCallManager {
         
         // Обработка изменения размера окна
         window.addEventListener('resize', () => this.adjustVideoLayout());
+        
+        // Двойной клик на статус соединения для показа статистики
+        this.connectionStatus?.addEventListener('dblclick', () => {
+            if (this.connectionStatsElement && !this.connectionStatsElement.classList.contains('hidden')) {
+                this.hideConnectionStats();
+            } else {
+                this.showConnectionStats();
+            }
+        });
+        
+        // Горячие клавиши
+        document.addEventListener('keydown', (e) => {
+            // Ctrl+Shift+S для показа статистики
+            if (e.ctrlKey && e.shiftKey && e.key === 'S') {
+                e.preventDefault();
+                this.showConnectionStats();
+            }
+            // Escape для скрытия статистики
+            if (e.key === 'Escape') {
+                this.hideConnectionStats();
+            }
+        });
     }
 
     async initializeCall(roomCode, userName) {
@@ -111,21 +162,36 @@ class VideoCallManager {
 
     async initializeMedia() {
         try {
-            // Запрашиваем доступ к камере и микрофону
+            // Проверяем поддержку getUserMedia
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                throw new Error('Ваш браузер не поддерживает видеозвонки');
+            }
+
+            // Определяем оптимальные настройки для устройства
+            const deviceCapabilities = await this.getDeviceCapabilities();
+            
+            // Запрашиваем доступ к камере и микрофону с адаптивными настройками
             this.localStream = await navigator.mediaDevices.getUserMedia({
                 video: {
-                    width: { ideal: 1280, max: 1920 },
-                    height: { ideal: 720, max: 1080 },
-                    frameRate: { ideal: 30, max: 60 }
+                    width: { ideal: deviceCapabilities.videoWidth, max: 1920 },
+                    height: { ideal: deviceCapabilities.videoHeight, max: 1080 },
+                    frameRate: { ideal: deviceCapabilities.frameRate, max: 60 },
+                    facingMode: 'user', // Фронтальная камера по умолчанию
+                    aspectRatio: 16/9
                 },
                 audio: {
                     echoCancellation: true,
                     noiseSuppression: true,
-                    autoGainControl: true
+                    autoGainControl: true,
+                    sampleRate: 48000,
+                    channelCount: 2
                 }
             });
             
             console.log('Локальный поток получен:', this.localStream);
+            
+            // Настраиваем треки для лучшего качества
+            this.configureMediaTracks();
             
             // Отображаем локальный поток
             this.addVideoElement(this.userId, this.localStream, this.userName + ' (Вы)', true);
@@ -134,7 +200,141 @@ class VideoCallManager {
             
         } catch (error) {
             console.error('Ошибка доступа к медиаустройствам:', error);
-            throw new Error('Не удалось получить доступ к камере и микрофону');
+            
+            // Пробуем с более простыми настройками
+            try {
+                console.log('Попытка с упрощенными настройками...');
+                this.localStream = await navigator.mediaDevices.getUserMedia({
+                    video: true,
+                    audio: true
+                });
+                
+                this.addVideoElement(this.userId, this.localStream, this.userName + ' (Вы)', true);
+                console.log('Медиаустройства инициализированы с упрощенными настройками');
+                
+            } catch (fallbackError) {
+                console.error('Ошибка с упрощенными настройками:', fallbackError);
+                throw new Error('Не удалось получить доступ к камере и микрофону. Проверьте разрешения браузера.');
+            }
+        }
+    }
+
+    async getDeviceCapabilities() {
+        try {
+            // Получаем информацию об устройствах
+            const devices = await navigator.mediaDevices.enumerateDevices();
+            const videoDevices = devices.filter(device => device.kind === 'videoinput');
+            
+            // Определяем базовые возможности
+            let videoWidth = 1280;
+            let videoHeight = 720;
+            let frameRate = 30;
+            
+            // Проверяем, мобильное ли устройство
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
+            if (isMobile) {
+                videoWidth = 640;
+                videoHeight = 480;
+                frameRate = 24;
+            }
+            
+            return {
+                videoWidth,
+                videoHeight,
+                frameRate,
+                isMobile,
+                hasMultipleCameras: videoDevices.length > 1
+            };
+            
+        } catch (error) {
+            console.error('Ошибка определения возможностей устройства:', error);
+            return {
+                videoWidth: 1280,
+                videoHeight: 720,
+                frameRate: 30,
+                isMobile: false,
+                hasMultipleCameras: false
+            };
+        }
+    }
+
+    configureMediaTracks() {
+        if (!this.localStream) return;
+
+        // Настраиваем аудио треки
+        const audioTracks = this.localStream.getAudioTracks();
+        audioTracks.forEach(track => {
+            const settings = track.getSettings();
+            console.log('Аудио трек настроен:', settings);
+        });
+
+        // Настраиваем видео треки
+        const videoTracks = this.localStream.getVideoTracks();
+        videoTracks.forEach(track => {
+            const settings = track.getSettings();
+            console.log('Видео трек настроен:', settings);
+            
+            // Добавляем обработчик изменения настроек
+            track.addEventListener('ended', () => {
+                console.log('Видео трек завершен');
+                this.handleTrackEnded('video');
+            });
+        });
+    }
+
+    handleTrackEnded(trackKind) {
+        console.log(`Трек ${trackKind} завершен, попытка восстановления...`);
+        
+        // Уведомляем других участников
+        this.sendMessage({
+            type: 'media_stream_event',
+            event_type: 'stream_ended',
+            stream_type: trackKind,
+            user_id: this.userId
+        });
+        
+        // Пытаемся восстановить трек
+        this.restoreMediaTrack(trackKind);
+    }
+
+    async restoreMediaTrack(trackKind) {
+        try {
+            if (trackKind === 'video') {
+                const newStream = await navigator.mediaDevices.getUserMedia({
+                    video: true,
+                    audio: false
+                });
+                
+                const newVideoTrack = newStream.getVideoTracks()[0];
+                const oldVideoTrack = this.localStream.getVideoTracks()[0];
+                
+                if (oldVideoTrack) {
+                    this.localStream.removeTrack(oldVideoTrack);
+                }
+                
+                this.localStream.addTrack(newVideoTrack);
+                
+                // Обновляем все peer connections
+                this.peerConnections.forEach((peerConnection, userId) => {
+                    const sender = peerConnection.getSenders().find(s => 
+                        s.track && s.track.kind === 'video'
+                    );
+                    if (sender) {
+                        sender.replaceTrack(newVideoTrack);
+                    }
+                });
+                
+                // Обновляем локальное видео
+                const localVideo = document.getElementById(`video-${this.userId}`);
+                if (localVideo) {
+                    localVideo.srcObject = this.localStream;
+                }
+                
+                console.log('Видео трек восстановлен');
+            }
+        } catch (error) {
+            console.error(`Ошибка восстановления ${trackKind} трека:`, error);
         }
     }
 
@@ -142,13 +342,18 @@ class VideoCallManager {
         return new Promise((resolve, reject) => {
             const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
             const host = this.getWebSocketHost();
-            const wsUrl = `${protocol}//${host}/video/ws/${this.roomCode}?user_id=${this.userId}`;
+            const wsUrl = `${protocol}//${host}/video/websocket/${this.roomCode}?user_id=${this.userId}`;
             
             console.log('Подключение к WebSocket:', wsUrl);
             this.socket = new WebSocket(wsUrl);
             
             this.socket.onopen = () => {
                 console.log('WebSocket подключен');
+                this.reconnectAttempts = 0; // Сбрасываем счетчик попыток
+                this.updateConnectionStatus('Подключено', 'green');
+                
+                // Запускаем heartbeat для мониторинга соединения
+                this.startHeartbeat();
                 
                 // Отправляем информацию о пользователе
                 this.sendMessage({
@@ -167,18 +372,32 @@ class VideoCallManager {
                 try {
                     const message = JSON.parse(event.data);
                     this.handleWebSocketMessage(message);
+                    
+                    // Обновляем время последнего heartbeat
+                    if (message.type === 'pong') {
+                        this.lastHeartbeat = Date.now();
+                    }
                 } catch (error) {
                     console.error('Ошибка парсинга сообщения:', error);
                 }
             };
             
-            this.socket.onclose = () => {
-                console.log('WebSocket отключен');
+            this.socket.onclose = (event) => {
+                console.log('WebSocket отключен:', event.code, event.reason);
+                this.stopHeartbeat();
                 this.updateConnectionStatus('Отключено', 'red');
+                
+                // Автоматическое переподключение
+                if (this.reconnectAttempts < this.maxReconnectAttempts) {
+                    this.attemptReconnect();
+                } else {
+                    this.showError('Не удалось восстановить соединение. Попробуйте обновить страницу.');
+                }
             };
             
             this.socket.onerror = (error) => {
                 console.error('Ошибка WebSocket:', error);
+                this.updateConnectionStatus('Ошибка соединения', 'red');
                 reject(error);
             };
         });
@@ -266,9 +485,13 @@ class VideoCallManager {
             
             const peerConnection = new RTCPeerConnection(this.iceConfig);
             
-            // Добавляем локальные треки
+            // Добавляем локальные треки с адаптивным качеством
             if (this.localStream) {
                 this.localStream.getTracks().forEach(track => {
+                    if (track.kind === 'video') {
+                        // Настраиваем качество видео в зависимости от соединения
+                        this.configureVideoTrack(track);
+                    }
                     peerConnection.addTrack(track, this.localStream);
                     console.log(`Добавлен трек: ${track.kind}`);
                 });
@@ -294,18 +517,34 @@ class VideoCallManager {
             peerConnection.onconnectionstatechange = () => {
                 console.log(`Соединение с ${userId}:`, peerConnection.connectionState);
                 this.updateParticipantConnectionStatus(userId, peerConnection.connectionState);
+                
+                // Обрабатываем проблемы соединения
+                if (peerConnection.connectionState === 'failed') {
+                    console.log(`Соединение с ${userId} не удалось, попытка переподключения`);
+                    this.reconnectPeerConnection(userId);
+                }
+            };
+            
+            // Мониторинг качества соединения
+            peerConnection.oniceconnectionstatechange = () => {
+                console.log(`ICE соединение с ${userId}:`, peerConnection.iceConnectionState);
+                this.updateConnectionQuality(userId, peerConnection.iceConnectionState);
             };
             
             this.peerConnections.set(userId, peerConnection);
             
             // Создаем offer для нового участника
             console.log(`Создание offer для ${userId}`);
-            const offer = await peerConnection.createOffer();
+            const offer = await peerConnection.createOffer({
+                offerToReceiveAudio: true,
+                offerToReceiveVideo: true
+            });
             await peerConnection.setLocalDescription(offer);
             this.sendWebRTCSignal('offer', offer, userId);
             
         } catch (error) {
             console.error('Ошибка создания peer connection:', error);
+            this.showError(`Не удалось подключиться к ${userId}`);
         }
     }
 
@@ -398,6 +637,185 @@ class VideoCallManager {
     sendMessage(message) {
         if (this.socket && this.socket.readyState === WebSocket.OPEN) {
             this.socket.send(JSON.stringify(message));
+        }
+    }
+
+    // Методы для мониторинга соединения
+    startHeartbeat() {
+        this.heartbeatInterval = setInterval(() => {
+            if (this.socket && this.socket.readyState === WebSocket.OPEN) {
+                this.sendMessage({ type: 'ping' });
+                
+                // Проверяем качество соединения
+                this.checkConnectionQuality();
+            }
+        }, 30000); // Ping каждые 30 секунд
+    }
+
+    stopHeartbeat() {
+        if (this.heartbeatInterval) {
+            clearInterval(this.heartbeatInterval);
+            this.heartbeatInterval = null;
+        }
+    }
+
+    checkConnectionQuality() {
+        const timeSinceLastHeartbeat = Date.now() - this.lastHeartbeat;
+        
+        if (timeSinceLastHeartbeat > 60000) { // Более 1 минуты без ответа
+            this.connectionQuality = 'bad';
+            this.updateConnectionStatus('Плохое соединение', 'orange');
+            this.showQualityWarning('Критически плохое соединение!', true);
+        } else if (timeSinceLastHeartbeat > 30000) { // Более 30 секунд
+            this.connectionQuality = 'poor';
+            this.updateConnectionStatus('Слабое соединение', 'yellow');
+            this.showQualityWarning('Слабое соединение');
+        } else {
+            this.connectionQuality = 'good';
+            this.updateConnectionStatus('Подключено', 'green');
+        }
+        
+        // Адаптируем качество видео в зависимости от соединения
+        this.adaptVideoQuality();
+    }
+
+    async attemptReconnect() {
+        this.reconnectAttempts++;
+        const delay = this.reconnectDelay * Math.pow(2, this.reconnectAttempts - 1); // Экспоненциальная задержка
+        
+        console.log(`Попытка переподключения ${this.reconnectAttempts}/${this.maxReconnectAttempts} через ${delay}ms`);
+        this.updateConnectionStatus(`Переподключение... (${this.reconnectAttempts}/${this.maxReconnectAttempts})`, 'orange');
+        
+        // Показываем overlay переподключения
+        this.showReconnectingOverlay();
+        
+        // Показываем предупреждение о качестве
+        if (this.reconnectAttempts > 2) {
+            this.showQualityWarning('Проблемы с соединением. Попытка восстановления...', true);
+        }
+        
+        setTimeout(async () => {
+            try {
+                await this.connectWebSocket();
+                console.log('Переподключение успешно');
+                this.hideReconnectingOverlay();
+                this.showNotification('Соединение восстановлено');
+            } catch (error) {
+                console.error('Ошибка переподключения:', error);
+                if (this.reconnectAttempts >= this.maxReconnectAttempts) {
+                    this.hideReconnectingOverlay();
+                    this.showError('Не удалось восстановить соединение. Попробуйте обновить страницу.');
+                }
+            }
+        }, delay);
+    }
+
+    // Методы для адаптивного качества видео
+    configureVideoTrack(track) {
+        const constraints = track.getConstraints();
+        
+        // Адаптируем качество в зависимости от соединения
+        if (this.connectionQuality === 'poor' || this.connectionQuality === 'bad') {
+            track.applyConstraints({
+                width: { ideal: 640, max: 1280 },
+                height: { ideal: 480, max: 720 },
+                frameRate: { ideal: 15, max: 30 }
+            });
+        } else {
+            track.applyConstraints({
+                width: { ideal: 1280, max: 1920 },
+                height: { ideal: 720, max: 1080 },
+                frameRate: { ideal: 30, max: 60 }
+            });
+        }
+    }
+
+    updateConnectionQuality(userId, iceConnectionState) {
+        const participant = this.participants.get(userId);
+        if (!participant) return;
+
+        switch (iceConnectionState) {
+            case 'connected':
+            case 'completed':
+                participant.connectionQuality = 'good';
+                break;
+            case 'checking':
+                participant.connectionQuality = 'connecting';
+                break;
+            case 'disconnected':
+                participant.connectionQuality = 'poor';
+                break;
+            case 'failed':
+            case 'closed':
+                participant.connectionQuality = 'bad';
+                break;
+        }
+
+        this.updateParticipantsList();
+    }
+
+    async reconnectPeerConnection(userId) {
+        try {
+            console.log(`Переподключение peer connection для ${userId}`);
+            
+            // Закрываем старое соединение
+            const oldConnection = this.peerConnections.get(userId);
+            if (oldConnection) {
+                oldConnection.close();
+                this.peerConnections.delete(userId);
+            }
+            
+            // Создаем новое соединение
+            await this.createPeerConnection(userId);
+            
+        } catch (error) {
+            console.error(`Ошибка переподключения peer connection для ${userId}:`, error);
+        }
+    }
+
+    // Адаптивное качество в зависимости от пропускной способности
+    async adaptVideoQuality() {
+        if (!this.localStream) return;
+
+        const videoTrack = this.localStream.getVideoTracks()[0];
+        if (!videoTrack) return;
+
+        // Получаем статистику соединения
+        const stats = await this.getConnectionStats();
+        
+        if (stats && stats.bitrate) {
+            if (stats.bitrate < 500000) { // Менее 500 кбит/с
+                this.configureVideoTrack(videoTrack);
+                this.connectionQuality = 'poor';
+            } else if (stats.bitrate < 1000000) { // Менее 1 Мбит/с
+                this.connectionQuality = 'good';
+            } else {
+                this.connectionQuality = 'excellent';
+            }
+        }
+    }
+
+    async getConnectionStats() {
+        try {
+            const stats = {};
+            
+            for (const [userId, peerConnection] of this.peerConnections) {
+                const connectionStats = await peerConnection.getStats();
+                let bitrate = 0;
+                
+                connectionStats.forEach(report => {
+                    if (report.type === 'outbound-rtp' && report.mediaType === 'video') {
+                        bitrate += report.bytesSent * 8; // Конвертируем в биты
+                    }
+                });
+                
+                stats[userId] = { bitrate };
+            }
+            
+            return stats;
+        } catch (error) {
+            console.error('Ошибка получения статистики соединения:', error);
+            return null;
         }
     }
 
@@ -619,18 +1037,35 @@ class VideoCallManager {
         this.participants.forEach((participant, userId) => {
             const item = document.createElement('div');
             item.className = 'participant-item';
+            
+            // Определяем иконку качества соединения
+            const qualityIcon = this.getConnectionQualityIcon(participant.connectionQuality || 'good');
+            
             item.innerHTML = `
                 <div class="participant-info">
                     <span class="participant-name">${participant.name}</span>
                     <span class="participant-status ${participant.connectionState}"></span>
+                    <span class="participant-connection-quality ${participant.connectionQuality || 'good'}"></span>
                 </div>
                 <div class="participant-controls">
                     <span class="mute-indicator ${participant.isMuted ? 'muted' : ''}">🎤</span>
                     <span class="video-indicator ${participant.isVideoEnabled ? '' : 'disabled'}">📹</span>
+                    <span class="quality-indicator">${qualityIcon}</span>
                 </div>
             `;
             this.participantsList.appendChild(item);
         });
+    }
+
+    getConnectionQualityIcon(quality) {
+        switch (quality) {
+            case 'excellent': return '🟢';
+            case 'good': return '🔵';
+            case 'poor': return '🟡';
+            case 'bad': return '🔴';
+            case 'connecting': return '🟣';
+            default: return '⚪';
+        }
     }
 
     updateParticipantsCount() {
@@ -699,26 +1134,64 @@ class VideoCallManager {
 
     // Выход из звонка
     leaveCall() {
+        console.log('Выход из звонка...');
+        
+        // Останавливаем heartbeat
+        this.stopHeartbeat();
+        
+        // Скрываем все UI элементы
+        this.hideConnectionStats();
+        this.hideReconnectingOverlay();
+        
         // Закрываем все peer connections
         this.peerConnections.forEach((peerConnection, userId) => {
-            peerConnection.close();
+            try {
+                peerConnection.close();
+            } catch (error) {
+                console.error(`Ошибка закрытия peer connection для ${userId}:`, error);
+            }
         });
         this.peerConnections.clear();
         
         // Останавливаем локальный поток
         if (this.localStream) {
-            this.localStream.getTracks().forEach(track => track.stop());
+            this.localStream.getTracks().forEach(track => {
+                try {
+                    track.stop();
+                } catch (error) {
+                    console.error('Ошибка остановки трека:', error);
+                }
+            });
         }
         
         // Закрываем WebSocket
         if (this.socket) {
-            this.socket.close();
+            try {
+                this.socket.close(1000, 'User leaving call');
+            } catch (error) {
+                console.error('Ошибка закрытия WebSocket:', error);
+            }
         }
         
         // Очищаем контейнер видео
         if (this.videoContainer) {
             this.videoContainer.innerHTML = '';
         }
+        
+        // Очищаем данные
+        this.participants.clear();
+        this.remoteStreams.clear();
+        
+        // Сбрасываем состояние
+        this.reconnectAttempts = 0;
+        this.connectionQuality = 'good';
+        
+        // Очищаем UI элементы
+        this.connectionStatsElement = null;
+        this.reconnectingOverlay = null;
+        this.statsUpdateInterval = null;
+        
+        console.log('Выход из звонка завершен');
         
         // Возвращаемся на главную страницу
         window.location.href = '/';
@@ -812,6 +1285,129 @@ class VideoCallManager {
         `;
         
         document.body.appendChild(modal);
+    }
+
+    // Методы для отображения статистики и предупреждений
+    showConnectionStats() {
+        if (this.connectionStatsElement) {
+            this.connectionStatsElement.classList.remove('hidden');
+            return;
+        }
+
+        const statsElement = document.createElement('div');
+        statsElement.className = 'connection-stats';
+        statsElement.innerHTML = `
+            <h4>📊 Статистика соединения</h4>
+            <div class="stat-item">
+                <span class="stat-label">Качество:</span>
+                <span class="stat-value" id="overall-quality">${this.connectionQuality}</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Участников:</span>
+                <span class="stat-value" id="participants-count">${this.participants.size}</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Соединений:</span>
+                <span class="stat-value" id="connections-count">${this.peerConnections.size}</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Попыток переподключения:</span>
+                <span class="stat-value" id="reconnect-attempts">${this.reconnectAttempts}</span>
+            </div>
+        `;
+
+        // Добавляем кнопку закрытия
+        const closeBtn = document.createElement('button');
+        closeBtn.textContent = '✕';
+        closeBtn.style.cssText = `
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: none;
+            border: none;
+            color: #ccc;
+            cursor: pointer;
+            font-size: 1rem;
+        `;
+        closeBtn.onclick = () => this.hideConnectionStats();
+        statsElement.appendChild(closeBtn);
+
+        document.body.appendChild(statsElement);
+        this.connectionStatsElement = statsElement;
+
+        // Обновляем статистику каждые 5 секунд
+        this.statsUpdateInterval = setInterval(() => {
+            this.updateConnectionStats();
+        }, 5000);
+    }
+
+    hideConnectionStats() {
+        if (this.connectionStatsElement) {
+            this.connectionStatsElement.classList.add('hidden');
+        }
+        if (this.statsUpdateInterval) {
+            clearInterval(this.statsUpdateInterval);
+            this.statsUpdateInterval = null;
+        }
+    }
+
+    updateConnectionStats() {
+        if (!this.connectionStatsElement) return;
+
+        const qualityElement = this.connectionStatsElement.querySelector('#overall-quality');
+        const participantsElement = this.connectionStatsElement.querySelector('#participants-count');
+        const connectionsElement = this.connectionStatsElement.querySelector('#connections-count');
+        const reconnectElement = this.connectionStatsElement.querySelector('#reconnect-attempts');
+
+        if (qualityElement) qualityElement.textContent = this.connectionQuality;
+        if (participantsElement) participantsElement.textContent = this.participants.size;
+        if (connectionsElement) connectionsElement.textContent = this.peerConnections.size;
+        if (reconnectElement) reconnectElement.textContent = this.reconnectAttempts;
+    }
+
+    showQualityWarning(message, isCritical = false) {
+        // Удаляем существующее предупреждение
+        const existingWarning = document.querySelector('.quality-warning');
+        if (existingWarning) {
+            existingWarning.remove();
+        }
+
+        const warning = document.createElement('div');
+        warning.className = `quality-warning ${isCritical ? 'critical' : ''}`;
+        warning.textContent = message;
+
+        document.body.appendChild(warning);
+
+        // Автоматически скрываем через 5 секунд
+        setTimeout(() => {
+            if (warning.parentElement) {
+                warning.remove();
+            }
+        }, 5000);
+    }
+
+    showReconnectingOverlay() {
+        if (this.reconnectingOverlay) return;
+
+        const overlay = document.createElement('div');
+        overlay.className = 'reconnecting-overlay';
+        overlay.innerHTML = `
+            <div class="reconnecting-content">
+                <div class="reconnecting-spinner"></div>
+                <div class="reconnecting-text">Переподключение...</div>
+                <div class="reconnecting-attempt">Попытка ${this.reconnectAttempts}/${this.maxReconnectAttempts}</div>
+            </div>
+        `;
+
+        document.body.appendChild(overlay);
+        this.reconnectingOverlay = overlay;
+    }
+
+    hideReconnectingOverlay() {
+        if (this.reconnectingOverlay) {
+            this.reconnectingOverlay.remove();
+            this.reconnectingOverlay = null;
+        }
     }
 
     // Обработчики сообщений

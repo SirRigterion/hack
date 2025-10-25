@@ -161,7 +161,7 @@ async def get_room_info(
     }
 
 
-@router.websocket("/ws/{room_code}")
+@router.websocket("/websocket/{room_code}")
 async def video_websocket_endpoint(
     websocket: WebSocket,
     room_code: str,

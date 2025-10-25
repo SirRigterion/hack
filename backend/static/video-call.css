@@ -394,3 +394,236 @@ input:focus {
     border-radius: 10px;
     margin: 10px 0;
 }
+
+/* Стили для качества соединения */
+.connection-quality {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.connection-quality.excellent {
+    background: rgba(76, 175, 80, 0.8);
+    color: white;
+    animation: pulse 2s infinite;
+}
+
+.connection-quality.good {
+    background: rgba(33, 150, 243, 0.8);
+    color: white;
+}
+
+.connection-quality.poor {
+    background: rgba(255, 193, 7, 0.8);
+    color: #333;
+    animation: shake 1s infinite;
+}
+
+.connection-quality.bad {
+    background: rgba(244, 67, 54, 0.8);
+    color: white;
+    animation: shake 0.5s infinite;
+}
+
+.connection-quality.connecting {
+    background: rgba(156, 39, 176, 0.8);
+    color: white;
+    animation: bounce 1s infinite;
+}
+
+/* Индикаторы качества в списке участников */
+.participant-connection-quality {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-left: 5px;
+    position: relative;
+}
+
+.participant-connection-quality.excellent {
+    background: #4CAF50;
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+}
+
+.participant-connection-quality.good {
+    background: #2196F3;
+    box-shadow: 0 0 8px rgba(33, 150, 243, 0.4);
+}
+
+.participant-connection-quality.poor {
+    background: #FFC107;
+    box-shadow: 0 0 6px rgba(255, 193, 7, 0.3);
+}
+
+.participant-connection-quality.bad {
+    background: #f44336;
+    box-shadow: 0 0 4px rgba(244, 67, 54, 0.2);
+}
+
+.participant-connection-quality.connecting {
+    background: #9C27B0;
+    animation: pulse 1s infinite;
+}
+
+/* Стили для статистики соединения */
+.connection-stats {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    max-width: 300px;
+    z-index: 1000;
+}
+
+.connection-stats.hidden {
+    display: none;
+}
+
+.connection-stats h4 {
+    margin: 0 0 10px 0;
+    color: #4CAF50;
+    font-size: 1rem;
+}
+
+.connection-stats .stat-item {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+    padding: 3px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.connection-stats .stat-item:last-child {
+    border-bottom: none;
+}
+
+.connection-stats .stat-label {
+    color: #ccc;
+}
+
+.connection-stats .stat-value {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+/* Стили для предупреждений о качестве */
+.quality-warning {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 193, 7, 0.9);
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 193, 7, 0.3);
+    z-index: 1001;
+    animation: slideInFromTop 0.5s ease;
+}
+
+.quality-warning.critical {
+    background: rgba(244, 67, 54, 0.9);
+    color: white;
+    border: 1px solid rgba(244, 67, 54, 0.3);
+}
+
+@keyframes slideInFromTop {
+    from { transform: translateX(-50%) translateY(-100%); opacity: 0; }
+    to { transform: translateX(-50%) translateY(0); opacity: 1; }
+}
+
+/* Стили для переподключения */
+.reconnecting-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    backdrop-filter: blur(5px);
+}
+
+.reconnecting-content {
+    text-align: center;
+    color: white;
+    padding: 30px;
+    background: rgba(42, 42, 42, 0.9);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.reconnecting-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-top: 4px solid #4CAF50;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.reconnecting-text {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.reconnecting-attempt {
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+/* Стили для мобильных устройств */
+@media (max-width: 768px) {
+    .connection-quality {
+        font-size: 0.7rem;
+        padding: 3px 8px;
+    }
+    
+    .connection-stats {
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+        max-width: none;
+        font-size: 0.8rem;
+    }
+    
+    .quality-warning {
+        left: 10px;
+        right: 10px;
+        transform: none;
+        font-size: 0.8rem;
+        padding: 8px 15px;
+    }
+    
+    .reconnecting-content {
+        margin: 0 20px;
+        padding: 20px;
+    }
+}

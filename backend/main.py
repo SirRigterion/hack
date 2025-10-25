@@ -1,6 +1,6 @@
 import datetime
 from contextlib import asynccontextmanager
-from fastapi import FastAPI, Request, Depends
+from fastapi import FastAPI, Request, Depends, WebSocket
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
@@ -13,6 +13,7 @@ from src.websocket.auth import router as websocket_auth_router
 from src.auth.routes import router as auth_router
 from src.images.routes import router as img_router
 from src.chat.routes import router as chat_router
+from src.video.routers import router as video_router
 from src.db.database import engine, startup as db_startup
 from src.db.models import Role, User, UserStatus
 from src.auth.auth import get_current_user
@@ -115,6 +116,9 @@ app.include_router(public_router, prefix="/users")
 app.include_router(auth_router)
 app.include_router(img_router)
 
+# Важно: video_router должен быть ПЕРЕД websocket_router, чтобы избежать конфликтов маршрутов
+app.include_router(video_router)
+
 app.include_router(websocket_auth_router)
 app.include_router(websocket_router, prefix="/api/v1")
 
@@ -142,16 +146,35 @@ async def test_video(request: Request):
     return HTMLResponse(content=content)
 
 
-if __name__ == "__main__":
-    import uvicorn
+@app.websocket("/test-ws")
+async def test_websocket(websocket):
+    """
+    Простой тестовый WebSocket endpoint без зависимостей
+    """
+    await websocket.accept()
+    try:
+        while True:
+            data = await websocket.receive_text()
+            await websocket.send_text(f"Echo: {data}")
+    except Exception as e:
+        print(f"WebSocket error: {e}")
+        await websocket.close()
 
-    uvicorn.run(
-        "main:app",
-        host="0.0.0.0",  # Принимаем соединения с любого IP
-        port=8000,
-        log_level="info",
-        reload=True
-    )
+
+@app.websocket("/video/test-ws/{room_code}")
+async def test_video_websocket(websocket: WebSocket, room_code: str):
+    """
+    Тестовый WebSocket endpoint для видео без зависимостей
+    """
+    await websocket.accept()
+    try:
+        await websocket.send_json({"type": "connected", "room": room_code})
+        while True:
+            data = await websocket.receive_json()
+            await websocket.send_json({"type": "echo", "data": data})
+    except Exception as e:
+        print(f"Video WebSocket error: {e}")
+        await websocket.close()
 
 
 if __name__ == "__main__":
