@@ -92,6 +92,17 @@ export class UserAPI {
     return response.data;
   }
 
+  async verifyEmail(token: string): Promise<any> {
+    const response = await this.axios.get("/auth/verify-email", {
+      params: { token },
+    });
+    return response.data;
+  }
+
+  async resendVerification(): Promise<void> {
+    await this.axios.post("/auth/resend-verification");
+  }
+
   async requestPasswordReset(): Promise<void> {
     await this.axios.post("/user/profile/reset-password/request");
   }

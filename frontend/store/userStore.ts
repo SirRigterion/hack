@@ -3,7 +3,7 @@ import { UserProfile } from "@/lib/api";
 
 interface UserState {
   user: UserProfile | null;
-  setUser: (user: UserProfile) => void;
+  setUser: (user: UserProfile | null) => void;
   clearUser: () => void;
 }
 
