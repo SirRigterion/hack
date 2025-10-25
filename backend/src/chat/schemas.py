@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List, Dict, Any
 from datetime import datetime
 from pydantic import BaseModel, Field
 from enum import Enum
@@ -46,15 +46,16 @@ class ChatRoomResponse(ChatRoomBase):
     created_by: int
     is_active: bool
     participants_count: Optional[int] = None
-    
+
     class Config:
         from_attributes = True
+
 
 class MessageBase(BaseModel):
     content: str = Field(..., min_length=1, max_length=2000, description="Содержимое сообщения")
     message_type: MessageTypeEnum = Field(MessageTypeEnum.TEXT, description="Тип сообщения")
     reply_to: Optional[int] = Field(None, ge=1, description="ID сообщения, на которое отвечаем")
-    
+
     def __init__(self, **data):
         # Преобразуем 0 в None для reply_to
         if 'reply_to' in data and data['reply_to'] == 0:
@@ -65,6 +66,7 @@ class MessageBase(BaseModel):
 class MessageCreate(MessageBase):
     pass
 
+
 class MessageUpdate(BaseModel):
     content: str = Field(..., min_length=1, max_length=2000)
 
@@ -74,6 +76,7 @@ class MessageResponse(MessageBase):
     room_id: int
     sender_id: int
     sender_name: Optional[str] = None
+    sender_full_name: Optional[str] = None  # Добавлено для фронтенда
     content: str
     message_type: str
     created_at: datetime
@@ -81,7 +84,7 @@ class MessageResponse(MessageBase):
     status: str
     is_deleted: bool
     reply_to: Optional[int] = None
-    
+
     class Config:
         from_attributes = True
         json_encoders = {
@@ -114,8 +117,9 @@ class ChatParticipantResponse(ChatParticipantBase):
     joined_at: datetime
     last_read_at: Optional[datetime] = None
     user_name: Optional[str] = None
+    user_full_name: Optional[str] = None  # Добавлено для фронтенда
     user_avatar: Optional[str] = None
-    
+
     class Config:
         from_attributes = True
 
@@ -137,9 +141,10 @@ class NotificationResponse(NotificationBase):
     message_id: Optional[int] = None
     is_read: bool
     created_at: datetime
-    
+
     class Config:
         from_attributes = True
+
 
 class MessageModerationBase(BaseModel):
     action: str = Field(..., description="Действие модерации")
@@ -156,7 +161,7 @@ class MessageModerationResponse(MessageModerationBase):
     moderator_id: int
     moderator_name: Optional[str] = None
     moderated_at: datetime
-    
+
     class Config:
         from_attributes = True
 
@@ -181,6 +186,48 @@ class UserOnlineWebSocket(WebSocketMessage):
     data: dict = Field(..., description="Данные о пользователе")
 
 
+# ДОБАВЛЕНЫ НОВЫЕ СХЕМЫ ДЛЯ СИНХРОНИЗАЦИИ
+
+class RoomStateWebSocket(WebSocketMessage):
+    type: str = Field("room_state_update", description="Обновление состояния комнаты")
+    data: dict = Field(..., description="Данные состояния комнаты")
+
+
+class SyncRequiredWebSocket(WebSocketMessage):
+    type: str = Field("sync_required", description="Требуется синхронизация")
+    data: dict = Field(..., description="Данные для синхронизации")
+
+
+class ForceSyncWebSocket(WebSocketMessage):
+    type: str = Field("force_sync", description="Принудительная синхронизация")
+    data: dict = Field(..., description="Данные синхронизации")
+
+
+class MessageUpdatedWebSocket(WebSocketMessage):
+    type: str = Field("message_updated", description="Сообщение обновлено")
+    data: dict = Field(..., description="Данные обновленного сообщения")
+
+
+class MessageDeletedWebSocket(WebSocketMessage):
+    type: str = Field("message_deleted", description="Сообщение удалено")
+    data: dict = Field(..., description="Данные удаленного сообщения")
+
+
+class UserJoinedWebSocket(WebSocketMessage):
+    type: str = Field("user_joined", description="Пользователь присоединился")
+    data: dict = Field(..., description="Данные о присоединившемся пользователе")
+
+
+class UserLeftWebSocket(WebSocketMessage):
+    type: str = Field("user_left", description="Пользователь покинул комнату")
+    data: dict = Field(..., description="Данные о покинувшем пользователе")
+
+
+class RoomInfoWebSocket(WebSocketMessage):
+    type: str = Field("room_info", description="Информация о комнате")
+    data: dict = Field(..., description="Данные комнаты")
+
+
 class MessageFilter(BaseModel):
     room_id: Optional[int] = None
     sender_id: Optional[int] = None
@@ -200,3 +247,27 @@ class ChatRoomFilter(BaseModel):
     search_text: Optional[str] = None
     limit: int = Field(20, ge=1, le=100)
     offset: int = Field(0, ge=0)
+
+
+# ДОБАВЛЕНЫ СХЕМЫ ДЛЯ WebSocket СООБЩЕНИЙ СИНХРОНИЗАЦИИ
+
+class WebSocketRoomState(BaseModel):
+    room_id: str
+    participants: List[Dict[str, Any]]
+    participants_count: int
+    timestamp: str
+
+
+class WebSocketSyncData(BaseModel):
+    room_id: int
+    action: str
+    timestamp: str
+    data: Optional[Dict[str, Any]] = None
+
+
+class WebSocketUserData(BaseModel):
+    user_id: int
+    username: str
+    full_name: str
+    avatar_url: Optional[str] = None
+    connection_type: Optional[str] = "chat"

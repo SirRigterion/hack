@@ -8,7 +8,7 @@ from .config_log import logger
 
 class Settings:
     PROJECT_NAME = "UserAPI by ARig"
-    PROJECT_VERSION = "7.1.0-docker"
+    PROJECT_VERSION = "8.0.0-docker"
 
     def __init__(self):
         if not load_dotenv(find_dotenv(), override=True):

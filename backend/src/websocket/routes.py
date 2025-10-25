@@ -16,17 +16,14 @@ async def websocket_endpoint(
         db: AsyncSession = Depends(get_db)
 ):
     """
-    WebSocket endpoint для видеоконференций
-    Токен передается как query параметр: ws://.../ws/room123?token=xyz
+    Универсальный WebSocket endpoint для чата и видео
     """
-
     # Аутентификация пользователя
     if not token:
         logger.warning("WebSocket: отсутствует токен")
         await websocket.close(code=status.WS_1008_POLICY_VIOLATION)
         return
 
-    # Аутентифицируем пользователя через нашу систему
     user_data = await manager.authenticate_websocket(token, db)
     if not user_data:
         logger.warning("WebSocket: невалидный токен")
@@ -76,7 +73,6 @@ async def websocket_endpoint(
                 )
 
             elif message_type == "webrtc_answer":
-                # Answer отправляем конкретному пользователю
                 target_user_id = data.get("target_user_id")
                 if target_user_id:
                     await manager.send_to_user(
@@ -106,18 +102,24 @@ async def websocket_endpoint(
                         target_user_id
                     )
 
-            # Чат
+            # ЧАТ - мгновенная доставка через WebSocket
             elif message_type == "chat_message":
+                # Когда пользователь отправляет сообщение через WebSocket
                 await manager.broadcast_to_room(
                     {
                         "type": "chat_message",
-                        "message": data.get("message"),
-                        "sender_id": user_data["user_id"],
-                        "sender_name": user_data["username"],
-                        "sender_full_name": user_data["full_name"],
-                        "timestamp": data.get("timestamp", manager._get_timestamp())
+                        "data": {
+                            "content": data.get("content"),
+                            "sender_id": user_data["user_id"],
+                            "sender_name": user_data["username"],
+                            "sender_full_name": user_data["full_name"],
+                            "timestamp": manager._get_timestamp(),
+                            "message_id": f"ws_{user_data['user_id']}_{manager._get_timestamp()}"  # временный ID
+                        },
+                        "timestamp": manager._get_timestamp()
                     },
                     room_id
+                    # УБИРАЕМ exclude_user_id - сообщение получают ВСЕ включая отправителя
                 )
 
             elif message_type == "user_typing":
@@ -162,20 +164,17 @@ async def websocket_endpoint(
         disconnected_user = manager.disconnect(websocket, room_id)
 
         if disconnected_user:
-            # Уведомляем остальных о выходе пользователя
             await manager.broadcast_to_room(
                 {
                     "type": "user_left",
                     "user_id": disconnected_user["user_id"],
                     "username": disconnected_user["username"],
                     "full_name": disconnected_user["full_name"],
-                    "message": f"{disconnected_user['full_name']} покинул конференцию",
                     "participants_count": len(manager.active_connections.get(room_id, [])),
                     "timestamp": manager._get_timestamp()
                 },
                 room_id
             )
-
     except Exception as e:
         logger.error(f"❌ Ошибка в WebSocket для {user_data['username']}: {e}")
         manager.disconnect(websocket, room_id)

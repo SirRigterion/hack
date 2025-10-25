@@ -1,7 +1,5 @@
-# src/websocket/websocket.py
-import json
 from typing import Dict, List, Optional
-from fastapi import WebSocket, WebSocketDisconnect, status
+from fastapi import WebSocket, status
 from jose import JWTError, jwt
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession

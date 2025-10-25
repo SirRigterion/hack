@@ -19,13 +19,11 @@ from src.websocket.manager import manager
 from src.auth.auth import get_current_user
 from src.core.config_log import logger
 
-# В начале файла routes.py, после импортов
 from src.chat.observer import chat_observer
 from src.chat.websocket_subscriber import websocket_subscriber
 
-# Заменяем существующую регистрацию на:
-# Регистрируем WebSocket подписчик как глобальный обработчик
-chat_observer.subscribe_global(websocket_subscriber.handle_chat_event)
+# Регистрируем WebSocket подписчик
+chat_observer.subscribe("global", websocket_subscriber.handle_chat_event)
 logger.info("✅ WebSocket подписчик зарегистрирован как глобальный обработчик событий чата")
 
 router = APIRouter(prefix="/chat", tags=["chat"])
@@ -259,6 +257,58 @@ async def update_chat_room(
         raise HTTPException(status_code=500, detail="Ошибка обновления чат-комнаты")
 
 
+@router.post("/rooms/{room_id}/join")
+async def join_chat_room(
+        room_id: int,
+        current_user: User = Depends(get_current_user),
+        db: AsyncSession = Depends(get_db)
+):
+    """Присоединиться к чат-комнате"""
+    try:
+        # Проверяем, существует ли комната
+        room_query = select(ChatRoom).where(ChatRoom.room_id == room_id)
+        room_result = await db.execute(room_query)
+        room = room_result.scalar_one_or_none()
+
+        if not room:
+            raise HTTPException(status_code=404, detail="Комната не найдена")
+
+        # Проверяем, не является ли пользователь уже участником
+        existing_participant_query = select(ChatParticipant).where(
+            and_(
+                ChatParticipant.room_id == room_id,
+                ChatParticipant.user_id == current_user.user_id
+            )
+        )
+        existing_participant_result = await db.execute(existing_participant_query)
+        existing_participant = existing_participant_result.scalar_one_or_none()
+
+        if existing_participant:
+            return {"message": "Вы уже участник этой комнаты"}
+
+        # Добавляем пользователя в комнату
+        participant = ChatParticipant(
+            room_id=room_id,
+            user_id=current_user.user_id,
+            is_admin=False,  # По умолчанию не админ
+            is_muted=False
+        )
+
+        db.add(participant)
+        await db.commit()
+
+        logger.info(f"Пользователь {current_user.user_id} присоединился к комнате {room_id}")
+
+        return {"message": "Вы успешно присоединились к комнате"}
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        await db.rollback()
+        logger.error(f"Ошибка присоединения к комнате: {e}")
+        raise HTTPException(status_code=500, detail="Ошибка присоединения к комнате")
+
+
 @router.post("/rooms/{room_id}/messages", response_model=MessageResponse)
 async def send_message(
         room_id: int,
@@ -266,7 +316,7 @@ async def send_message(
         current_user: User = Depends(get_current_user),
         db: AsyncSession = Depends(get_db)
 ):
-    """Отправка сообщения в чат-комнату."""
+    """Отправка сообщения в чат-комнату"""
     try:
         logger.info(f"Попытка отправки сообщения в комнату {room_id} пользователем {current_user.user_id}")
 
@@ -292,22 +342,7 @@ async def send_message(
         if not message_data.content or not message_data.content.strip():
             raise HTTPException(status_code=400, detail="Содержание сообщения не может быть пустым")
 
-        # Валидация reply_to
-        if message_data.reply_to:
-            # Проверяем, что сообщение, на которое ссылаются, существует в той же комнате
-            reply_message_query = select(Message).where(
-                and_(
-                    Message.message_id == message_data.reply_to,
-                    Message.room_id == room_id
-                )
-            )
-            reply_message_result = await db.execute(reply_message_query)
-            reply_message = reply_message_result.scalar_one_or_none()
-
-            if not reply_message:
-                raise HTTPException(status_code=400, detail="Сообщение для ответа не найдено")
-
-        # Создаем сообщение
+        # Создаем сообщение в БД
         message = Message(
             room_id=room_id,
             sender_id=current_user.user_id,
@@ -320,78 +355,14 @@ async def send_message(
         try:
             db.add(message)
             await db.flush()
-
-            # Автоматическая модерация (если есть)
-            try:
-                from src.chat.moderation import ModerationService
-                moderation_service = ModerationService(db)
-                moderation_result = await moderation_service.auto_moderate_message(message)
-                logger.info(f"Результат модерации: {moderation_result}")
-            except ImportError:
-                logger.warning("Модуль модерации не найден, пропускаем модерацию")
-            except Exception as e:
-                logger.warning(f"Ошибка автоматической модерации: {e}")
-
             await db.commit()
+            await db.refresh(message)
         except Exception as e:
             await db.rollback()
             logger.error(f"Ошибка отправки сообщения: {e}")
             raise HTTPException(status_code=500, detail="Ошибка отправки сообщения")
-        await db.refresh(message)
 
-        # В функции send_message, после сохранения сообщения в БД
-        try:
-            event_data = {
-                "message_id": message.message_id,
-                "room_id": room_id,
-                "sender_id": current_user.user_id,
-                "sender_name": current_user.user_full_name,
-                "sender_login": current_user.user_login,
-                "content": message.content,
-                "message_type": message.message_type,
-                "created_at": message.created_at.isoformat(),
-                "status": message.status,
-                "is_deleted": message.is_deleted,
-                "reply_to": message.reply_to
-            }
-
-            # Уведомляем всех подписчиков
-            await chat_observer.notify(room_id, "new_message", event_data)
-            logger.info(f"🔔 Observer: новое сообщение {message.message_id} в комнате {room_id}")
-
-        except Exception as e:
-            logger.error(f"❌ Ошибка уведомления Observer: {e}")
-
-        try:
-            from src.websocket.manager import manager
-
-            # Формируем WebSocket сообщение
-            ws_message = {
-                "type": "chat_message",
-                "data": {
-                    "message_id": message.message_id,
-                    "room_id": message.room_id,
-                    "sender_id": message.sender_id,
-                    "sender_name": current_user.user_full_name,
-                    "sender_full_name": current_user.user_full_name,
-                    "content": message.content,
-                    "message_type": message.message_type,
-                    "created_at": message.created_at.isoformat(),
-                    "status": message.status,
-                    "is_deleted": message.is_deleted,
-                    "reply_to": message.reply_to
-                },
-                "timestamp": message.created_at.isoformat()
-            }
-
-            # Отправляем через WebSocket менеджер
-            await manager.broadcast_to_room(ws_message, str(room_id))
-            logger.info(f"📢 Сообщение {message.message_id} отправлено через WebSocket в комнату {room_id}")
-
-        except Exception as e:
-            logger.error(f"❌ Ошибка отправки через WebSocket: {e}")
-
-        # Получаем информацию об отправителе для ответа
+        # Получаем информацию об отправителе
         sender_query = select(User).where(User.user_id == current_user.user_id)
         sender_result = await db.execute(sender_query)
         sender = sender_result.scalar_one_or_none()
@@ -411,18 +382,19 @@ async def send_message(
             reply_to=message.reply_to
         )
 
-        # Отправляем через WebSocket
+        # ✅ МГНОВЕННАЯ ДОСТАВКА через WebSocket всем участникам комнаты
         try:
             await manager.broadcast_to_room(
-                room_id=room_id,
-                message={
-                    "type": "new_message",
-                    "data": response.dict()
-                }
+                {
+                    "type": "chat_message",
+                    "data": response.dict(),
+                    "timestamp": manager._get_timestamp()
+                },
+                str(room_id)  # room_id как строка для WebSocket
             )
-            logger.info(f"Сообщение {message.message_id} отправлено через WebSocket в комнату {room_id}")
+            logger.info(f"📢 Сообщение {message.message_id} мгновенно доставлено через WebSocket в комнату {room_id}")
         except Exception as e:
-            logger.error(f"Ошибка отправки через WebSocket: {e}")
+            logger.error(f"❌ Ошибка мгновенной доставки через WebSocket: {e}")
 
         logger.info(f"Успешно отправлено сообщение {message.message_id} в комнату {room_id}")
 
@@ -561,8 +533,18 @@ async def edit_message(
             reply_to=message.reply_to
         )
 
-        # Отправляем обновление через WebSocket
-        await manager.broadcast_message(response, message.room_id)
+        # СИНХРОНИЗАЦИЯ: Отправляем обновление через WebSocket
+        await manager.broadcast_to_room(
+            {
+                "type": "message_updated",
+                "data": response.dict(),
+                "timestamp": manager._get_timestamp()
+            },
+            str(message.room_id)
+        )
+
+        # СИНХРОНИЗАЦИЯ: Обновляем состояние комнаты
+        await manager.broadcast_room_state(str(message.room_id))
 
         return response
 
@@ -600,22 +582,19 @@ async def delete_message(
 
         await db.commit()
 
-        # Отправляем уведомление через WebSocket
-        response = MessageResponse(
-            message_id=message.message_id,
-            room_id=message.room_id,
-            sender_id=message.sender_id,
-            sender_name=current_user.user_full_name,
-            content="Сообщение удалено",
-            message_type=message.message_type,
-            created_at=message.created_at,
-            edited_at=message.edited_at,
-            status=message.status,
-            is_deleted=message.is_deleted,
-            reply_to=message.reply_to
+        # СИНХРОНИЗАЦИЯ: Уведомляем всех клиентов об удалении
+        await manager.broadcast_to_room(
+            {
+                "type": "message_deleted",
+                "message_id": message_id,
+                "room_id": message.room_id,
+                "timestamp": manager._get_timestamp()
+            },
+            str(message.room_id)
         )
 
-        await manager.broadcast_message(response, message.room_id)
+        # СИНХРОНИЗАЦИЯ: Обновляем состояние комнаты
+        await manager.broadcast_room_state(str(message.room_id))
 
         return {"message": "Сообщение удалено"}
 
@@ -674,6 +653,9 @@ async def add_participant(
         db.add(participant)
         await db.commit()
         await db.refresh(participant)
+
+        # СИНХРОНИЗАЦИЯ: Обновляем состояние комнаты
+        await manager.broadcast_room_state(str(room_id))
 
         return ChatParticipantResponse(
             participant_id=participant.participant_id,
@@ -1000,8 +982,11 @@ async def bulk_moderate_messages(
 async def websocket_endpoint(websocket: WebSocket, user_id: int):
     """WebSocket endpoint для чата."""
     try:
-        handler = WebSocketHandler(manager)
-        await handler.handle_connection(websocket, user_id)
+        # TODO: Implement WebSocketHandler or remove this endpoint
+        # handler = WebSocketHandler(manager)
+        # await handler.handle_connection(websocket, user_id)
+        await websocket.accept()
+        await websocket.send_json({"type": "info", "message": "WebSocket endpoint not implemented"})
     except WebSocketDisconnect:
         logger.info(f"WebSocket отключен для пользователя {user_id}")
     except Exception as e:

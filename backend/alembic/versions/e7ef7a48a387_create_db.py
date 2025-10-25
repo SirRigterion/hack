@@ -1,8 +1,8 @@
 """Create DB
 
-Revision ID: 2fb689aa3cc8
+Revision ID: e7ef7a48a387
 Revises: 
-Create Date: 2025-10-24 19:25:45.112910
+Create Date: 2025-10-25 14:31:17.182626
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = '2fb689aa3cc8'
+revision: str = 'e7ef7a48a387'
 down_revision: Union[str, Sequence[str], None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -71,6 +71,26 @@ def upgrade() -> None:
     )
     op.create_index(op.f('ix_user_tokens_token_hash'), 'user_tokens', ['token_hash'], unique=False)
     op.create_index(op.f('ix_user_tokens_user_id'), 'user_tokens', ['user_id'], unique=False)
+    op.create_table('video_rooms',
+    sa.Column('room_id', sa.Integer(), nullable=False),
+    sa.Column('room_name', sa.String(length=100), nullable=False),
+    sa.Column('room_description', sa.String(length=500), nullable=True),
+    sa.Column('room_code', sa.String(length=20), nullable=False),
+    sa.Column('room_url', sa.String(length=255), nullable=False),
+    sa.Column('created_at', sa.TIMESTAMP(), server_default=sa.text('now()'), nullable=False),
+    sa.Column('created_by', sa.Integer(), nullable=False),
+    sa.Column('is_active', sa.Boolean(), nullable=False),
+    sa.Column('is_private', sa.Boolean(), nullable=False),
+    sa.Column('max_participants', sa.Integer(), nullable=False),
+    sa.Column('encryption_key', sa.String(length=255), nullable=True),
+    sa.Column('recording_enabled', sa.Boolean(), nullable=False),
+    sa.Column('waiting_room_enabled', sa.Boolean(), nullable=False),
+    sa.ForeignKeyConstraint(['created_by'], ['users.user_id'], ),
+    sa.PrimaryKeyConstraint('room_id'),
+    sa.UniqueConstraint('room_url')
+    )
+    op.create_index(op.f('ix_video_rooms_room_code'), 'video_rooms', ['room_code'], unique=True)
+    op.create_index(op.f('ix_video_rooms_room_id'), 'video_rooms', ['room_id'], unique=False)
     op.create_table('chat_participants',
     sa.Column('participant_id', sa.Integer(), nullable=False),
     sa.Column('room_id', sa.Integer(), nullable=False),
@@ -101,6 +121,76 @@ def upgrade() -> None:
     sa.PrimaryKeyConstraint('message_id')
     )
     op.create_index(op.f('ix_messages_message_id'), 'messages', ['message_id'], unique=False)
+    op.create_table('room_invitations',
+    sa.Column('invitation_id', sa.Integer(), nullable=False),
+    sa.Column('room_id', sa.Integer(), nullable=False),
+    sa.Column('invited_by', sa.Integer(), nullable=False),
+    sa.Column('invited_user_id', sa.Integer(), nullable=True),
+    sa.Column('invited_email', sa.String(length=100), nullable=True),
+    sa.Column('invitation_code', sa.String(length=50), nullable=False),
+    sa.Column('expires_at', sa.TIMESTAMP(), nullable=False),
+    sa.Column('is_used', sa.Boolean(), nullable=False),
+    sa.Column('used_at', sa.TIMESTAMP(), nullable=True),
+    sa.Column('created_at', sa.TIMESTAMP(), server_default=sa.text('now()'), nullable=False),
+    sa.ForeignKeyConstraint(['invited_by'], ['users.user_id'], ),
+    sa.ForeignKeyConstraint(['invited_user_id'], ['users.user_id'], ),
+    sa.ForeignKeyConstraint(['room_id'], ['video_rooms.room_id'], ),
+    sa.PrimaryKeyConstraint('invitation_id')
+    )
+    op.create_index(op.f('ix_room_invitations_invitation_code'), 'room_invitations', ['invitation_code'], unique=True)
+    op.create_index(op.f('ix_room_invitations_invitation_id'), 'room_invitations', ['invitation_id'], unique=False)
+    op.create_table('room_recordings',
+    sa.Column('recording_id', sa.Integer(), nullable=False),
+    sa.Column('room_id', sa.Integer(), nullable=False),
+    sa.Column('started_by', sa.Integer(), nullable=False),
+    sa.Column('started_at', sa.TIMESTAMP(), server_default=sa.text('now()'), nullable=False),
+    sa.Column('ended_at', sa.TIMESTAMP(), nullable=True),
+    sa.Column('file_path', sa.String(length=500), nullable=True),
+    sa.Column('file_size', sa.Integer(), nullable=True),
+    sa.Column('duration', sa.Integer(), nullable=True),
+    sa.Column('is_processing', sa.Boolean(), nullable=False),
+    sa.Column('is_available', sa.Boolean(), nullable=False),
+    sa.Column('thumbnail_path', sa.String(length=500), nullable=True),
+    sa.ForeignKeyConstraint(['room_id'], ['video_rooms.room_id'], ),
+    sa.ForeignKeyConstraint(['started_by'], ['users.user_id'], ),
+    sa.PrimaryKeyConstraint('recording_id')
+    )
+    op.create_index(op.f('ix_room_recordings_recording_id'), 'room_recordings', ['recording_id'], unique=False)
+    op.create_table('video_participants',
+    sa.Column('participant_id', sa.Integer(), nullable=False),
+    sa.Column('room_id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('joined_at', sa.TIMESTAMP(), server_default=sa.text('now()'), nullable=False),
+    sa.Column('left_at', sa.TIMESTAMP(), nullable=True),
+    sa.Column('is_online', sa.Boolean(), nullable=False),
+    sa.Column('is_muted', sa.Boolean(), nullable=False),
+    sa.Column('is_video_enabled', sa.Boolean(), nullable=False),
+    sa.Column('is_screen_sharing', sa.Boolean(), nullable=False),
+    sa.Column('role', sa.String(length=20), nullable=False),
+    sa.Column('permissions', sa.String(length=500), nullable=True),
+    sa.Column('last_activity', sa.TIMESTAMP(), nullable=True),
+    sa.ForeignKeyConstraint(['room_id'], ['video_rooms.room_id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.user_id'], ),
+    sa.PrimaryKeyConstraint('participant_id')
+    )
+    op.create_index(op.f('ix_video_participants_participant_id'), 'video_participants', ['participant_id'], unique=False)
+    op.create_table('media_streams',
+    sa.Column('stream_id', sa.Integer(), nullable=False),
+    sa.Column('room_id', sa.Integer(), nullable=False),
+    sa.Column('participant_id', sa.Integer(), nullable=False),
+    sa.Column('stream_type', sa.String(length=20), nullable=False),
+    sa.Column('stream_id_webrtc', sa.String(length=100), nullable=False),
+    sa.Column('is_active', sa.Boolean(), nullable=False),
+    sa.Column('quality', sa.String(length=20), nullable=False),
+    sa.Column('bitrate', sa.Integer(), nullable=True),
+    sa.Column('resolution', sa.String(length=20), nullable=True),
+    sa.Column('created_at', sa.TIMESTAMP(), server_default=sa.text('now()'), nullable=False),
+    sa.Column('ended_at', sa.TIMESTAMP(), nullable=True),
+    sa.ForeignKeyConstraint(['participant_id'], ['video_participants.participant_id'], ),
+    sa.ForeignKeyConstraint(['room_id'], ['video_rooms.room_id'], ),
+    sa.PrimaryKeyConstraint('stream_id')
+    )
+    op.create_index(op.f('ix_media_streams_stream_id'), 'media_streams', ['stream_id'], unique=False)
     op.create_table('message_moderation',
     sa.Column('moderation_id', sa.Integer(), nullable=False),
     sa.Column('message_id', sa.Integer(), nullable=False),
@@ -128,20 +218,46 @@ def upgrade() -> None:
     sa.PrimaryKeyConstraint('notification_id')
     )
     op.create_index(op.f('ix_notifications_notification_id'), 'notifications', ['notification_id'], unique=False)
+    op.create_table('room_events',
+    sa.Column('event_id', sa.Integer(), nullable=False),
+    sa.Column('room_id', sa.Integer(), nullable=False),
+    sa.Column('participant_id', sa.Integer(), nullable=True),
+    sa.Column('event_type', sa.String(length=50), nullable=False),
+    sa.Column('event_data', sa.String(length=1000), nullable=True),
+    sa.Column('created_at', sa.TIMESTAMP(), server_default=sa.text('now()'), nullable=False),
+    sa.ForeignKeyConstraint(['participant_id'], ['video_participants.participant_id'], ),
+    sa.ForeignKeyConstraint(['room_id'], ['video_rooms.room_id'], ),
+    sa.PrimaryKeyConstraint('event_id')
+    )
+    op.create_index(op.f('ix_room_events_event_id'), 'room_events', ['event_id'], unique=False)
     # ### end Alembic commands ###
 
 
 def downgrade() -> None:
     """Downgrade schema."""
     # ### commands auto generated by Alembic - please adjust! ###
+    op.drop_index(op.f('ix_room_events_event_id'), table_name='room_events')
+    op.drop_table('room_events')
     op.drop_index(op.f('ix_notifications_notification_id'), table_name='notifications')
     op.drop_table('notifications')
     op.drop_index(op.f('ix_message_moderation_moderation_id'), table_name='message_moderation')
     op.drop_table('message_moderation')
+    op.drop_index(op.f('ix_media_streams_stream_id'), table_name='media_streams')
+    op.drop_table('media_streams')
+    op.drop_index(op.f('ix_video_participants_participant_id'), table_name='video_participants')
+    op.drop_table('video_participants')
+    op.drop_index(op.f('ix_room_recordings_recording_id'), table_name='room_recordings')
+    op.drop_table('room_recordings')
+    op.drop_index(op.f('ix_room_invitations_invitation_id'), table_name='room_invitations')
+    op.drop_index(op.f('ix_room_invitations_invitation_code'), table_name='room_invitations')
+    op.drop_table('room_invitations')
     op.drop_index(op.f('ix_messages_message_id'), table_name='messages')
     op.drop_table('messages')
     op.drop_index(op.f('ix_chat_participants_participant_id'), table_name='chat_participants')
     op.drop_table('chat_participants')
+    op.drop_index(op.f('ix_video_rooms_room_id'), table_name='video_rooms')
+    op.drop_index(op.f('ix_video_rooms_room_code'), table_name='video_rooms')
+    op.drop_table('video_rooms')
     op.drop_index(op.f('ix_user_tokens_user_id'), table_name='user_tokens')
     op.drop_index(op.f('ix_user_tokens_token_hash'), table_name='user_tokens')
     op.drop_table('user_tokens')

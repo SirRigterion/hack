@@ -15,6 +15,33 @@ class UniversalConnectionManager:
     Универсальный менеджер WebSocket соединений для чата и видео
     """
 
+    async def broadcast_room_state(self, room_id: str):
+        """Широковещательная синхронизация состояния комнаты"""
+        participants = self.get_room_participants(room_id)
+
+        await self.broadcast_to_room(
+            {
+                "type": "room_state_update",
+                "room_id": room_id,
+                "participants": participants,
+                "participants_count": len(participants),
+                "timestamp": self._get_timestamp()
+            },
+            room_id
+        )
+
+    async def notify_message_update(self, room_id: str, message_data: dict):
+        """Уведомление об обновлении сообщений"""
+        await self.broadcast_to_room(
+            {
+                "type": "messages_updated",
+                "room_id": room_id,
+                "message": message_data,
+                "timestamp": self._get_timestamp()
+            },
+            room_id
+        )
+
     def __init__(self):
         # Структура: {room_id: [{websocket, user_data, connection_type}]}
         self.active_connections: Dict[str, List[dict]] = {}

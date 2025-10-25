@@ -321,6 +321,22 @@
             border-radius: 50%;
             margin-right: 8px;
         }
+
+        .sync-indicator {
+            padding: 5px 10px;
+            background: #f39c12;
+            color: white;
+            border-radius: 3px;
+            font-size: 12px;
+            margin-left: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
     </style>
 </head>
 <body>
@@ -363,7 +379,7 @@
             </div>
 
             <div class="online-users">
-                <h3>🟢 Онлайн</h3>
+                <h3>🟢 Онлайн <span id="onlineCount">(0)</span></h3>
                 <div id="onlineUsers">
                     <!-- Список онлайн пользователей -->
                 </div>
@@ -409,7 +425,8 @@
     let currentRoom = null;
     let ws = null;
     let authToken = null;
-    let messageRefreshInterval = null;
+    let roomParticipants = [];
+    let lastSyncTime = null;
 
     // Базовый URL API
     const API_BASE = 'http://localhost:8000';
@@ -425,6 +442,7 @@
     const roomUsers = document.getElementById('roomUsers');
     const typingIndicator = document.getElementById('typingIndicator');
     const onlineUsers = document.getElementById('onlineUsers');
+    const onlineCount = document.getElementById('onlineCount');
     const loginBtn = document.getElementById('loginBtn');
     const logoutBtn = document.getElementById('logoutBtn');
 
@@ -472,11 +490,6 @@
     }
 
     async function logout() {
-        if (messageRefreshInterval) {
-            clearInterval(messageRefreshInterval);
-            messageRefreshInterval = null;
-        }
-
         try {
             await fetch(`${API_BASE}/auth/logout`, {
                 method: 'POST',
@@ -489,6 +502,7 @@
         currentUser = null;
         authToken = null;
         currentRoom = null;
+        roomParticipants = [];
 
         if (ws) {
             ws.close();
@@ -497,6 +511,17 @@
 
         updateUI();
         addSystemMessage('🔒 Вы вышли из системы');
+
+        // Очищаем интерфейс
+        roomsList.innerHTML = '';
+        onlineUsers.innerHTML = '';
+        chatMessages.innerHTML = `
+            <div class="message other">
+                <div class="message-sender">Система</div>
+                <div class="message-content">Добро пожаловать в тестовый чат! Выберите комнату слева или создайте новую.</div>
+                <div class="message-time">Только что</div>
+            </div>
+        `;
     }
 
     // Функции для работы с комнатами
@@ -542,8 +567,11 @@
 
             if (response.ok) {
                 const room = await response.json();
-                loadRooms();
+                await loadRooms();
                 addSystemMessage(`✅ Комната "${roomName}" создана`);
+
+                // Автоматически присоединяемся к созданной комнате
+                await joinRoom(room);
             } else {
                 const error = await response.json();
                 alert(`Ошибка создания комнаты: ${error.detail}`);
@@ -560,6 +588,9 @@
         rooms.forEach(room => {
             const roomElement = document.createElement('div');
             roomElement.className = 'room-item';
+            if (currentRoom && room.room_id === currentRoom.room_id) {
+                roomElement.classList.add('active');
+            }
             roomElement.innerHTML = `
                 <strong>${room.room_name}</strong>
                 <div style="font-size: 12px; opacity: 0.8;">
@@ -575,24 +606,72 @@
     async function joinRoom(room) {
         if (!currentUser) return;
 
-        currentRoom = room;
-        updateUI();
+        console.log(`🚪 Попытка присоединиться к комнате ${room.room_id}`);
 
-        // Останавливаем предыдущий интервал
-        if (messageRefreshInterval) {
-            clearInterval(messageRefreshInterval);
+        try {
+            // Сначала проверяем доступ к комнате
+            const participantsResponse = await fetch(`${API_BASE}/chat/rooms/${room.room_id}/participants`, {
+                credentials: 'include'
+            });
+
+            if (!participantsResponse.ok && participantsResponse.status === 403) {
+                // Пытаемся автоматически присоединиться
+                const joinResponse = await fetch(`${API_BASE}/chat/rooms/${room.room_id}/participants`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        user_id: currentUser.user_id,
+                        is_admin: false,
+                        is_muted: false
+                    }),
+                    credentials: 'include'
+                });
+
+                if (!joinResponse.ok) {
+                    const error = await joinResponse.json();
+                    alert(`❌ Не удалось присоединиться к комнате: ${error.detail}`);
+                    return;
+                }
+            }
+
+            currentRoom = room;
+            updateUI();
+
+            // Обновляем выделение активной комнаты
+            const rooms = await getRooms();
+            displayRooms(rooms);
+
+            // Загружаем сообщения и участников
+            await Promise.all([
+                loadRoomMessages(room),
+                loadRoomParticipants(room)
+            ]);
+
+            // Присоединяемся к комнате через WebSocket
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                joinRoomViaWebSocket(room);
+            }
+
+            addSystemMessage(`✅ Вы присоединились к комнате "${room.room_name}"`);
+
+        } catch (error) {
+            console.error('❌ Ошибка присоединения к комнате:', error);
+            alert('❌ Ошибка присоединения к комнате');
         }
+    }
 
-        // Загружаем сообщения сразу
-        await loadRoomMessages(room);
-
-
-        // Присоединяемся к комнате через WebSocket
-        if (ws && ws.readyState === WebSocket.OPEN) {
-            joinRoomViaWebSocket(room);
+    async function getRooms() {
+        try {
+            const response = await fetch(`${API_BASE}/chat/rooms`, {
+                credentials: 'include'
+            });
+            return response.ok ? await response.json() : [];
+        } catch (error) {
+            console.error('Ошибка получения комнат:', error);
+            return [];
         }
-
-        addSystemMessage(`✅ Вы присоединились к комнате "${room.room_name}"`);
     }
 
     // Функция загрузки сообщений комнаты
@@ -607,9 +686,32 @@
             if (response.ok) {
                 const messages = await response.json();
                 displayMessages(messages.reverse());
+                lastSyncTime = new Date();
+            } else {
+                console.error('Ошибка загрузки сообщений:', response.status);
             }
         } catch (error) {
             console.error('Ошибка загрузки сообщений:', error);
+        }
+    }
+
+    // Функция загрузки участников комнаты
+    async function loadRoomParticipants(room) {
+        if (!room || !currentUser) return;
+
+        try {
+            const response = await fetch(`${API_BASE}/chat/rooms/${room.room_id}/participants`, {
+                credentials: 'include'
+            });
+
+            if (response.ok) {
+                roomParticipants = await response.json();
+                updateOnlineUsersList(roomParticipants);
+            } else {
+                console.error('Ошибка загрузки участников:', response.status);
+            }
+        } catch (error) {
+            console.error('Ошибка загрузки участников:', error);
         }
     }
 
@@ -632,7 +734,7 @@
         }
 
         messages.forEach(message => {
-            addMessageToChat(message);
+            addMessageToChat(message, false);
         });
 
         // Восстанавливаем позицию прокрутки
@@ -643,8 +745,115 @@
 
     // Функция проверки, прокручен ли чат до конца
     function isScrolledToBottom() {
-        const threshold = 100; // пикселей от конца
+        const threshold = 100;
         return chatMessages.scrollTop + chatMessages.clientHeight >= chatMessages.scrollHeight - threshold;
+    }
+
+    async function sendMessage() {
+        const content = messageInput.value.trim();
+        if (!content || !currentRoom || !currentUser) return;
+
+        // Очищаем поле ввода сразу
+        messageInput.value = '';
+
+        // 1. Мгновенно создаем и показываем сообщение
+        const tempMessage = {
+            message_id: `temp_${currentUser.user_id}_${Date.now()}`,
+            content: content,
+            sender_id: currentUser.user_id,
+            sender_name: currentUser.user_full_name,
+            sender_full_name: currentUser.user_full_name,
+            created_at: new Date().toISOString(),
+            message_type: 'text',
+            status: 'sent',
+            is_deleted: false,
+            reply_to: null,
+            is_temp: true // помечаем как временное
+        };
+
+        // Мгновенно показываем у отправителя
+        addMessageToChat(tempMessage);
+
+        try {
+            // 2. Отправляем через WebSocket для мгновенной доставки всем
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify({
+                    type: "chat_message",
+                    content: content
+                }));
+                console.log('✅ Сообщение отправлено через WebSocket');
+            } else {
+                console.error('❌ WebSocket не подключен');
+                addSystemMessage('Ошибка подключения. Переподключаемся...');
+                connectWebSocket();
+
+                // Если WebSocket недоступен, сохраняем только через HTTP
+                await saveMessageToDatabase(content);
+                return;
+            }
+
+            // 3. Асинхронно сохраняем в БД (не блокируем интерфейс)
+            await saveMessageToDatabase(content);
+
+        } catch (error) {
+            console.error('Ошибка отправки сообщения:', error);
+            addSystemMessage('❌ Ошибка отправки сообщения');
+        }
+    }
+
+    async function saveMessageToDatabase(content) {
+        try {
+            const response = await fetch(`${API_BASE}/chat/rooms/${currentRoom.room_id}/messages`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    content: content,
+                    message_type: 'text'
+                }),
+                credentials: 'include'
+            });
+
+            if (response.ok) {
+                const messageData = await response.json();
+                console.log('✅ Сообщение сохранено в БД:', messageData);
+
+                // Обновляем временное сообщение на постоянное
+                updateTempMessage(messageData);
+            } else {
+                console.error('❌ Ошибка сохранения в БД');
+            }
+        } catch (error) {
+            console.error('Ошибка сохранения в БД:', error);
+        }
+    }
+
+    function updateTempMessage(realMessage) {
+        // Находим временное сообщение по content и sender_id
+        const tempMessages = document.querySelectorAll('.message.own[data-temp="true"]');
+
+        for (const msgElement of tempMessages) {
+            const contentElement = msgElement.querySelector('.message-content');
+            if (contentElement && contentElement.textContent === realMessage.content) {
+                // Обновляем ID сообщения
+                msgElement.setAttribute('data-message-id', realMessage.message_id);
+                msgElement.removeAttribute('data-temp');
+
+                // Обновляем время на реальное
+                const timeElement = msgElement.querySelector('.message-time');
+                if (timeElement) {
+                    const time = new Date(realMessage.created_at).toLocaleTimeString('ru-RU', {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                    timeElement.textContent = time;
+                }
+
+                console.log('✅ Временное сообщение обновлено на постоянное');
+                break;
+            }
+        }
     }
 
     function addMessageToChat(message) {
@@ -658,6 +867,10 @@
         const messageElement = document.createElement('div');
         messageElement.className = `message ${message.sender_id === currentUser?.user_id ? 'own' : 'other'}`;
         messageElement.setAttribute('data-message-id', message.message_id);
+
+        if (message.is_temp) {
+            messageElement.setAttribute('data-temp', 'true');
+        }
 
         const time = new Date(message.created_at).toLocaleTimeString('ru-RU', {
             hour: '2-digit',
@@ -674,10 +887,11 @@
 
         // Плавная прокрутка к новому сообщению
         setTimeout(() => {
-            messageElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }, 100);
-
-        console.log('✅ Message added to chat:', message);
+            const isAtBottom = isScrolledToBottom();
+            if (isAtBottom) {
+                messageElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }, 50);
     }
 
     function addSystemMessage(text) {
@@ -686,49 +900,15 @@
         messageElement.innerHTML = `
             <div class="message-sender">Система</div>
             <div class="message-content">${text}</div>
-            <div class="message-time">Только что</div>
+            <div class="message-time">${new Date().toLocaleTimeString('ru-RU', {hour: '2-digit', minute: '2-digit'})}</div>
         `;
 
         chatMessages.appendChild(messageElement);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
 
-    async function sendMessage() {
-        const content = messageInput.value.trim();
-
-        if (!content || !currentRoom || !currentUser) return;
-
-        try {
-            const response = await fetch(`${API_BASE}/chat/rooms/${currentRoom.room_id}/messages`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    content: content,
-                    message_type: 'text'
-                }),
-                credentials: 'include'
-            });
-
-            if (response.ok) {
-                const messageData = await response.json();
-                console.log('✅ Message sent via HTTP:', messageData);
-                messageInput.value = '';
-
-                // Временно: принудительно обновляем чат через 1 секунду
-                setTimeout(() => {
-                    loadRoomMessages(currentRoom);
-                }, 1000);
-
-            } else {
-                const error = await response.json();
-                alert(`Ошибка отправки: ${error.detail}`);
-            }
-        } catch (error) {
-            console.error('Ошибка отправки сообщения:', error);
-            alert('Ошибка соединения с сервером');
-        }
+        // Прокручиваем к системному сообщению
+        setTimeout(() => {
+            messageElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
     }
 
     async function connectWebSocket() {
@@ -797,7 +977,6 @@
         }
     }
 
-    // Добавь функцию для присоединения к комнате через WebSocket
     function joinRoomViaWebSocket(room) {
         if (ws && ws.readyState === WebSocket.OPEN) {
             ws.send(JSON.stringify({
@@ -805,6 +984,7 @@
                 room_id: room.room_id,
                 room_name: room.room_name
             }));
+            console.log(`✅ Присоединились к комнате ${room.room_id} через WebSocket`);
         }
     }
 
@@ -813,74 +993,69 @@
 
         switch (data.type) {
             case 'chat_message':
-                console.log('✅ Новое сообщение через WebSocket:', data.data);
-                addMessageToChat(data.data);
+                console.log('✅ Мгновенное сообщение через WebSocket:', data.data);
+
+                // Проверяем, не наше ли это сообщение
+                const isOurMessage = data.data.sender_id === currentUser.user_id;
+
+                // Если это НЕ наше сообщение, показываем его
+                if (!isOurMessage) {
+                    addMessageToChat(data.data);
+                }
+                // Если это наше сообщение, но не временное (пришло от сервера),
+                // значит WebSocket сработал - ничего не делаем, т.к. у нас уже есть временное сообщение
                 break;
 
-            case 'update_chat':
-                // Принудительное обновление чата для всех участников
-                console.log('🔄 Принудительное обновление чата:', data.event);
-                if (currentRoom && data.data && data.data.room_id === currentRoom.room_id) {
-                    if (data.event === 'new_message') {
-                        addMessageToChat(data.data);
-                    } else if (data.event === 'message_updated') {
-                        updateMessageInChat(data.data);
-                    } else if (data.event === 'message_deleted') {
-                        removeMessageFromChat(data.data.message_id);
-                    }
+            case 'message_created':
+                // Обработка сообщения, созданного через HTTP
+                if (data.data.sender_id !== currentUser.user_id) {
+                    addMessageToChat(data.data);
                 }
                 break;
 
-            case 'message_updated':
-                console.log('✏️ Сообщение обновлено:', data.data);
-                updateMessageInChat(data.data);
-                break;
-
-            case 'message_deleted':
-                console.log('🗑️ Сообщение удалено:', data.data);
-                removeMessageFromChat(data.data.message_id);
-                break;
-
-            case 'user_online':
-                updateOnlineUsers(data);
-                break;
-
             case 'user_joined':
-                addSystemMessage(`${data.full_name || data.username} присоединился к чату`);
-                if (data.participants_count) {
-                    roomUsers.textContent = `Участников: ${data.participants_count}`;
+                addSystemMessage(`🟢 ${data.user_name} присоединился к комнате`);
+                if (currentRoom) {
+                    loadRoomParticipants(currentRoom);
                 }
                 break;
 
             case 'user_left':
-                addSystemMessage(`${data.full_name || data.username} покинул чат`);
-                if (data.participants_count) {
-                    roomUsers.textContent = `Участников: ${data.participants_count}`;
+                addSystemMessage(`🔴 ${data.user_name} покинул комнату`);
+                if (currentRoom) {
+                    loadRoomParticipants(currentRoom);
                 }
                 break;
 
-            case 'room_info':
-                console.log('Room info received:', data);
-                if (data.participants) {
-                    updateOnlineUsersList(data.participants);
-                }
+            case 'user_typing':
+                updateTypingIndicator(data);
+                break;
+
+            case 'message_updated':
+                updateMessageInChat(data.data);
+                break;
+
+            case 'message_deleted':
+                removeMessageFromChat(data.message_id);
                 break;
 
             case 'notification':
-                showNotification(data.data || data);
+                showNotification(data);
                 break;
 
             case 'pong':
-                console.log('🏓 WebSocket pong received');
+                console.log('🏓 Pong received');
                 break;
 
             default:
-                console.log('Unknown WebSocket message type:', data.type, data);
+                console.log('Unknown message type:', data.type);
         }
     }
 
     function updateOnlineUsersList(participants) {
         onlineUsers.innerHTML = '';
+        const count = participants ? participants.length : 0;
+        onlineCount.textContent = `(${count})`;
 
         if (participants && participants.length > 0) {
             participants.forEach(user => {
@@ -888,7 +1063,8 @@
                 userElement.className = 'online-user';
                 userElement.innerHTML = `
                     <div class="online-dot"></div>
-                    <span>${user.full_name || user.username}</span>
+                    <span>${user.full_name || user.username || 'Неизвестный'}</span>
+                    ${user.connection_type === 'video' ? '<span style="margin-left: 5px;">🎥</span>' : ''}
                 `;
                 onlineUsers.appendChild(userElement);
             });
@@ -903,38 +1079,40 @@
             const contentElement = messageElement.querySelector('.message-content');
             if (contentElement) {
                 contentElement.textContent = messageData.content;
+                // Добавляем индикатор редактирования
+                const timeElement = messageElement.querySelector('.message-time');
+                if (timeElement) {
+                    timeElement.innerHTML = `${new Date().toLocaleTimeString('ru-RU')} <small>(изменено)</small>`;
+                }
             }
         }
     }
 
-    // Функция удаления сообщения из чата
     function removeMessageFromChat(messageId) {
         const messageElement = document.querySelector(`[data-message-id="${messageId}"]`);
         if (messageElement) {
-            messageElement.remove();
+            messageElement.innerHTML = `
+                <div class="message-sender">Система</div>
+                <div class="message-content" style="opacity: 0.6; font-style: italic;">Сообщение удалено</div>
+                <div class="message-time">${new Date().toLocaleTimeString('ru-RU')}</div>
+            `;
+            messageElement.className = 'message other';
         }
     }
 
     function updateTypingIndicator(data) {
         if (data.room_id !== currentRoom?.room_id) return;
 
-        if (data.is_typing && data.typing_users.length > 0) {
-            const usersText = data.typing_users.length === 1 ?
-                'пользователь печатает...' :
-                `${data.typing_users.length} пользователя печатают...`;
-            typingIndicator.textContent = usersText;
+        const typingElement = document.getElementById('typingIndicator');
+        if (data.is_typing) {
+            typingElement.textContent = `${data.sender_name || 'Кто-то'} печатает...`;
         } else {
-            typingIndicator.textContent = '';
+            typingElement.textContent = '';
         }
     }
 
-    function updateOnlineUsers(data) {
-        // В реальном приложении здесь бы обновлялся список онлайн пользователей
-        console.log('Online users update:', data);
-    }
-
     function showNotification(notification) {
-        addSystemMessage(`🔔 ${notification.title}: ${notification.content}`);
+        addSystemMessage(`🔔 ${notification.title || 'Уведомление'}: ${notification.content || notification.message}`);
     }
 
     // Вспомогательные функции
@@ -965,7 +1143,7 @@
 
         if (currentRoom) {
             currentRoomTitle.textContent = `💬 ${currentRoom.room_name}`;
-            roomUsers.textContent = `Участников: ${currentRoom.participants_count || 0}`;
+            roomUsers.textContent = `Участников: ${currentRoom.participants_count || roomParticipants.length || 0}`;
         } else {
             currentRoomTitle.textContent = 'Выберите комнату для начала общения';
             roomUsers.textContent = 'Участников: 0';
@@ -983,7 +1161,7 @@
         if (currentRoom && ws && ws.readyState === WebSocket.OPEN) {
             // Отправляем статус печатания
             ws.send(JSON.stringify({
-                type: 'typing',
+                type: 'user_typing',
                 room_id: currentRoom.room_id,
                 is_typing: messageInput.value.length > 0
             }));
@@ -996,6 +1174,25 @@
             ws.send(JSON.stringify({ type: 'ping' }));
         }
     }, 30000);
+
+    // Периодическая синхронизация состояния (каждые 60 секунд)
+    setInterval(() => {
+        if (currentRoom) {
+            loadRoomMessages(currentRoom);
+            loadRoomParticipants(currentRoom);
+        }
+    }, 60000);
+
+    // Синхронизация при возвращении на вкладку
+    document.addEventListener('visibilitychange', function() {
+        if (!document.hidden && currentRoom) {
+            // Пользователь вернулся на вкладку - синхронизируем
+            setTimeout(() => {
+                loadRoomMessages(currentRoom);
+                loadRoomParticipants(currentRoom);
+            }, 1000);
+        }
+    });
 
     // Инициализация
     updateUI();
