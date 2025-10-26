@@ -1619,3 +1619,423 @@ FileNotFoundError: [Errno 2] No such file or directory: 'test_video.html'
 2025-10-25 12:56:41 | INFO     | user_api | lifespan:85 | Завершение работы приложения начато
 2025-10-25 12:56:41 | INFO     | user_api | lifespan:87 | Соединение с БД закрыто
 2025-10-25 12:56:41 | INFO     | user_api | lifespan:88 | Приложение полностью остановлено
+2025-10-25 13:26:31 | INFO     | user_api | <module>:27 | ✅ WebSocket подписчик зарегистрирован как глобальный обработчик событий чата
+2025-10-25 13:26:31 | INFO     | user_api | lifespan:28 | Запуск приложения начат
+2025-10-25 13:26:32 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 13:26:32 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 13:26:34 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 13:26:36 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 13:26:36 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 13:26:36 | INFO     | user_api | lifespan:31 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 13:27:37 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /user/profile | Method: GET | IP: 172.18.0.1
+2025-10-25 13:27:23 | INFO     | user_api | login:220 | Пользователь char успешно вошел в систему
+2025-10-25 13:29:47 | INFO     | user_api | lifespan:85 | Завершение работы приложения начато
+2025-10-25 13:29:47 | INFO     | user_api | lifespan:87 | Соединение с БД закрыто
+2025-10-25 13:29:47 | INFO     | user_api | lifespan:88 | Приложение полностью остановлено
+2025-10-25 13:32:02 | INFO     | user_api | <module>:27 | ✅ WebSocket подписчик зарегистрирован как глобальный обработчик событий чата
+2025-10-25 13:32:03 | INFO     | user_api | lifespan:28 | Запуск приложения начат
+2025-10-25 13:32:03 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 13:32:03 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 13:32:05 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 13:31:35 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 13:31:35 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 13:31:35 | INFO     | user_api | lifespan:31 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 13:54:13 | INFO     | user_api | lifespan:85 | Завершение работы приложения начато
+2025-10-25 13:54:13 | INFO     | user_api | lifespan:87 | Соединение с БД закрыто
+2025-10-25 13:54:13 | INFO     | user_api | lifespan:88 | Приложение полностью остановлено
+2025-10-25 13:55:01 | INFO     | user_api | <module>:27 | ✅ WebSocket подписчик зарегистрирован как глобальный обработчик событий чата
+2025-10-25 13:55:01 | INFO     | user_api | lifespan:28 | Запуск приложения начат
+2025-10-25 13:55:01 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 13:55:01 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 13:55:03 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 13:55:05 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 13:55:05 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 13:55:05 | INFO     | user_api | lifespan:31 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 13:55:33 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /user/profile | Method: GET | IP: 172.18.0.1
+2025-10-25 14:06:13 | INFO     | user_api | lifespan:85 | Завершение работы приложения начато
+2025-10-25 14:06:13 | INFO     | user_api | lifespan:87 | Соединение с БД закрыто
+2025-10-25 14:06:13 | INFO     | user_api | lifespan:88 | Приложение полностью остановлено
+2025-10-25 14:07:47 | INFO     | user_api | <module>:27 | ✅ WebSocket подписчик зарегистрирован как глобальный обработчик событий чата
+2025-10-25 14:07:47 | INFO     | user_api | lifespan:28 | Запуск приложения начат
+2025-10-25 14:07:47 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 14:07:47 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 14:07:50 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 14:07:52 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 14:07:52 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 14:07:52 | INFO     | user_api | lifespan:31 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 14:09:04 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /user/profile | Method: GET | IP: 172.18.0.1
+2025-10-25 14:09:19 | INFO     | user_api | login:220 | Пользователь char успешно вошел в систему
+2025-10-25 14:09:32 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:09:32 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/participants | Method: GET | IP: 172.18.0.1
+2025-10-25 14:09:32 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:09:32 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/participants | Method: GET | IP: 172.18.0.1
+2025-10-25 14:09:32 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:09:32 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:09:32 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:09:32 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:10:39 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:10:39 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:10:39 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/participants | Method: GET | IP: 172.18.0.1
+2025-10-25 14:10:39 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:10:39 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:10:39 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/participants | Method: GET | IP: 172.18.0.1
+2025-10-25 14:10:39 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:10:39 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:10:44 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:10:44 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:10:49 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:10:49 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:10:53 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:10:53 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:10:59 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:10:59 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:11:04 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:11:04 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:11:09 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:11:09 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:11:15 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:11:15 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:11:20 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:11:20 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:11:24 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:11:24 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:11:31 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:11:31 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:11:36 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:11:36 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:11:41 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:11:41 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:11:47 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:11:47 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:11:52 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:11:52 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:11:58 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:11:58 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:11:59 | INFO     | user_api | lifespan:85 | Завершение работы приложения начато
+2025-10-25 14:11:59 | INFO     | user_api | lifespan:87 | Соединение с БД закрыто
+2025-10-25 14:11:59 | INFO     | user_api | lifespan:88 | Приложение полностью остановлено
+2025-10-25 14:13:24 | INFO     | user_api | <module>:27 | ✅ WebSocket подписчик зарегистрирован как глобальный обработчик событий чата
+2025-10-25 14:13:24 | INFO     | user_api | lifespan:28 | Запуск приложения начат
+2025-10-25 14:13:24 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 14:13:24 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 14:13:26 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 14:13:28 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 14:13:28 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 14:13:28 | INFO     | user_api | lifespan:31 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 14:13:29 | INFO     | user_api | logout:249 | Пользователь 2 успешно вышел из системы
+2025-10-25 14:13:29 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /user/profile | Method: GET | IP: 172.18.0.1
+2025-10-25 14:13:56 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /user/profile | Method: GET | IP: 172.18.0.1
+2025-10-25 14:14:17 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /user/profile | Method: GET | IP: 172.18.0.1
+2025-10-25 14:14:39 | INFO     | user_api | login:220 | Пользователь char успешно вошел в систему
+2025-10-25 14:14:46 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:14:46 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:14:46 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:14:46 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:14:46 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/participants | Method: GET | IP: 172.18.0.1
+2025-10-25 14:14:46 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:14:46 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:14:46 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/participants | Method: GET | IP: 172.18.0.1
+2025-10-25 14:14:50 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:14:50 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:14:54 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:14:54 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:14:59 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:14:59 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:15:06 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:15:06 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:15:11 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:15:11 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:15:15 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:15:15 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:15:20 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:15:20 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:15:24 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:15:24 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:15:30 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:15:30 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:15:35 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:15:35 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:15:43 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:15:43 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:15:47 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:15:47 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:15:52 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:15:52 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:15:57 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:15:57 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:16:01 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:16:01 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:16:06 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:16:06 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:16:13 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:16:13 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:16:18 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:16:18 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:16:23 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:16:23 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:16:28 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:16:28 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:16:33 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:16:33 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:16:38 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:16:38 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:16:45 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:16:45 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:16:51 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:16:51 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:16:56 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:16:56 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:17:01 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:17:01 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:17:06 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:17:06 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:17:10 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:17:10 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:17:16 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:17:16 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:17:21 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:17:21 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:17:26 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:17:26 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:17:31 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:17:31 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:17:36 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:17:36 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:17:41 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:17:41 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:17:46 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:17:46 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:17:51 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:17:51 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:17:55 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:17:55 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:18:00 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:18:00 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:18:04 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:18:04 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:18:09 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:18:09 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:18:14 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:18:14 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:18:21 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:18:21 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:18:26 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:18:26 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:18:30 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:18:30 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:18:35 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:18:35 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:18:39 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:18:39 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:18:44 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:18:44 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:18:51 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:18:51 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:18:56 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:18:56 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:19:01 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:19:01 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:19:05 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:19:05 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:19:10 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:19:10 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:19:14 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:19:14 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:19:19 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:19:19 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:19:27 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:19:27 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:19:31 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:19:31 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:19:37 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 14:19:37 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:19:37 | INFO     | user_api | lifespan:85 | Завершение работы приложения начато
+2025-10-25 14:19:37 | INFO     | user_api | lifespan:87 | Соединение с БД закрыто
+2025-10-25 14:19:37 | INFO     | user_api | lifespan:88 | Приложение полностью остановлено
+2025-10-25 14:25:49 | INFO     | user_api | <module>:27 | ✅ WebSocket подписчик зарегистрирован как глобальный обработчик событий чата
+2025-10-25 14:25:50 | INFO     | user_api | lifespan:28 | Запуск приложения начат
+2025-10-25 14:25:50 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 14:25:50 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 14:25:52 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 14:25:54 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 14:25:54 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 14:25:54 | INFO     | user_api | lifespan:31 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 14:26:30 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /user/profile | Method: GET | IP: 172.18.0.1
+2025-10-25 14:26:54 | INFO     | user_api | login:220 | Пользователь char успешно вошел в систему
+2025-10-25 14:27:03 | WARNING  | user_api | websocket_endpoint:23 | WebSocket: отсутствует токен
+2025-10-25 14:27:07 | WARNING  | user_api | websocket_endpoint:23 | WebSocket: отсутствует токен
+2025-10-25 14:27:08 | WARNING  | user_api | websocket_endpoint:23 | WebSocket: отсутствует токен
+2025-10-25 14:27:33 | INFO     | user_api | create_chat_room:67 | Создана чат-комната 1 пользователем 2
+2025-10-25 14:27:35 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: [{'type': 'int_parsing', 'loc': ('path', 'room_id'), 'msg': 'Input should be a valid integer, unable to parse string as an integer', 'input': 'undefined'}, {'type': 'int_parsing', 'loc': ('path', 'room_id'), 'msg': 'Input should be a valid integer, unable to parse string as an integer', 'input': 'undefined'}]
+2025-10-25 14:27:35 | WARNING  | user_api | validation_exception_handler:205 | Validation Error: 2 errors | Path: /chat/rooms/undefined/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 14:27:43 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: [{'type': 'int_parsing', 'loc': ('path', 'room_id'), 'msg': 'Input should be a valid integer, unable to parse string as an integer', 'input': 'undefined'}]
+2025-10-25 14:27:43 | WARNING  | user_api | validation_exception_handler:205 | Validation Error: 1 errors | Path: /chat/rooms/undefined/messages | Method: POST | IP: 172.18.0.1
+2025-10-25 15:13:03 | INFO     | user_api | lifespan:85 | Завершение работы приложения начато
+2025-10-25 15:13:03 | INFO     | user_api | lifespan:87 | Соединение с БД закрыто
+2025-10-25 15:13:03 | INFO     | user_api | lifespan:88 | Приложение полностью остановлено
+2025-10-25 15:14:17 | INFO     | user_api | <module>:27 | ✅ WebSocket подписчик зарегистрирован как глобальный обработчик событий чата
+2025-10-25 15:14:18 | INFO     | user_api | lifespan:28 | Запуск приложения начат
+2025-10-25 15:14:18 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 15:14:18 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 15:14:20 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 15:14:22 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 15:14:22 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 15:14:22 | INFO     | user_api | lifespan:31 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 15:14:52 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /user/profile | Method: GET | IP: 172.18.0.1
+2025-10-25 15:15:21 | INFO     | user_api | login:220 | Пользователь char успешно вошел в систему
+2025-10-25 15:15:28 | WARNING  | user_api | websocket_endpoint:23 | WebSocket: отсутствует токен
+2025-10-25 15:15:33 | WARNING  | user_api | websocket_endpoint:23 | WebSocket: отсутствует токен
+2025-10-25 15:15:33 | WARNING  | user_api | websocket_endpoint:23 | WebSocket: отсутствует токен
+2025-10-25 15:16:28 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /favicon.ico | Method: GET | IP: 172.18.0.1
+2025-10-25 15:29:10 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /favicon.ico | Method: GET | IP: 172.18.0.1
+2025-10-25 16:00:34 | WARNING  | user_api | get_current_user:68 | Отсутствует токен доступа, IP: 172.18.0.1
+2025-10-25 16:00:34 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Не удалось проверить учетные данные
+2025-10-25 16:00:34 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Не удалось проверить учетные данные | Path: /chat/rooms | Method: POST | IP: 172.18.0.1
+2025-10-25 16:10:10 | INFO     | user_api | lifespan:85 | Завершение работы приложения начато
+2025-10-25 16:10:11 | INFO     | user_api | lifespan:87 | Соединение с БД закрыто
+2025-10-25 16:10:11 | INFO     | user_api | lifespan:88 | Приложение полностью остановлено
+2025-10-25 16:13:11 | INFO     | user_api | <module>:27 | ✅ WebSocket подписчик зарегистрирован как глобальный обработчик событий чата
+2025-10-25 16:13:12 | INFO     | user_api | lifespan:28 | Запуск приложения начат
+2025-10-25 16:13:12 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 16:13:12 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 16:13:14 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 16:13:16 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 16:13:16 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 16:13:16 | INFO     | user_api | lifespan:31 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 16:13:36 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /user/profile | Method: GET | IP: 172.18.0.1
+2025-10-25 16:13:58 | INFO     | user_api | login:220 | Пользователь char успешно вошел в систему
+2025-10-25 16:22:05 | INFO     | user_api | lifespan:85 | Завершение работы приложения начато
+2025-10-25 16:22:05 | INFO     | user_api | lifespan:87 | Соединение с БД закрыто
+2025-10-25 16:22:05 | INFO     | user_api | lifespan:88 | Приложение полностью остановлено
+2025-10-25 16:23:03 | INFO     | user_api | <module>:27 | ✅ WebSocket подписчик зарегистрирован как глобальный обработчик событий чата
+2025-10-25 16:23:04 | INFO     | user_api | lifespan:28 | Запуск приложения начат
+2025-10-25 16:23:04 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 16:23:04 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 16:23:07 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 16:23:09 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 16:23:09 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 16:23:09 | INFO     | user_api | lifespan:31 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 16:39:50 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /user/profile | Method: GET | IP: 172.18.0.1
+2025-10-25 16:40:05 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /user/profile | Method: GET | IP: 172.18.0.1
+2025-10-25 16:40:42 | INFO     | user_api | login:220 | Пользователь char успешно вошел в систему
+2025-10-25 16:41:57 | INFO     | user_api | create_chat_room:67 | Создана чат-комната 2 пользователем 2
+2025-10-25 16:41:59 | INFO     | user_api | create_chat_room:67 | Создана чат-комната 3 пользователем 2
+2025-10-25 16:46:13 | INFO     | user_api | lifespan:85 | Завершение работы приложения начато
+2025-10-25 16:46:13 | INFO     | user_api | lifespan:87 | Соединение с БД закрыто
+2025-10-25 16:46:13 | INFO     | user_api | lifespan:88 | Приложение полностью остановлено
+2025-10-25 16:47:13 | INFO     | user_api | <module>:27 | ✅ WebSocket подписчик зарегистрирован как глобальный обработчик событий чата
+2025-10-25 16:47:13 | INFO     | user_api | lifespan:28 | Запуск приложения начат
+2025-10-25 16:47:13 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 16:47:13 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 16:47:15 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 16:47:17 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 16:47:17 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 16:47:17 | INFO     | user_api | lifespan:31 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 16:47:32 | INFO     | user_api | logout:249 | Пользователь 2 успешно вышел из системы
+2025-10-25 16:47:32 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /user/profile | Method: GET | IP: 172.18.0.1
+2025-10-25 16:47:47 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /user/profile | Method: GET | IP: 172.18.0.1
+2025-10-25 16:48:07 | INFO     | user_api | login:220 | Пользователь char успешно вошел в систему
+2025-10-25 16:48:15 | INFO     | user_api | connect:98 | ✅ WebSocket: char подключился к комнате global. Всего: 1
+2025-10-25 16:48:15 | INFO     | user_api | connect:98 | ✅ WebSocket: char подключился к комнате global. Всего: 2
+2025-10-25 16:48:15 | INFO     | user_api | websocket_endpoint:163 | 🔌 WebSocket отключен: char из комнаты global
+2025-10-25 16:48:15 | INFO     | user_api | disconnect:129 | ❌ WebSocket: char отключился от комнаты global
+2025-10-25 16:48:15 | INFO     | user_api | connect:98 | ✅ WebSocket: char подключился к комнате global. Всего: 2
+2025-10-25 16:48:23 | INFO     | user_api | send_message:321 | Попытка отправки сообщения в комнату 1 пользователем 2
+2025-10-25 16:48:23 | INFO     | user_api | send_message:395 | 📢 Сообщение 1 мгновенно доставлено через WebSocket в комнату 1
+2025-10-25 16:48:23 | INFO     | user_api | send_message:399 | Успешно отправлено сообщение 1 в комнату 1
+2025-10-25 16:48:27 | INFO     | user_api | send_message:321 | Попытка отправки сообщения в комнату 1 пользователем 2
+2025-10-25 16:48:27 | INFO     | user_api | send_message:395 | 📢 Сообщение 2 мгновенно доставлено через WebSocket в комнату 1
+2025-10-25 16:48:27 | INFO     | user_api | send_message:399 | Успешно отправлено сообщение 2 в комнату 1
+2025-10-25 16:48:32 | INFO     | user_api | send_message:321 | Попытка отправки сообщения в комнату 1 пользователем 2
+2025-10-25 16:48:32 | INFO     | user_api | send_message:395 | 📢 Сообщение 3 мгновенно доставлено через WebSocket в комнату 1
+2025-10-25 16:48:32 | INFO     | user_api | send_message:399 | Успешно отправлено сообщение 3 в комнату 1
+2025-10-25 16:54:26 | INFO     | user_api | websocket_endpoint:163 | 🔌 WebSocket отключен: char из комнаты global
+2025-10-25 16:54:26 | INFO     | user_api | disconnect:129 | ❌ WebSocket: char отключился от комнаты global
+2025-10-25 16:54:26 | ERROR    | user_api | broadcast_to_room:149 | Ошибка отправки пользователю char: 
+2025-10-25 16:54:26 | INFO     | user_api | disconnect:129 | ❌ WebSocket: char отключился от комнаты global
+2025-10-25 16:54:26 | INFO     | user_api | websocket_endpoint:163 | 🔌 WebSocket отключен: char из комнаты global
+2025-10-25 16:54:26 | INFO     | user_api | lifespan:85 | Завершение работы приложения начато
+2025-10-25 16:54:26 | INFO     | user_api | lifespan:87 | Соединение с БД закрыто
+2025-10-25 16:54:26 | INFO     | user_api | lifespan:88 | Приложение полностью остановлено
+2025-10-25 16:59:33 | INFO     | user_api | <module>:27 | ✅ WebSocket подписчик зарегистрирован как глобальный обработчик событий чата
+2025-10-25 16:59:33 | INFO     | user_api | lifespan:28 | Запуск приложения начат
+2025-10-25 16:59:33 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 16:59:33 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 16:59:38 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 16:59:40 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 16:59:40 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 16:59:40 | INFO     | user_api | lifespan:31 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 17:00:21 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /user/profile | Method: GET | IP: 172.18.0.1
+2025-10-25 17:00:42 | INFO     | user_api | login:220 | Пользователь char успешно вошел в систему
+2025-10-25 17:01:02 | INFO     | user_api | send_message:321 | Попытка отправки сообщения в комнату 1 пользователем 2
+2025-10-25 17:01:02 | INFO     | user_api | send_message:395 | 📢 Сообщение 4 мгновенно доставлено через WebSocket в комнату 1
+2025-10-25 17:01:02 | INFO     | user_api | send_message:399 | Успешно отправлено сообщение 4 в комнату 1
+2025-10-25 17:01:09 | INFO     | user_api | send_message:321 | Попытка отправки сообщения в комнату 3 пользователем 2
+2025-10-25 17:01:09 | INFO     | user_api | send_message:395 | 📢 Сообщение 5 мгновенно доставлено через WebSocket в комнату 3
+2025-10-25 17:01:09 | INFO     | user_api | send_message:399 | Успешно отправлено сообщение 5 в комнату 3
+2025-10-25 17:05:08 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /user/profile | Method: GET | IP: 172.18.0.1
+2025-10-25 17:05:26 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 401: Неверный логин или пароль
+2025-10-25 17:05:26 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Неверный логин или пароль | Path: /auth/login | Method: POST | IP: 172.18.0.1
+2025-10-25 17:08:16 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: [{'type': 'value_error', 'loc': ('body', 'user_password'), 'msg': 'Value error, Пароль должен содержать минимум 8 символов, включая хотя бы одну заглавную букву, одну строчную букву, одну цифру и один специальный символ (!@#$%^&*)', 'input': 'dav@zol1', 'ctx': {'error': ValueError('Пароль должен содержать минимум 8 символов, включая хотя бы одну заглавную букву, одну строчную букву, одну цифру и один специальный символ (!@#$%^&*)')}}]
+2025-10-25 17:08:16 | WARNING  | user_api | validation_exception_handler:205 | Validation Error: 1 errors | Path: /auth/register | Method: POST | IP: 172.18.0.1
+2025-10-25 17:09:02 | INFO     | user_api | send_email:40 | Письмо отправлено на evilhadina2025@gmail.com
+2025-10-25 17:09:02 | INFO     | user_api | register:83 | Пользователь charchar успешно зарегистрирован
+2025-10-25 17:09:46 | INFO     | user_api | login:220 | Пользователь charchar успешно вошел в систему
+2025-10-25 17:09:50 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 17:09:50 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 17:09:50 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 17:09:50 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 17:09:52 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 17:09:52 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/2/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 17:09:53 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 17:09:53 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 17:18:53 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 17:18:53 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/2/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 17:18:59 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 17:18:59 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/3/messages | Method: GET | IP: 172.18.0.1
+2025-10-25 17:19:05 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /user/profile | Method: GET | IP: 172.18.0.1
+2025-10-25 17:19:12 | INFO     | user_api | send_message:321 | Попытка отправки сообщения в комнату 1 пользователем 3
+2025-10-25 17:19:12 | WARNING  | user_api | send_message:334 | Пользователь 3 не участник комнаты 1
+2025-10-25 17:19:12 | ERROR    | user_api | send_message:404 | HTTP ошибка при отправке сообщения: Доступ запрещен
+2025-10-25 17:19:12 | ERROR    | user_api | get_db:47 | Ошибка в сессии базы данных: 403: Доступ запрещен
+2025-10-25 17:19:12 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Доступ запрещен | Path: /chat/rooms/1/messages | Method: POST | IP: 172.18.0.1
+2025-10-25 17:19:17 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /user/profile | Method: GET | IP: 172.18.0.1
+2025-10-25 17:33:00 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /favicon.ico | Method: GET | IP: 172.18.0.1
+2025-10-25 17:43:47 | INFO     | user_api | lifespan:85 | Завершение работы приложения начато
+2025-10-25 17:43:47 | INFO     | user_api | lifespan:87 | Соединение с БД закрыто
+2025-10-25 17:43:47 | INFO     | user_api | lifespan:88 | Приложение полностью остановлено
+2025-10-25 17:45:13 | INFO     | user_api | <module>:27 | ✅ WebSocket подписчик зарегистрирован как глобальный обработчик событий чата
+2025-10-25 17:45:13 | INFO     | user_api | lifespan:28 | Запуск приложения начат
+2025-10-25 17:45:13 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 17:45:13 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 17:45:15 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 17:45:17 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 17:45:17 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 17:45:17 | INFO     | user_api | lifespan:31 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 17:45:54 | INFO     | user_api | login:220 | Пользователь char успешно вошел в систему
+2025-10-25 17:46:06 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /user/profile | Method: GET | IP: 172.18.0.1
+2025-10-25 17:46:00 | INFO     | user_api | login:220 | Пользователь char успешно вошел в систему
+2025-10-25 17:46:08 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Комната не найдена | Path: /video/demo/rooms/demo-room | Method: GET | IP: 172.18.0.1
+2025-10-25 17:46:08 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Комната не найдена | Path: /video/demo/rooms/demo-room | Method: GET | IP: 172.18.0.1
+2025-10-25 18:11:16 | INFO     | user_api | lifespan:85 | Завершение работы приложения начато
+2025-10-25 18:11:16 | INFO     | user_api | lifespan:87 | Соединение с БД закрыто
+2025-10-25 18:11:16 | INFO     | user_api | lifespan:88 | Приложение полностью остановлено
+2025-10-25 18:12:32 | INFO     | user_api | <module>:27 | ✅ WebSocket подписчик зарегистрирован как глобальный обработчик событий чата
+2025-10-25 18:12:32 | INFO     | user_api | lifespan:28 | Запуск приложения начат
+2025-10-25 18:12:33 | INFO     | user_api | test_db_connection:61 | Подключение к базе данных успешно
+2025-10-25 18:12:33 | WARNING  | user_api | init_redis:30 | init_redis: попытка 1/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 18:12:35 | WARNING  | user_api | init_redis:30 | init_redis: попытка 2/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 18:12:37 | WARNING  | user_api | init_redis:30 | init_redis: попытка 3/3 не удалась: Error Multiple exceptions: [Errno 111] Connect call failed ('::1', 6379, 0, 0), [Errno 111] Connect call failed ('127.0.0.1', 6379) connecting to localhost:6379.
+2025-10-25 18:12:37 | ERROR    | user_api | init_redis:33 | init_redis: Redis недоступен, продолжаем работу без него
+2025-10-25 18:12:37 | INFO     | user_api | lifespan:31 | Подключение к PostgreSQL и Redis завершено
+2025-10-25 18:13:17 | WARNING  | user_api | http_exception_handler:178 | HTTP Exception: Not Found | Path: /user/profile | Method: GET | IP: 172.18.0.1
+2025-10-25 18:14:38 | INFO     | user_api | login:220 | Пользователь char успешно вошел в систему
+2025-10-25 18:14:51 | INFO     | user_api | send_message:321 | Попытка отправки сообщения в комнату 2 пользователем 2
+2025-10-25 18:14:51 | INFO     | user_api | send_message:395 | 📢 Сообщение 6 мгновенно доставлено через WebSocket в комнату 2
+2025-10-25 18:14:51 | INFO     | user_api | send_message:399 | Успешно отправлено сообщение 6 в комнату 2
+2025-10-25 18:18:44 | INFO     | user_api | send_message:321 | Попытка отправки сообщения в комнату 3 пользователем 2
+2025-10-25 18:18:44 | INFO     | user_api | send_message:395 | 📢 Сообщение 7 мгновенно доставлено через WebSocket в комнату 3
+2025-10-25 18:18:44 | INFO     | user_api | send_message:399 | Успешно отправлено сообщение 7 в комнату 3
+2025-10-25 18:50:56 | INFO     | user_api | lifespan:85 | Завершение работы приложения начато
+2025-10-25 18:50:56 | INFO     | user_api | lifespan:87 | Соединение с БД закрыто
+2025-10-25 18:50:56 | INFO     | user_api | lifespan:88 | Приложение полностью остановлено

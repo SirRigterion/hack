@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useUserStore } from "@/store/userStore";
 import { useRouter } from "next/navigation";
-import { VideoArea } from "@/components/video/VideoArea";
+import VideoArea  from "@/components/video/VideoArea";
 import { ChatPanel } from "@/components/video/ChatPanel";
 import { Card } from "@/components/ui/card";
 

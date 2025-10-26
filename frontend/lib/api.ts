@@ -196,6 +196,10 @@ export interface MessageResponse {
   is_deleted: boolean;
 }
 
+export interface MessageUpdate {
+  content: string;
+}
+
 export interface ChatParticipantCreate {
   room_id: number;
   user_id: number;
@@ -221,6 +225,42 @@ export interface MessageModerationCreate {
   reason?: string | null;
 }
 
+export interface NotificationResponse {
+  notification_id: number;
+  user_id: number;
+  title: string;
+  content: string;
+  notification_type: string;
+  is_read: boolean;
+  created_at: string;
+  related_entity_type?: string | null;
+  related_entity_id?: number | null;
+}
+
+export interface ModerationHistoryResponse {
+  moderation_id: number;
+  message_id: number;
+  moderator_id: number;
+  moderator_name?: string | null;
+  action: string;
+  reason?: string | null;
+  created_at: string;
+}
+
+export interface ModerationStatsResponse {
+  total_pending: number;
+  total_approved: number;
+  total_rejected: number;
+  total_moderated: number;
+}
+
+export interface WebsocketTokenResponse {
+  token: string;
+  user_id: number;
+  username: string;
+  full_name: string;
+}
+
 // --- Класс ChatAPI ---
 export class ChatAPI {
   private axios: AxiosInstance;
@@ -230,6 +270,11 @@ export class ChatAPI {
       baseURL: baseURL || process.env.NEXT_PUBLIC_API_URL,
       withCredentials: true,
     });
+  }
+
+  async getWebsocketToken(): Promise<WebsocketTokenResponse> {
+    const response = await this.axios.get<WebsocketTokenResponse>("/ws-auth/token");
+    return response.data;
   }
 
   // --- Chat Rooms ---
@@ -260,6 +305,10 @@ export class ChatAPI {
     return response.data;
   }
 
+  async joinRoom(room_id: number): Promise<void> {
+    await this.axios.post(`/chat/rooms/${room_id}/join`);
+  }
+
   // --- Messages ---
   async sendMessage(room_id: number, data: MessageCreate): Promise<MessageResponse> {
     const response = await this.axios.post<MessageResponse>(`/chat/rooms/${room_id}/messages`, data);
@@ -280,8 +329,8 @@ export class ChatAPI {
     return response.data;
   }
 
-  async editMessage(message_id: number, content: string): Promise<MessageResponse> {
-    const response = await this.axios.put<MessageResponse>(`/chat/messages/${message_id}`, { content });
+  async editMessage(message_id: number, data: MessageUpdate): Promise<MessageResponse> {
+    const response = await this.axios.put<MessageResponse>(`/chat/messages/${message_id}`, data);
     return response.data;
   }
 
@@ -300,14 +349,194 @@ export class ChatAPI {
     return response.data;
   }
 
-  // --- Moderation ---
-  async moderateMessage(message_id: number, action: string, reason?: string): Promise<void> {
-    const body: MessageModerationCreate = { message_id, action, reason };
-    await this.axios.post(`/chat/moderation/messages/${message_id}`, body);
+  // --- Notifications ---
+  async getNotifications(params?: {
+    limit?: number;
+    offset?: number;
+    unread_only?: boolean;
+  }): Promise<NotificationResponse[]> {
+    const response = await this.axios.get<NotificationResponse[]>("/chat/notifications", { params });
+    return response.data;
   }
 
-  async getPendingMessages(limit = 50, offset = 0): Promise<MessageResponse[]> {
-    const response = await this.axios.get<MessageResponse[]>("/chat/moderation/pending", { params: { limit, offset } });
+  async deleteNotification(notification_id: number): Promise<void> {
+    await this.axios.delete(`/chat/notifications/${notification_id}`);
+  }
+
+  async getUnreadCount(): Promise<{ count: number }> {
+    const response = await this.axios.get<{ count: number }>("/chat/notifications/unread-count");
     return response.data;
+  }
+
+  // --- Moderation ---
+  async moderateMessage(message_id: number, data: MessageModerationCreate): Promise<void> {
+    await this.axios.post(`/chat/moderation/messages/${message_id}`, data);
+  }
+
+  async getPendingMessages(params?: {
+    limit?: number;
+    offset?: number;
+  }): Promise<MessageResponse[]> {
+    const response = await this.axios.get<MessageResponse[]>("/chat/moderation/pending", { params });
+    return response.data;
+  }
+
+  async getModerationHistory(params?: {
+    message_id?: number | null;
+    moderator_id?: number | null;
+    limit?: number;
+    offset?: number;
+  }): Promise<ModerationHistoryResponse[]> {
+    const response = await this.axios.get<ModerationHistoryResponse[]>("/chat/moderation/history", { params });
+    return response.data;
+  }
+
+  async getModerationStats(): Promise<ModerationStatsResponse> {
+    const response = await this.axios.get<ModerationStatsResponse>("/chat/moderation/stats");
+    return response.data;
+  }
+
+  async bulkModerateMessages(params: {
+    action: string;
+    reason?: string | null;
+  }, message_ids: number[]): Promise<void> {
+    await this.axios.post("/chat/moderation/bulk", message_ids, { params });
+  }
+}
+
+
+// --- Типы для видео API ---
+export interface VideoRoomCreate {
+  name: string;
+  description?: string | null;
+  is_private?: boolean;
+}
+
+export interface VideoRoomResponse {
+  room_id: number;
+  room_code: string;
+  name: string;
+  description?: string | null;
+  is_private: boolean;
+  created_at: string;
+  created_by: number;
+  participants_count?: number | null;
+}
+
+export interface JoinRoomRequest {
+  room_code: string;
+  user_name?: string;
+}
+
+export interface RoomInvitationCreate {
+  user_id: number;
+  message?: string;
+}
+
+export interface WebsocketTokenResponse {
+  token: string;
+  user_id: number;
+  username: string;
+  full_name: string;
+}
+
+// --- Класс VideoAPI ---
+export class VideoAPI {
+  private axios: AxiosInstance;
+
+  constructor(baseURL?: string) {
+    this.axios = axios.create({
+      baseURL: baseURL || process.env.NEXT_PUBLIC_API_URL,
+      withCredentials: true,
+    });
+  }
+
+  // --- Websocket ---
+  async getWebsocketToken(): Promise<WebsocketTokenResponse> {
+    const response = await this.axios.get<WebsocketTokenResponse>("/ws-auth/token");
+    return response.data;
+  }
+
+  // --- Demo Rooms ---
+  async createDemoRoom(data: VideoRoomCreate): Promise<VideoRoomResponse> {
+    const response = await this.axios.post<VideoRoomResponse>("/video/demo/rooms", data);
+    return response.data;
+  }
+
+  async getDemoRoomInfo(room_code: string): Promise<VideoRoomResponse> {
+    const response = await this.axios.get<VideoRoomResponse>(`/video/demo/rooms/${room_code}`);
+    return response.data;
+  }
+
+  // --- User Rooms ---
+  async getUserRooms(): Promise<VideoRoomResponse[]> {
+    const response = await this.axios.get<VideoRoomResponse[]>("/video/rooms");
+    return response.data;
+  }
+
+  async createVideoRoom(data: VideoRoomCreate): Promise<VideoRoomResponse> {
+    const response = await this.axios.post<VideoRoomResponse>("/video/rooms", data);
+    return response.data;
+  }
+
+  async joinVideoRoom(data: JoinRoomRequest): Promise<VideoRoomResponse> {
+    const response = await this.axios.post<VideoRoomResponse>("/video/rooms/join", data);
+    return response.data;
+  }
+
+  async getRoomInfo(room_code: string): Promise<VideoRoomResponse> {
+    const response = await this.axios.get<VideoRoomResponse>(`/video/rooms/${room_code}`);
+    return response.data;
+  }
+
+  async getRoomStatistics(room_id: number): Promise<any> {
+    const response = await this.axios.get(`/video/rooms/${room_id}/stats`);
+    return response.data;
+  }
+
+  async inviteToRoom(room_id: number, data: RoomInvitationCreate): Promise<void> {
+    await this.axios.post(`/video/rooms/${room_id}/invite`, data);
+  }
+
+  async joinByInvitation(invitation_code: string): Promise<VideoRoomResponse> {
+    const response = await this.axios.post<VideoRoomResponse>(`/video/rooms/join-by-invitation/${invitation_code}`);
+    return response.data;
+  }
+
+  async leaveRoom(room_id: number): Promise<void> {
+    await this.axios.delete(`/video/rooms/${room_id}/leave`);
+  }
+
+  async getRoomParticipants(room_id: number): Promise<any[]> {
+    const response = await this.axios.get(`/video/rooms/${room_id}/participants`);
+    return response.data;
+  }
+
+  // --- Recording ---
+  async startRecording(room_code: string): Promise<void> {
+    await this.axios.post(`/video/rooms/${room_code}/recording/start`);
+  }
+
+  async stopRecording(room_code: string): Promise<void> {
+    await this.axios.post(`/video/rooms/${room_code}/recording/stop`);
+  }
+
+  async getRecordingStatus(room_code: string): Promise<any> {
+    const response = await this.axios.get(`/video/rooms/${room_code}/recording/status`);
+    return response.data;
+  }
+
+  async getRecordingsList(room_code?: string): Promise<any[]> {
+    const response = await this.axios.get(`/video/recordings`, { params: { room_code } });
+    return response.data;
+  }
+
+  async getRecordingDetails(recording_id: string): Promise<any> {
+    const response = await this.axios.get(`/video/recordings/${recording_id}`);
+    return response.data;
+  }
+
+  async deleteRecording(recording_id: string): Promise<void> {
+    await this.axios.delete(`/video/recordings/${recording_id}`);
   }
 }

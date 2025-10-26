@@ -1,89 +1,108 @@
-'use client';
-
-import { useEffect, useState, useRef } from "react";
-import { ChatAPI, MessageResponse } from "@/lib/api";
-import { useUserStore } from "@/store/userStore";
+import React, { useEffect, useState, useRef } from "react";
+import { ChatAPI, ChatRoomResponse, MessageResponse, MessageCreate } from "@/lib/api";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-const chatApi = new ChatAPI();
+const chatAPI = new ChatAPI();
 
-interface ChatPanelProps {
-  roomId?: number; // Можно передавать id комнаты, по умолчанию 1
-}
-
-export const ChatPanel = ({ roomId = 1 }: ChatPanelProps) => {
-  const user = useUserStore((state) => state.user);
+export const ChatPanel: React.FC = () => {
+  const [rooms, setRooms] = useState<ChatRoomResponse[]>([]);
+  const [currentRoom, setCurrentRoom] = useState<ChatRoomResponse | null>(null);
   const [messages, setMessages] = useState<MessageResponse[]>([]);
   const [newMessage, setNewMessage] = useState("");
-  const [loading, setLoading] = useState(false);
 
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  // --- Инициализация WS ---
+  useEffect(() => {
+    const initWS = async () => {
+      await chatAPI.getWebsocketToken();
+      if (!currentRoom) return;
+    };
+    initWS();
+  }, [currentRoom]);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  // --- Загрузка комнат и сообщений ---
+  useEffect(() => {
+    const loadRooms = async () => {
+      const roomsData = await chatAPI.getRooms();
+      setRooms(roomsData);
+      if (roomsData.length > 0) {
+        handleRoomSelect(roomsData[0]);
+      }
+    };
+    loadRooms();
+  }, []);
+
+  const loadMessages = async (roomId: number) => {
+    const msgs = await chatAPI.getMessages(roomId, { limit: 50 });
+    setMessages(msgs.reverse());
   };
 
-  const fetchMessages = async () => {
-    if (!user) return;
+  const handleRoomSelect = async (room: ChatRoomResponse) => {
+    setCurrentRoom(room);
+    await loadMessages(room.room_id);
+  };
+
+  const handleSendMessage = async () => {
+    if (!currentRoom || !newMessage.trim()) return;
+
+    const data: MessageCreate = {
+      room_id: currentRoom.room_id,
+      content: newMessage,
+      message_type: "text",
+    };
+
     try {
-      const msgs = await chatApi.getMessages(roomId);
-      setMessages(msgs);
+      const sentMessage = await chatAPI.sendMessage(currentRoom.room_id, data);
+      setMessages((prev) => [...prev, sentMessage]);
+      setNewMessage("");
     } catch (err) {
-      console.error(err);
+      console.error("Failed to send message:", err);
     }
   };
 
-  const handleSend = async () => {
-  if (!user || !newMessage.trim()) return;
-  setLoading(true);
-  try {
-    const msg = await chatApi.sendMessage(roomId, {
-      room_id: roomId,        // добавляем обязательное поле
-      content: newMessage,
-    });
-    setMessages((prev) => [...prev, msg]);
-    setNewMessage("");
-  } catch (err) {
-    console.error(err);
-  } finally {
-    setLoading(false);
-    scrollToBottom();
-  }
-};
-
-
-  useEffect(() => {
-    fetchMessages();
-    const interval = setInterval(fetchMessages, 5000); // обновление каждые 5 сек
-    return () => clearInterval(interval);
-  }, [user, roomId]);
-
-  useEffect(scrollToBottom, [messages]);
-
-  if (!user) return null;
-
   return (
-    <div className="flex flex-col h-full p-2">
-      <div className="flex-1 overflow-y-auto mb-2 space-y-2">
-        {messages.map((msg) => (
-          <div key={msg.message_id} className="p-2 rounded border bg-gray-100">
-            <strong>{msg.sender_name || "Неизвестный"}:</strong> {msg.content}
-          </div>
-        ))}
-        <div ref={messagesEndRef} />
-      </div>
+    <Card className="flex flex-col h-[600px] w-full max-w-4xl mx-auto">
+      <CardContent className="flex flex-row h-full gap-4 p-4">
+        {/* --- Список комнат --- */}
+        <div className="flex flex-col w-1/4 border-r border-gray-200 overflow-y-auto">
+          {rooms.map((room) => (
+            <Button
+              key={room.room_id}
+              variant={currentRoom?.room_id === room.room_id ? "default" : "ghost"}
+              className="mb-2 text-left"
+              onClick={() => handleRoomSelect(room)}
+            >
+              {room.room_name}
+            </Button>
+          ))}
+        </div>
 
-      <div className="flex gap-2">
-        <Input
-          value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
-          placeholder="Написать сообщение..."
-        />
-        <Button onClick={handleSend} disabled={loading}>
-          {loading ? "Отправка..." : "Отправить"}
-        </Button>
-      </div>
-    </div>
+        {/* --- Сообщения --- */}
+        <div className="flex flex-col w-3/4 h-full">
+          <div className="flex-1 overflow-y-auto p-2 space-y-2">
+            {messages.map((msg) => (
+              <div key={msg.message_id} className="p-2 rounded-md bg-gray-100">
+                <strong>{msg.sender_name ?? "Unknown"}:</strong> {msg.content}
+              </div>
+            ))}
+          </div>
+
+          {/* --- Ввод нового сообщения --- */}
+          {currentRoom && (
+            <div className="flex mt-2 gap-2">
+              <Input
+                className="flex-1"
+                placeholder="Type a message..."
+                value={newMessage}
+                onChange={(e) => setNewMessage(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
+              />
+              <Button onClick={handleSendMessage}>Send</Button>
+            </div>
+          )}
+        </div>
+      </CardContent>
+    </Card>
   );
 };
